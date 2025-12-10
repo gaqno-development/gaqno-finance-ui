@@ -1,5 +1,8 @@
 FROM node:20-alpine AS base
 
+# Install git for git dependencies
+RUN apk add --no-cache git
+
 FROM base AS deps
 WORKDIR /app
 COPY package.json ./
