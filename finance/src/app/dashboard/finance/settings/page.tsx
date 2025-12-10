@@ -1,11 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useSupabaseClient } from '@repo/core/hooks/useSupabaseClient'
-import { useTenant } from '@repo/core/contexts/TenantContext'
-import { FeatureModule, FeaturePermissionLevel, IUserFeaturePermission } from '@repo/core/types/user'
-import { formatRoleLabel } from '@repo/core/lib/permissions'
-import { Card, CardHeader, CardContent, CardTitle, CardDescription } from '@repo/ui/components/ui'
+import { useSupabaseClient } from '@gaqno-dev/core/hooks/useSupabaseClient'
+import { useTenant } from '@gaqno-dev/core/contexts/TenantContext'
+import { FeatureModule, FeaturePermissionLevel, IUserFeaturePermission } from '@gaqno-dev/core/types/user'
+import { formatRoleLabel } from '@gaqno-dev/core/lib/permissions'
+import { Card, CardHeader, CardContent, CardTitle, CardDescription } from '@gaqno-dev/ui/components/ui'
 import {
   Table,
   TableBody,
@@ -13,10 +13,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@repo/ui/components/ui'
-import { Badge } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
-import { usePermissions } from '@repo/core/hooks/usePermissions'
+} from '@gaqno-dev/ui/components/ui'
+import { Badge } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
+import { usePermissions } from '@gaqno-dev/core/hooks/usePermissions'
 
 interface IFinanceUser extends IUserFeaturePermission {
   user_name?: string

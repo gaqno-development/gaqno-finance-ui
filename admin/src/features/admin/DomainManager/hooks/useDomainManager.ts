@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { useDomains } from '@repo/core/hooks/admin/useDomains'
-import { useDialog } from '@repo/core/hooks/useDialog'
-import { IDomain } from '@repo/core/types/admin'
+import { useDomains } from '@gaqno-dev/core/hooks/admin/useDomains'
+import { useDialog } from '@gaqno-dev/core/hooks/useDialog'
+import { IDomain } from '@gaqno-dev/core/types/admin'
 
 export const useDomainManager = (tenantId: string) => {
     const { domains, isLoading, createDomain, updateDomain, deleteDomain, verifyDomain } = useDomains(tenantId)

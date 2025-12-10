@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useAnalytics } from '@repo/core/hooks/admin/useAnalytics'
+import { useAnalytics } from '@gaqno-dev/core/hooks/admin/useAnalytics'
 
 export const useAnalyticsDashboard = (tenantId: string) => {
     const [timeRange, setTimeRange] = useState('30d')

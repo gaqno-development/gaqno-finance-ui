@@ -3,8 +3,8 @@
 import { use } from 'react'
 import { BookBlueprintPanel } from '@/features/books/components/BookBlueprintPanel'
 import { useBook } from '@/features/books/hooks/useBooks'
-import { LoadingSkeleton } from '@repo/ui/components/ui'
-import { EmptyState } from '@repo/ui/components/ui'
+import { LoadingSkeleton } from '@gaqno-dev/ui/components/ui'
+import { EmptyState } from '@gaqno-dev/ui/components/ui'
 import { BookX } from 'lucide-react'
 
 export default function BookDetailPage({ params }: { params: Promise<{ id: string }> }) {

@@ -1,6 +1,6 @@
-import { useSupabaseQuery, useSupabaseMutation } from '@repo/core/hooks/useSupabaseQuery'
-import { useSupabaseClient } from '@repo/core/hooks/useSupabaseClient'
-import { useTenant } from '@repo/core/contexts/TenantContext'
+import { useSupabaseQuery, useSupabaseMutation } from '@gaqno-dev/core/hooks/useSupabaseQuery'
+import { useSupabaseClient } from '@gaqno-dev/core/hooks/useSupabaseClient'
+import { useTenant } from '@gaqno-dev/core/contexts/TenantContext'
 import { useQueryClient } from '@tanstack/react-query'
 import { FinanceService } from '../services/financeService'
 import {

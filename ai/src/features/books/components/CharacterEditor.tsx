@@ -1,19 +1,19 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
-import { Input } from '@repo/ui/components/ui'
-import { Label } from '@repo/ui/components/ui'
-import { Textarea } from '@repo/ui/components/ui'
-import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/components/ui'
-import { Badge } from '@repo/ui/components/ui'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/components/ui'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
+import { Input } from '@gaqno-dev/ui/components/ui'
+import { Label } from '@gaqno-dev/ui/components/ui'
+import { Textarea } from '@gaqno-dev/ui/components/ui'
+import { Avatar, AvatarFallback, AvatarImage } from '@gaqno-dev/ui/components/ui'
+import { Badge } from '@gaqno-dev/ui/components/ui'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@gaqno-dev/ui/components/ui'
 import { useBookCharacters } from '../hooks/useBookCharacters'
 import { useBook } from '../hooks/useBooks'
 import { useBookBlueprint } from '../hooks/useBookBlueprint'
-import { useSupabaseClient } from '@repo/core/hooks/useSupabaseClient'
-import { useUIStore } from '@repo/core/store/uiStore'
+import { useSupabaseClient } from '@gaqno-dev/core/hooks/useSupabaseClient'
+import { useUIStore } from '@gaqno-dev/core/store/uiStore'
 import { IBookCharacter } from '../types/books'
 import { ICharacterDetails, CharacterRole } from '../types/character'
 import { Wand2, Loader2, Image as ImageIcon, Save, User } from 'lucide-react'
@@ -23,7 +23,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
 
 interface ICharacterEditorProps {
   bookId: string

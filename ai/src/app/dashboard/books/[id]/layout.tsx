@@ -3,7 +3,7 @@
 import { use } from 'react'
 import { usePathname } from 'next/navigation'
 import { BookNavigationHeader } from '@/features/books/components/BookNavigationHeader'
-import { Breadcrumbs } from '@repo/ui/components/ui'
+import { Breadcrumbs } from '@gaqno-dev/ui/components/ui'
 import { useBook } from '@/features/books/hooks/useBooks'
 
 type TabType = 'blueprint' | 'chapters' | 'cover' | 'export'

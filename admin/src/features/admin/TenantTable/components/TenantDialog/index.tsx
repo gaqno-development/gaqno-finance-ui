@@ -7,10 +7,10 @@ import {
     DialogHeader,
     DialogTitle,
     DialogFooter,
-} from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
-import { Input } from '@repo/ui/components/ui'
-import { Label } from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
+import { Input } from '@gaqno-dev/ui/components/ui'
+import { Label } from '@gaqno-dev/ui/components/ui'
 import { Loader2 } from 'lucide-react'
 import { ITenantDialogProps } from '../../types'
 import { useTenantDialog } from './hooks/useTenantDialog'

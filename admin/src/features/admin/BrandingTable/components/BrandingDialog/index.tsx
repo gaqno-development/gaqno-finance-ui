@@ -7,10 +7,10 @@ import {
     DialogHeader,
     DialogTitle,
     DialogFooter,
-} from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
-import { Input } from '@repo/ui/components/ui'
-import { Label } from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
+import { Input } from '@gaqno-dev/ui/components/ui'
+import { Label } from '@gaqno-dev/ui/components/ui'
 import { Upload, Loader2 } from 'lucide-react'
 import { IBrandingDialogProps } from '../../types'
 import { useBrandingDialog } from './hooks/useBrandingDialog'

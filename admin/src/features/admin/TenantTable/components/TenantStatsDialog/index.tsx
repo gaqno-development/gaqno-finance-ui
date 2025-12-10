@@ -6,12 +6,12 @@ import {
     DialogContent,
     DialogHeader,
     DialogTitle,
-} from '@repo/ui/components/ui'
-import { Card } from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
+import { Card } from '@gaqno-dev/ui/components/ui'
 import { Users, Rocket, Globe, Palette, CheckCircle2, XCircle } from 'lucide-react'
 import { ITenantStatsDialogProps } from '../../types'
 import { useTenantStats } from '../../hooks/useTenantStats'
-import { formatDate } from '@repo/core/utils/date'
+import { formatDate } from '@gaqno-dev/core/utils/date'
 
 export const TenantStatsDialog: React.FC<ITenantStatsDialogProps> = ({
     open,

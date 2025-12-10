@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import { useTenants } from '@repo/core/hooks/admin/useTenants'
-import { ITenant } from '@repo/core/types/admin'
-import { useDialog } from '@repo/core/hooks/useDialog'
+import { useTenants } from '@gaqno-dev/core/hooks/admin/useTenants'
+import { ITenant } from '@gaqno-dev/core/types/admin'
+import { useDialog } from '@gaqno-dev/core/hooks/useDialog'
 
 export const useTenantManager = () => {
     const { tenants, isLoading, createTenant, updateTenant, deleteTenant } = useTenants()

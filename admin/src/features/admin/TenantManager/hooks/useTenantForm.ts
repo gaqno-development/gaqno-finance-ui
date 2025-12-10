@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { tenantSchema, ITenantFormValues } from '../schema'
-import { ITenant } from '@repo/core/types/admin'
+import { ITenant } from '@gaqno-dev/core/types/admin'
 
 export const useTenantForm = (
     tenant: ITenant | undefined,

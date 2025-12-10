@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { useBranding } from '@repo/core/hooks/admin/useBranding'
-import { IBrandingConfig } from '@repo/core/types/admin'
+import { useBranding } from '@gaqno-dev/core/hooks/admin/useBranding'
+import { IBrandingConfig } from '@gaqno-dev/core/types/admin'
 
 export const useBrandingManager = (tenantId: string) => {
     const [previewMode, setPreviewMode] = useState(false)

@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   output: 'standalone', // Enable standalone output for Docker
-  transpilePackages: ["@repo/ui", "@repo/core"],
+  transpilePackages: ["@gaqno-dev/ui", "@gaqno-dev/core"],
   async rewrites() {
     // Use environment variables for service URLs (Coolify internal network)
     // Falls back to localhost for local development

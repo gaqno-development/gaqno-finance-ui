@@ -1,10 +1,10 @@
 'use client'
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui/components/ui'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@gaqno-dev/ui/components/ui'
 import { useCategoriesManagement } from './hooks/useCategoriesManagement'
-import { Button } from '@repo/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 import { Plus } from 'lucide-react'
-import { DataTable } from '@repo/ui/components/ui'
+import { DataTable } from '@gaqno-dev/ui/components/ui'
 import { columns } from '@/features/admin/TenantTable/columns' // Temporary reuse or need new columns
 // import { CategoryManagementDialog } from '@/features/finance/components/CategoryManagementDialog'
 // import { CategoryBadge } from '@/features/finance/components/CategoryBadge'

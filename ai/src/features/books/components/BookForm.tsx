@@ -3,12 +3,12 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Input } from '@repo/ui/components/ui'
-import { Label } from '@repo/ui/components/ui'
-import { Textarea } from '@repo/ui/components/ui'
+import { Input } from '@gaqno-dev/ui/components/ui'
+import { Label } from '@gaqno-dev/ui/components/ui'
+import { Textarea } from '@gaqno-dev/ui/components/ui'
 import { GenreSelector } from './GenreSelector'
 import { StyleSelector } from './StyleSelector'
-import { Button } from '@repo/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 import { useState } from 'react'
 
 const bookFormSchema = z.object({

@@ -1,8 +1,8 @@
 import { useState, useMemo } from 'react'
-import { useSupabaseQuery, useSupabaseMutation } from '@repo/core/hooks/useSupabaseQuery'
-import { createClient } from '@repo/core/utils/supabase/client'
+import { useSupabaseQuery, useSupabaseMutation } from '@gaqno-dev/core/hooks/useSupabaseQuery'
+import { createClient } from '@gaqno-dev/core/utils/supabase/client'
 import { useQueryClient } from '@tanstack/react-query'
-import { IBrandingConfig } from '@repo/core/types/admin'
+import { IBrandingConfig } from '@gaqno-dev/core/types/admin'
 
 export const useBrandingTable = () => {
     const supabase = useMemo(() => createClient(), [])

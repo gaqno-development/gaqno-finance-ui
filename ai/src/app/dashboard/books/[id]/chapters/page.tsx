@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import { ChapterList } from '@/features/books/components/ChapterList'
 import { ChapterEditor } from '@/features/books/components/ChapterEditor'
 import { useBookChapters } from '@/features/books/hooks/useBookChapters'
-import { LoadingSkeleton } from '@repo/ui/components/ui'
+import { LoadingSkeleton } from '@gaqno-dev/ui/components/ui'
 
 function ChaptersContent({ bookId }: { bookId: string }) {
   const searchParams = useSearchParams()

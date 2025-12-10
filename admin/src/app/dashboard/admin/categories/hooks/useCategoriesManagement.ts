@@ -1,8 +1,8 @@
-import { useRoleBasedAccess } from '@repo/core/hooks/useRoleBasedAccess'
-import { UserRole } from '@repo/core/types/user'
-// import { useCategories } from '@repo/core/hooks/finance/useCategories'
+import { useRoleBasedAccess } from '@gaqno-dev/core/hooks/useRoleBasedAccess'
+import { UserRole } from '@gaqno-dev/core/types/user'
+// import { useCategories } from '@gaqno-dev/core/hooks/finance/useCategories'
 import { useState } from 'react'
-// import { IFinanceCategory } from '@repo/core/types/finance'
+// import { IFinanceCategory } from '@gaqno-dev/core/types/finance'
 
 // Placeholder for missing shared finance types/hooks
 // If admin needs to manage categories, we might need a shared definition or admin-specific service.

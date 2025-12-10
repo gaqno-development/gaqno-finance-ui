@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui/components/ui'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@gaqno-dev/ui/components/ui'
 import { UserCard } from '@/components/features/users/components/user-card'
 import { UserForm } from '@/components/features/users/components/user-form'
 import { useUsersPage } from './hooks/useUsersPage'

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useUsers } from '@/components/features/users/hooks/useUsers'
 import { useUserActions } from '@/components/features/users/hooks/useUserActions'
-import { IUserProfile } from '@repo/core/types/user'
+import { IUserProfile } from '@gaqno-dev/core/types/user'
 
 export const useUsersPage = () => {
   const [editingUser, setEditingUser] = useState<IUserProfile | null>(null)

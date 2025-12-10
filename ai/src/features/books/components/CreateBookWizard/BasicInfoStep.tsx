@@ -1,16 +1,16 @@
 'use client'
 
 import { useFormContext } from 'react-hook-form'
-import { Input } from '@repo/ui/components/ui'
-import { Label } from '@repo/ui/components/ui'
-import { Textarea } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
+import { Input } from '@gaqno-dev/ui/components/ui'
+import { Label } from '@gaqno-dev/ui/components/ui'
+import { Textarea } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 import { GenreSelector } from '../GenreSelector'
 import { AISuggestionButton } from '../AISuggestionButton'
-import { useSupabaseClient } from '@repo/core/hooks/useSupabaseClient'
+import { useSupabaseClient } from '@gaqno-dev/core/hooks/useSupabaseClient'
 import { useState } from 'react'
 import { Sparkles, Loader2 } from 'lucide-react'
-import { useUIStore } from '@repo/core/store/uiStore'
+import { useUIStore } from '@gaqno-dev/core/store/uiStore'
 
 interface IBasicInfoStepProps {
   onGenreSelect: (genre: string) => void

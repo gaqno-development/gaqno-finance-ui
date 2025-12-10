@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { FeatureManager } from '@/features/admin/FeatureManager'
-import { ITenant } from '@repo/core/types/admin'
+import { ITenant } from '@gaqno-dev/core/types/admin'
 
 interface IFeaturesTabProps {
     tenant: ITenant

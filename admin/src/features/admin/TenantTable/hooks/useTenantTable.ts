@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from 'react'
-import { useTenants } from '@repo/core/hooks/admin/useTenants'
-import { ITenant } from '@repo/core/types/admin'
+import { useTenants } from '@gaqno-dev/core/hooks/admin/useTenants'
+import { ITenant } from '@gaqno-dev/core/types/admin'
 
 export const useTenantTable = () => {
     const { tenants, isLoading, deleteTenant } = useTenants()

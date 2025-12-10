@@ -10,18 +10,18 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@repo/ui/components/ui'
-import { DialogFormFooter } from '@repo/ui/components/ui'
-import { handleMutationError, handleFormError } from '@repo/core/utils/error-handler'
-import { Input } from '@repo/ui/components/ui'
-import { Label } from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
+import { DialogFormFooter } from '@gaqno-dev/ui/components/ui'
+import { handleMutationError, handleFormError } from '@gaqno-dev/core/utils/error-handler'
+import { Input } from '@gaqno-dev/ui/components/ui'
+import { Label } from '@gaqno-dev/ui/components/ui'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
 import { useTransactions } from '../hooks/useTransactions'
 import { useCreditCards } from '../hooks/useCreditCards'
 import { useCategories } from '../hooks/useCategories'
@@ -30,7 +30,7 @@ import { CategorySelectorDialog } from './CategorySelectorDialog'
 import { CategoryBadge } from './CategoryBadge'
 import { getTransactionIcon } from './TransactionIconPicker'
 import { IFinanceTransaction, TransactionType, TransactionStatus } from '../types/finance'
-import { Button } from '@repo/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 import { X } from 'lucide-react'
 
 const transactionSchema = z.object({

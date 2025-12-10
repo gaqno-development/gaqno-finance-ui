@@ -1,8 +1,8 @@
 'use client'
 
 import React from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui/components/ui'
-import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/components/ui'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@gaqno-dev/ui/components/ui'
+import { Avatar, AvatarFallback, AvatarImage } from '@gaqno-dev/ui/components/ui'
 import { User, Settings as SettingsIcon, Shield } from 'lucide-react'
 import { useSettings } from './hooks/useSettings'
 

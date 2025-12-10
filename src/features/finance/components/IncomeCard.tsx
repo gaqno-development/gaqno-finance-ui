@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardContent } from '@repo/ui/components/ui'
+import { Card, CardHeader, CardTitle, CardContent } from '@gaqno-dev/ui/components/ui'
 import { TrendingUp } from 'lucide-react'
 import { formatCurrency } from '../utils/formatCurrency'
 

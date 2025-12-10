@@ -1,10 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { Popover, PopoverContent, PopoverTrigger } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
+import { Popover, PopoverContent, PopoverTrigger } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 import { Loader2, Sparkles, Check, X, RefreshCw } from 'lucide-react'
-import { cn } from '@repo/core/lib/utils'
+import { cn } from '@gaqno-dev/core/lib/utils'
 
 interface IAISuggestionPopoverProps {
   onGenerate: () => Promise<string>

@@ -10,9 +10,9 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@repo/ui/components/ui'
-import { Card, CardHeader, CardTitle, CardContent } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
+import { Card, CardHeader, CardTitle, CardContent } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 import { Plus } from 'lucide-react'
 import { CreditCardDisplayCard } from './CreditCardDisplayCard'
 import { AddCreditCardDialog } from './AddCreditCardDialog'

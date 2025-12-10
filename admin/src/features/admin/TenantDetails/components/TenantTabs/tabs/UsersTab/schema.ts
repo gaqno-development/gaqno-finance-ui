@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { strongPasswordSchema, confirmPasswordRefinement } from '@repo/core/lib/validations'
+import { strongPasswordSchema, confirmPasswordRefinement } from '@gaqno-dev/core/lib/validations'
 
 export const userSchema = z.object({
     name: z.string()

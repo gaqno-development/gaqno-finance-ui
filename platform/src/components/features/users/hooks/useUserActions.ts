@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { api } from '@repo/core/lib/api'
-import { IUpdateUserRequest } from '@repo/core/types/user'
+import { api } from '@gaqno-dev/core/lib/api'
+import { IUpdateUserRequest } from '@gaqno-dev/core/types/user'
 
 export const useUserActions = () => {
   const queryClient = useQueryClient()

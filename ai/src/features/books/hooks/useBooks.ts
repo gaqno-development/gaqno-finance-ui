@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
-import { useSupabaseQuery, useSupabaseMutation } from '@repo/core/hooks/useSupabaseQuery'
-import { useSupabaseClient } from '@repo/core/hooks/useSupabaseClient'
-import { useTenant } from '@repo/core/contexts/TenantContext'
-import { useAuth } from '@repo/core/contexts/AuthContext'
+import { useSupabaseQuery, useSupabaseMutation } from '@gaqno-dev/core/hooks/useSupabaseQuery'
+import { useSupabaseClient } from '@gaqno-dev/core/hooks/useSupabaseClient'
+import { useTenant } from '@gaqno-dev/core/contexts/TenantContext'
+import { useAuth } from '@gaqno-dev/core/contexts/AuthContext'
 import { useQueryClient } from '@tanstack/react-query'
 import { BookService } from '../services/bookService'
 import {

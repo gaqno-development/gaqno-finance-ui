@@ -1,8 +1,8 @@
 'use client'
 
 import React from 'react'
-import { Card } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
+import { Card } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 import {
     Pencil,
     Trash2,
@@ -15,7 +15,7 @@ import {
 } from 'lucide-react'
 import { ITenantCardProps } from '../../types'
 import Link from 'next/link'
-import { formatDate } from '@repo/core/utils/date'
+import { formatDate } from '@gaqno-dev/core/utils/date'
 
 export const TenantCard: React.FC<ITenantCardProps> = ({
     tenant,

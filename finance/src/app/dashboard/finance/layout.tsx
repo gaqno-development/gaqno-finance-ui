@@ -1,7 +1,7 @@
 'use client'
 
-import { FeatureGuard } from '@repo/ui/components/guards'
-import { FeatureModule, FeaturePermissionLevel } from '@repo/core/types/user'
+import { FeatureGuard } from '@gaqno-dev/ui/components/guards'
+import { FeatureModule, FeaturePermissionLevel } from '@gaqno-dev/core/types/user'
 
 export default function FinanceLayout({
   children,

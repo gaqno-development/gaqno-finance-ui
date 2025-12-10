@@ -1,14 +1,14 @@
 'use client'
 
 import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@repo/ui/components/ui'
-import { Input } from '@repo/ui/components/ui'
-import { Label } from '@repo/ui/components/ui'
-import { Textarea } from '@repo/ui/components/ui'
+import { Card, CardContent, CardHeader, CardTitle } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@gaqno-dev/ui/components/ui'
+import { Input } from '@gaqno-dev/ui/components/ui'
+import { Label } from '@gaqno-dev/ui/components/ui'
+import { Textarea } from '@gaqno-dev/ui/components/ui'
 import { useBookCharacters } from '../hooks/useBookCharacters'
-import { Avatar, AvatarImage, AvatarFallback } from '@repo/ui/components/ui'
+import { Avatar, AvatarImage, AvatarFallback } from '@gaqno-dev/ui/components/ui'
 import { Plus } from 'lucide-react'
 
 interface ICharacterListProps {

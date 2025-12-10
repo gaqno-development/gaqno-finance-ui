@@ -1,13 +1,13 @@
 'use client'
 
 import React from 'react'
-import { Card } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
+import { Card } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 import { ArrowLeft, Settings } from 'lucide-react'
 import { useTenantDetails } from './hooks/useTenantDetails'
 import { TenantTabs } from './components/TenantTabs'
 import Link from 'next/link'
-import { formatDate } from '@repo/core/utils/date'
+import { formatDate } from '@gaqno-dev/core/utils/date'
 
 interface ITenantDetailsProps {
     tenantId: string

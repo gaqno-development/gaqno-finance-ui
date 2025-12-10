@@ -1,9 +1,9 @@
 'use client'
 import React from 'react'
-import { Card } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
+import { Card } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 import { useDomainManager } from './hooks/useDomainManager'
-import { DataTable } from '@repo/ui/components/ui'
+import { DataTable } from '@gaqno-dev/ui/components/ui'
 import { useMemo } from 'react'
 import { createDomainColumns } from './columns'
 

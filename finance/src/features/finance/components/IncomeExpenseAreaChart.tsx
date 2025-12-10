@@ -8,7 +8,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
 import {
   ChartConfig,
   ChartContainer,
@@ -16,14 +16,14 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
-} from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
 import { TrendingUp, TrendingDown } from 'lucide-react'
 import { IFinanceTransaction } from '../types/finance'
 import { generateRecurringTransactions } from '../utils/generateRecurringTransactions'

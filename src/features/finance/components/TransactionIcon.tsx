@@ -1,7 +1,7 @@
 'use client'
 
 import { IFinanceTransaction } from '../types/finance'
-import { cn } from '@repo/core/lib/utils'
+import { cn } from '@gaqno-dev/core/lib/utils'
 import { getTransactionIcon } from './TransactionIconPicker'
 
 interface ITransactionIconProps {

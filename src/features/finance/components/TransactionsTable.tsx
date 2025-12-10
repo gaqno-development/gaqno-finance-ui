@@ -8,9 +8,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
-import { Card, CardHeader, CardTitle, CardContent } from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
+import { Card, CardHeader, CardTitle, CardContent } from '@gaqno-dev/ui/components/ui'
 import { Edit, Trash2 } from 'lucide-react'
 import { formatCurrency } from '../utils/formatCurrency'
 import { TransactionStatusBadge } from './TransactionStatusBadge'

@@ -6,11 +6,11 @@ import {
     DialogContent,
     DialogHeader,
     DialogTitle,
-} from '@repo/ui/components/ui'
-import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
+import { Avatar, AvatarFallback, AvatarImage } from '@gaqno-dev/ui/components/ui'
 import { ITenantUsersDialogProps } from '../../types'
 import { useTenantUsers } from '../../hooks/useTenantUsers'
-import { formatDate } from '@repo/core/utils/date'
+import { formatDate } from '@gaqno-dev/core/utils/date'
 
 export const TenantUsersDialog: React.FC<ITenantUsersDialogProps> = ({
     open,

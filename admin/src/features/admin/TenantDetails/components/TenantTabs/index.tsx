@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { ITenant } from '@repo/core/types/admin'
+import { ITenant } from '@gaqno-dev/core/types/admin'
 import { TTenantTab } from '../../hooks/useTenantDetails'
 import {
     LayoutDashboard,

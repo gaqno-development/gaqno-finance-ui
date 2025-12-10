@@ -5,7 +5,7 @@ import { BlueprintContent } from './BlueprintContent'
 import { BlueprintContextPanel } from './BlueprintContextPanel'
 import { useBookBlueprint } from '../hooks/useBookBlueprint'
 import { useBook } from '../hooks/useBooks'
-import { LoadingSkeleton } from '@repo/ui/components/ui'
+import { LoadingSkeleton } from '@gaqno-dev/ui/components/ui'
 
 interface IBookBlueprintPanelProps {
   bookId: string

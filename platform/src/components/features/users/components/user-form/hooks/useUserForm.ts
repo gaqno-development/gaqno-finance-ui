@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { userFormSchema, IUserFormValues } from '../schema'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { api } from '@repo/core/lib/api'
+import { api } from '@gaqno-dev/core/lib/api'
 import { IUserFormProps } from '../types'
 
 export const useUserForm = (props: IUserFormProps) => {

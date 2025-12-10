@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { createClient } from '@repo/core/utils/supabase/client'
+import { createClient } from '@gaqno-dev/core/utils/supabase/client'
 import axios from 'axios'
 
 export const useImageUpload = () => {

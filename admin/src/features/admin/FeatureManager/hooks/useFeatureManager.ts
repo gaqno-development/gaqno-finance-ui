@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useFeatures } from '@repo/core/hooks/admin/useFeatures'
-import { IFeature } from '@repo/core/types/admin'
+import { useFeatures } from '@gaqno-dev/core/hooks/admin/useFeatures'
+import { IFeature } from '@gaqno-dev/core/types/admin'
 
 export const useFeatureManager = (tenantId: string) => {
     const { features, isLoading, updateFeature: updateFeatureStatus } = useFeatures(tenantId)

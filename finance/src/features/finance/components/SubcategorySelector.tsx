@@ -7,9 +7,9 @@ import {
   SheetHeader,
   SheetTitle,
   SheetDescription,
-} from '@repo/ui/components/ui'
-import { Input } from '@repo/ui/components/ui'
-import { cn } from '@repo/core/lib/utils'
+} from '@gaqno-dev/ui/components/ui'
+import { Input } from '@gaqno-dev/ui/components/ui'
+import { cn } from '@gaqno-dev/core/lib/utils'
 import { IFinanceSubcategory, IFinanceCategory } from '../types/finance'
 import { getTransactionIcon } from './TransactionIconPicker'
 import { Search, Check } from 'lucide-react'

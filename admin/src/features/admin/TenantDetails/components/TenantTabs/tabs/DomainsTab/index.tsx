@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { DomainManager } from '@/features/admin/DomainManager'
-import { ITenant } from '@repo/core/types/admin'
+import { ITenant } from '@gaqno-dev/core/types/admin'
 
 interface IDomainsTabProps {
     tenant: ITenant

@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
-import { useSupabaseQuery } from '@repo/core/hooks/useSupabaseQuery'
-import { createClient } from '@repo/core/utils/supabase/client'
-import { ITenant } from '@repo/core/types/admin'
+import { useSupabaseQuery } from '@gaqno-dev/core/hooks/useSupabaseQuery'
+import { createClient } from '@gaqno-dev/core/utils/supabase/client'
+import { ITenant } from '@gaqno-dev/core/types/admin'
 import { useRouter } from 'next/navigation'
 
 export type TTenantTab = 'overview' | 'branding' | 'users' | 'domains' | 'features' | 'analytics'

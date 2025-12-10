@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useAuth } from '@repo/core/hooks/useAuth'
-import { UserRole } from '@repo/core/types/user'
-import { isRootAdmin } from '@repo/core/lib/permissions'
+import { useAuth } from '@gaqno-dev/core/hooks/useAuth'
+import { UserRole } from '@gaqno-dev/core/types/user'
+import { isRootAdmin } from '@gaqno-dev/core/lib/permissions'
 
 export const useAdminGuard = () => {
     const router = useRouter()

@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@repo/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 
 interface IYearFilterButtonsProps {
   availableYears: number[]

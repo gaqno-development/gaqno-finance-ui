@@ -2,10 +2,10 @@
 
 import React from 'react'
 import { useRouter } from 'next/navigation'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 import { AlertCircle } from 'lucide-react'
-import { ROUTES } from '@repo/core/lib/constants'
+import { ROUTES } from '@gaqno-dev/core/lib/constants'
 
 export default function UnauthorizedPage() {
   const router = useRouter()

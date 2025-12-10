@@ -2,19 +2,19 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
-import { Card, CardContent, CardHeader, CardTitle } from '@repo/ui/components/ui'
-import { Textarea } from '@repo/ui/components/ui'
-import { Input } from '@repo/ui/components/ui'
-import { Label } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
+import { Card, CardContent, CardHeader, CardTitle } from '@gaqno-dev/ui/components/ui'
+import { Textarea } from '@gaqno-dev/ui/components/ui'
+import { Input } from '@gaqno-dev/ui/components/ui'
+import { Label } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 import { useBookChapters } from '../hooks/useBookChapters'
 import { useBook } from '../hooks/useBooks'
 import { useBookBlueprint } from '../hooks/useBookBlueprint'
 import { useBookCharacters } from '../hooks/useBookCharacters'
-import { useSupabaseClient } from '@repo/core/hooks/useSupabaseClient'
+import { useSupabaseClient } from '@gaqno-dev/core/hooks/useSupabaseClient'
 import { calculatePages, formatPageInfo } from '../utils/pageCalculator'
 import { Save, Wand2, Loader2, Sparkles } from 'lucide-react'
-import { Progress } from '@repo/ui/components/ui'
+import { Progress } from '@gaqno-dev/ui/components/ui'
 
 interface IChapterEditorProps {
   bookId: string

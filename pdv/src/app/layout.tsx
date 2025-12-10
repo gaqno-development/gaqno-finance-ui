@@ -1,9 +1,9 @@
-import "@repo/ui/styles";
+import "@gaqno-dev/ui/styles";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ThemeProvider } from "@repo/ui/components/providers";
-import { QueryProvider } from "@repo/ui/components/providers";
-import { AuthProvider } from "@repo/ui/contexts";
+import { ThemeProvider } from "@gaqno-dev/ui/components/providers";
+import { QueryProvider } from "@gaqno-dev/ui/components/providers";
+import { AuthProvider } from "@gaqno-dev/ui/contexts";
 
 const inter = Inter({ subsets: ["latin"] });
 

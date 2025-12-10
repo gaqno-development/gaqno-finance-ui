@@ -2,12 +2,12 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@repo/ui/components/ui'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@repo/ui/components/ui'
-import { Input } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@gaqno-dev/ui/components/ui'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@gaqno-dev/ui/components/ui'
+import { Input } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 import { useLogin } from './hooks/useLogin'
-import { ROUTES } from '@repo/core/lib/constants'
+import { ROUTES } from '@gaqno-dev/core/lib/constants'
 
 export default function LoginPage() {
   const { form, onSubmit, isSubmitting, error } = useLogin()

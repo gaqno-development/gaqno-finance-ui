@@ -1,7 +1,7 @@
 'use client'
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 import { useBookExports } from '../hooks/useBookExport'
 import { ExportFormat, ExportStatus } from '../types/books'
 import { FileText, Download } from 'lucide-react'

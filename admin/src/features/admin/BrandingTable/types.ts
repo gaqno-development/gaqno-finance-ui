@@ -1,4 +1,4 @@
-import { IBrandingConfig } from '@repo/core/types/admin'
+import { IBrandingConfig } from '@gaqno-dev/core/types/admin'
 
 export interface IBrandingTableProps {
     onEdit?: (branding: IBrandingConfig) => void

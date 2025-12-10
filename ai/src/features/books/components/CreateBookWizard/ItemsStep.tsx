@@ -1,15 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@repo/ui/components/ui'
-import { Input } from '@repo/ui/components/ui'
-import { Label } from '@repo/ui/components/ui'
-import { Textarea } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
+import { Card, CardContent, CardHeader, CardTitle } from '@gaqno-dev/ui/components/ui'
+import { Input } from '@gaqno-dev/ui/components/ui'
+import { Label } from '@gaqno-dev/ui/components/ui'
+import { Textarea } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 import { AISuggestionButton } from '../AISuggestionButton'
 import { Package, Plus, Trash2, Sparkles, Loader2 } from 'lucide-react'
-import { useSupabaseClient } from '@repo/core/hooks/useSupabaseClient'
-import { useUIStore } from '@repo/core/store/uiStore'
+import { useSupabaseClient } from '@gaqno-dev/core/hooks/useSupabaseClient'
+import { useUIStore } from '@gaqno-dev/core/store/uiStore'
 
 interface IItem {
   id: string

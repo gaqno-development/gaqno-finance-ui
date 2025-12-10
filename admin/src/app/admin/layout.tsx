@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { RootAdminGuard } from '@repo/ui/components/guards'
+import { RootAdminGuard } from '@gaqno-dev/ui/components/guards'
 
 export default function AdminLayout({
     children,

@@ -1,5 +1,5 @@
-import { Card, CardContent } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
+import { Card, CardContent } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 import { Trash2, Edit } from 'lucide-react'
 import { formatCurrency } from '../utils/formatCurrency'
 import { ICreditCard } from '../types/finance'

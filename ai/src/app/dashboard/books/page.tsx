@@ -2,12 +2,12 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui/components/ui'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@gaqno-dev/ui/components/ui'
 import { CreateBookWizard } from '@/features/books/components/CreateBookWizard'
 import { useBooks } from '@/features/books/hooks/useBooks'
 import { BookOpen, Plus } from 'lucide-react'
-import { EmptyState } from '@repo/ui/components/ui'
-import { LoadingSkeleton } from '@repo/ui/components/ui'
+import { EmptyState } from '@gaqno-dev/ui/components/ui'
+import { LoadingSkeleton } from '@gaqno-dev/ui/components/ui'
 
 export default function BooksPage() {
   const router = useRouter()

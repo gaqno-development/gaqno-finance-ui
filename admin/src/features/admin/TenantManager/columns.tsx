@@ -1,7 +1,7 @@
 "use client"
 
-import { Button } from "@repo/ui/components/ui/button"
-import { formatDate } from "@repo/core/utils/date"
+import { Button } from "@gaqno-dev/ui/components/ui/button"
+import { formatDate } from "@gaqno-dev/core/utils/date"
 
 type TenantRow = {
   id: string

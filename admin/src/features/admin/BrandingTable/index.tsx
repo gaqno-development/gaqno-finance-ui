@@ -1,14 +1,14 @@
 'use client'
 
 import React from 'react'
-import { Card } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
-import { Input } from '@repo/ui/components/ui'
+import { Card } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
+import { Input } from '@gaqno-dev/ui/components/ui'
 import { Plus } from 'lucide-react'
 import { useBrandingTable } from './hooks/useBrandingTable'
 import { BrandingDialog } from './components/BrandingDialog'
 import { TenantUsersDialog } from './components/TenantUsersDialog'
-import { DataTable } from '@repo/ui/components/ui'
+import { DataTable } from '@gaqno-dev/ui/components/ui'
 import { createBrandingColumns } from './columns'
 import { useMemo } from 'react'
 

@@ -1,5 +1,5 @@
 import { SupabaseClient } from '@supabase/supabase-js'
-import { Database } from '@repo/core/types/database'
+import { Database } from '@gaqno-dev/core/types/database'
 import {
   IBookToneStyle,
   ICreateBookToneStyleInput,

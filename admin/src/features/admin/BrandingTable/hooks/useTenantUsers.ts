@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
-import { useSupabaseQuery } from '@repo/core/hooks/useSupabaseQuery'
-import { createClient } from '@repo/core/utils/supabase/client'
+import { useSupabaseQuery } from '@gaqno-dev/core/hooks/useSupabaseQuery'
+import { createClient } from '@gaqno-dev/core/utils/supabase/client'
 import { ITenantUser } from '../types'
 
 export const useTenantUsers = (tenantId: string) => {

@@ -2,9 +2,9 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { tenantSchema, ITenantFormValues } from '../../../schema'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { createClient } from '@repo/core/utils/supabase/client'
+import { createClient } from '@gaqno-dev/core/utils/supabase/client'
 import { useMemo, useEffect } from 'react'
-import { ITenant } from '@repo/core/types/admin'
+import { ITenant } from '@gaqno-dev/core/types/admin'
 
 export const useTenantDialog = (
     tenantData: ITenant | null | undefined,

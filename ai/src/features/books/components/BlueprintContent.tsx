@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 import { BlueprintCard } from './BlueprintCard'
 import { BlueprintStructure } from './BlueprintStructure'
 import { useBookBlueprint } from '../hooks/useBookBlueprint'

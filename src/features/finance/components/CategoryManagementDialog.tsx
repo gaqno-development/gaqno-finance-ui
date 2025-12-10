@@ -10,25 +10,25 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@repo/ui/components/ui'
-import { DialogFormFooter } from '@repo/ui/components/ui'
-import { Input } from '@repo/ui/components/ui'
-import { Label } from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
+import { DialogFormFooter } from '@gaqno-dev/ui/components/ui'
+import { Input } from '@gaqno-dev/ui/components/ui'
+import { Label } from '@gaqno-dev/ui/components/ui'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 import { IFinanceCategory, TransactionType, ICreateCategoryInput, IUpdateCategoryInput, ICreateSubcategoryInput, IUpdateSubcategoryInput } from '../types/finance'
 import { useCategories } from '../hooks/useCategories'
 import { useSubcategories } from '../hooks/useSubcategories'
-import { handleMutationError } from '@repo/core/utils/error-handler'
+import { handleMutationError } from '@gaqno-dev/core/utils/error-handler'
 import { Trash2, Plus, Edit2 } from 'lucide-react'
 import { getTransactionIcon } from './TransactionIconPicker'
-import { cn } from '@repo/core/lib/utils'
+import { cn } from '@gaqno-dev/core/lib/utils'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -38,7 +38,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
 
 const categorySchema = z.object({
   name: z.string().min(1, 'Nome é obrigatório'),

@@ -9,7 +9,7 @@ import { MonthlySummaryBarChart } from '@/features/finance/components/MonthlySum
 import { CreditCardOverview } from '@/features/finance/components/CreditCardOverview'
 import { CreditCardSummary } from '@/features/finance/components/CreditCardSummary'
 import { IncomeExpenseView } from '@/features/finance/components/IncomeExpenseView'
-import { Card, CardContent } from '@repo/ui/components/ui'
+import { Card, CardContent } from '@gaqno-dev/ui/components/ui'
 import { useFinanceSummary } from '@/features/finance/hooks/useFinanceSummary'
 import { useTransactions } from '@/features/finance/hooks/useTransactions'
 import { useCreditCards, useCreditCardSummary } from '@/features/finance/hooks/useCreditCards'

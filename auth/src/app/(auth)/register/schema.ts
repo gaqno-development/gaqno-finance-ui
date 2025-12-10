@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { passwordSchema, confirmPasswordRefinement } from '@repo/core/lib/validations'
+import { passwordSchema, confirmPasswordRefinement } from '@gaqno-dev/core/lib/validations'
 
 export const registerSchema = z.object({
   name: z.string().min(3, 'Nome deve ter no mínimo 3 caracteres'),

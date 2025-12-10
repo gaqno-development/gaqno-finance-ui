@@ -1,4 +1,4 @@
-import { ITenant } from '@repo/core/types/admin'
+import { ITenant } from '@gaqno-dev/core/types/admin'
 
 export interface ITenantTableProps {
     view?: 'grid' | 'table'

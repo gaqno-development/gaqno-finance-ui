@@ -9,13 +9,13 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
 import { formatCurrency } from '../utils/formatCurrency'
 import { ICategoryExpense } from '../types/finance'
 

@@ -7,11 +7,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
-import { Input } from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
+import { Input } from '@gaqno-dev/ui/components/ui'
 import { IFinanceCategory, TransactionType } from '../types/finance'
-import { cn } from '@repo/core/lib/utils'
+import { cn } from '@gaqno-dev/core/lib/utils'
 import { getDefaultColorForCategory } from '../utils/iconToCategory'
 import { getTransactionIcon } from './TransactionIconPicker'
 import { useCategories } from '../hooks/useCategories'

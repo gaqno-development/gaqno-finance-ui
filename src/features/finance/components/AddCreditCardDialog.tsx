@@ -10,18 +10,18 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@repo/ui/components/ui'
-import { DialogFormFooter } from '@repo/ui/components/ui'
-import { handleMutationError, handleFormError } from '@repo/core/utils/error-handler'
-import { Input } from '@repo/ui/components/ui'
-import { Label } from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
+import { DialogFormFooter } from '@gaqno-dev/ui/components/ui'
+import { handleMutationError, handleFormError } from '@gaqno-dev/core/utils/error-handler'
+import { Input } from '@gaqno-dev/ui/components/ui'
+import { Label } from '@gaqno-dev/ui/components/ui'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
 import { useCreditCards } from '../hooks/useCreditCards'
 import { ICreditCard } from '../types/finance'
 

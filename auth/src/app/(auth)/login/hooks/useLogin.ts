@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { loginSchema, ILoginFormValues } from '../schema'
 import { useMutation } from '@tanstack/react-query'
-import { ROUTES } from '@repo/core/lib/constants'
-import { createClient } from '@repo/core/utils/supabase/client'
+import { ROUTES } from '@gaqno-dev/core/lib/constants'
+import { createClient } from '@gaqno-dev/core/utils/supabase/client'
 
 export const useLogin = () => {
   const router = useRouter()

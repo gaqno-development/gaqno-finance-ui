@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui/components/ui'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@gaqno-dev/ui/components/ui'
 import { Users, Settings, Activity, TrendingUp } from 'lucide-react'
 import { useAdminDashboard } from './hooks/useAdminDashboard'
 

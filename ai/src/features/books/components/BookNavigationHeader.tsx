@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useBook } from '../hooks/useBooks'
-import { Tabs, TabsList, TabsTrigger } from '@repo/ui/components/ui'
+import { Tabs, TabsList, TabsTrigger } from '@gaqno-dev/ui/components/ui'
 import { BookOpen, FileText, Image, Download } from 'lucide-react'
 
 interface IBookNavigationHeaderProps {

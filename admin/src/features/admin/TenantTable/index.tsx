@@ -2,9 +2,9 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { Card } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
-import { Input } from '@repo/ui/components/ui'
+import { Card } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
+import { Input } from '@gaqno-dev/ui/components/ui'
 import {
     Plus,
     Grid3x3,
@@ -23,8 +23,8 @@ import { TenantCard } from './components/TenantCard'
 import { TenantDialog } from './components/TenantDialog'
 import { TenantStatsDialog } from './components/TenantStatsDialog'
 import { TenantUsersDialog } from '../BrandingTable/components/TenantUsersDialog'
-import { formatDate } from '@repo/core/utils/date'
-import { DataTable } from '@repo/ui/components/ui'
+import { formatDate } from '@gaqno-dev/core/utils/date'
+import { DataTable } from '@gaqno-dev/ui/components/ui'
 import { useMemo } from 'react'
 import { createTenantTableColumns } from './columns'
 

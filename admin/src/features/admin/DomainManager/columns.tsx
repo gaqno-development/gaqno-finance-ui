@@ -1,8 +1,8 @@
 "use client"
 
-import { IDomain } from "@repo/core/types/admin"
-import { Button } from "@repo/ui/components/ui/button"
-import { formatDate } from "@repo/core/utils/date"
+import { IDomain } from "@gaqno-dev/core/types/admin"
+import { Button } from "@gaqno-dev/ui/components/ui/button"
+import { formatDate } from "@gaqno-dev/core/utils/date"
 
 export interface DomainColumnsHandlers {
   onVerify: (id: string) => void

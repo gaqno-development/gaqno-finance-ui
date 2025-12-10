@@ -1,7 +1,7 @@
 'use client'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@repo/ui/components/ui'
-import { Alert, AlertDescription } from '@repo/ui/components/ui'
+import { Card, CardContent, CardHeader, CardTitle } from '@gaqno-dev/ui/components/ui'
+import { Alert, AlertDescription } from '@gaqno-dev/ui/components/ui'
 import { AlertTriangle } from 'lucide-react'
 
 interface IConsistencyAlertsProps {

@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Button } from '@repo/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 import { Upload, Loader2, X } from 'lucide-react'
 import { useImageUploader } from './hooks/useImageUploader'
 

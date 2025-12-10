@@ -6,11 +6,11 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@repo/ui/components/ui'
-import { useAuth } from '@repo/core/contexts/AuthContext'
-import { useSupabaseQuery } from '@repo/core/hooks/useSupabaseQuery'
-import { useSupabaseClient } from '@repo/core/hooks/useSupabaseClient'
-import { useTenant } from '@repo/core/contexts/TenantContext'
+} from '@gaqno-dev/ui/components/ui'
+import { useAuth } from '@gaqno-dev/core/contexts/AuthContext'
+import { useSupabaseQuery } from '@gaqno-dev/core/hooks/useSupabaseQuery'
+import { useSupabaseClient } from '@gaqno-dev/core/hooks/useSupabaseClient'
+import { useTenant } from '@gaqno-dev/core/contexts/TenantContext'
 
 interface IPersonSelectorProps {
   value?: string | null

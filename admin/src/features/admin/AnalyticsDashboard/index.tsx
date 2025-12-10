@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
-import { Card } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
+import { Card } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
 import { useAnalyticsDashboard } from './hooks/useAnalyticsDashboard'
 
 interface IAnalyticsDashboardProps {

@@ -1,23 +1,23 @@
 'use client'
 
 import { useState, useMemo, useEffect } from 'react'
-import { Card, CardHeader, CardContent } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@repo/ui/components/ui'
+import { Card, CardHeader, CardContent } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@gaqno-dev/ui/components/ui'
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
   ContextMenuSeparator,
-} from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
 import { TrendingUp, TrendingDown, ChevronDown, ChevronRight, Plus, Filter, Maximize2, Eye, Edit, Trash2 } from 'lucide-react'
 import { IFinanceTransaction } from '../types/finance'
 import { formatCurrency } from '../utils/formatCurrency'

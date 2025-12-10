@@ -1,14 +1,14 @@
 'use client'
 
 import React from 'react'
-import { Card } from '@repo/ui/components/ui'
-import { Button } from '@repo/ui/components/ui'
-import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/components/ui'
-import { ITenant } from '@repo/core/types/admin'
+import { Card } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/ui/components/ui'
+import { Avatar, AvatarFallback, AvatarImage } from '@gaqno-dev/ui/components/ui'
+import { ITenant } from '@gaqno-dev/core/types/admin'
 import { Plus, Pencil, Trash2, UserPlus } from 'lucide-react'
 import { useUsersTab } from './hooks/useUsersTab'
 import { UserDialog } from './components/UserDialog'
-import { formatDate } from '@repo/core/utils/date'
+import { formatDate } from '@gaqno-dev/core/utils/date'
 
 interface IUsersTabProps {
     tenant: ITenant

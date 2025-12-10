@@ -1,6 +1,6 @@
-import { useSupabaseQuery } from '@repo/core/hooks/useSupabaseQuery'
-import { api } from '@repo/core/lib/api'
-import { IUserProfile } from '@repo/core/types/user'
+import { useSupabaseQuery } from '@gaqno-dev/core/hooks/useSupabaseQuery'
+import { api } from '@gaqno-dev/core/lib/api'
+import { IUserProfile } from '@gaqno-dev/core/types/user'
 
 export const useUsers = () => {
   return useSupabaseQuery<IUserProfile[]>(

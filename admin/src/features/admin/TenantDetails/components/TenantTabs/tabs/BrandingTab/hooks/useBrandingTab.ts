@@ -2,9 +2,9 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { brandingSchema, IBrandingFormValues } from '@/features/admin/BrandingTable/schema'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { createClient } from '@repo/core/utils/supabase/client'
+import { createClient } from '@gaqno-dev/core/utils/supabase/client'
 import { useMemo, useEffect } from 'react'
-import { useBranding } from '@repo/core/hooks/admin/useBranding'
+import { useBranding } from '@gaqno-dev/core/hooks/admin/useBranding'
 
 export const useBrandingTab = (tenantId: string) => {
     const supabase = useMemo(() => createClient(), [])

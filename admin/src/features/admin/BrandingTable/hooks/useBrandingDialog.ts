@@ -2,9 +2,9 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { brandingSchema, IBrandingFormValues } from '../schema'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { createClient } from '@repo/core/utils/supabase/client'
+import { createClient } from '@gaqno-dev/core/utils/supabase/client'
 import { useMemo } from 'react'
-import { IBrandingConfig } from '@repo/core/types/admin'
+import { IBrandingConfig } from '@gaqno-dev/core/types/admin'
 
 export const useBrandingDialog = (
     brandingData: IBrandingConfig | null | undefined,

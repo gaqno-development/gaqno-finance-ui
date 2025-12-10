@@ -1,7 +1,7 @@
-import { useAuth } from '@repo/core/hooks/useAuth'
+import { useAuth } from '@gaqno-dev/core/hooks/useAuth'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
-import { ROLE_ROUTES } from '@repo/core/lib/constants'
+import { ROLE_ROUTES } from '@gaqno-dev/core/lib/constants'
 
 export const useDashboard = () => {
   const { profile, loading } = useAuth()

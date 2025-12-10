@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useTenantUsers } from '@/features/admin/BrandingTable/hooks/useTenantUsers'
 import { ITenantUser } from '@/features/admin/BrandingTable/types'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { createClient } from '@repo/core/utils/supabase/client'
+import { createClient } from '@gaqno-dev/core/utils/supabase/client'
 import { useMemo } from 'react'
 
 export const useUsersTab = (tenantId: string) => {

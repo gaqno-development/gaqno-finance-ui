@@ -9,13 +9,13 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from '@repo/ui/components/ui'
+} from '@gaqno-dev/ui/components/ui'
 import { IFinanceTransaction } from '../types/finance'
 import { formatCurrency } from '../utils/formatCurrency'
 import { EmojiIcon } from './EmojiIcon'
