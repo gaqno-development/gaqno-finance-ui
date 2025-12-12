@@ -1,10 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useSupabaseClient } from '@gaqno-dev/core/hooks/useSupabaseClient'
-import { useTenant } from '@gaqno-dev/core/contexts'
-import { FeatureModule, FeaturePermissionLevel, IUserFeaturePermission } from '@gaqno-dev/core/types/user'
-import { formatRoleLabel } from '@gaqno-dev/core/lib/permissions'
+import { useSupabaseClient } from '@gaqno-dev/frontcore/hooks/useSupabaseClient'
+import { useTenant } from '@gaqno-dev/frontcore/contexts'
+import { FeatureModule, FeaturePermissionLevel, IUserFeaturePermission } from '@gaqno-dev/frontcore/types/user'
+import { formatRoleLabel } from '@gaqno-dev/frontcore'
 import { Card, CardHeader, CardContent, CardTitle, CardDescription } from '@gaqno-dev/ui/components/ui'
 import {
   Table,
@@ -16,7 +16,7 @@ import {
 } from '@gaqno-dev/ui/components/ui'
 import { Badge } from '@gaqno-dev/ui/components/ui'
 import { Button } from '@gaqno-dev/ui/components/ui'
-import { usePermissions } from '@gaqno-dev/core/hooks/usePermissions'
+import { usePermissions } from '@gaqno-dev/frontcore/hooks/usePermissions'
 
 interface IFinanceUser extends IUserFeaturePermission {
   user_name?: string

@@ -1,5 +1,5 @@
 import { SupabaseClient } from '@supabase/supabase-js'
-import { Database } from '@gaqno-dev/core/types/database'
+import { Database } from '@gaqno-dev/frontcore/types/database'
 import {
   IFinanceTransaction,
   IFinanceCategory,

@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@gaqno-dev/core/lib/utils'
+import { cn } from '@gaqno-dev/frontcore/lib/utils'
 
 interface ICategoryColorPickerProps {
   selectedColor?: string

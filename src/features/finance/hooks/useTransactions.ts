@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
-import { useSupabaseQuery, useSupabaseMutation } from '@gaqno-dev/core/hooks/useSupabaseQuery'
-import { useSupabaseClient } from '@gaqno-dev/core/hooks/useSupabaseClient'
-import { useTenant, useAuth } from '@gaqno-dev/core/contexts'
+import { useSupabaseQuery, useSupabaseMutation } from '@gaqno-dev/frontcore/hooks/useSupabaseQuery'
+import { useSupabaseClient } from '@gaqno-dev/frontcore/hooks/useSupabaseClient'
+import { useTenant, useAuth } from '@gaqno-dev/frontcore/contexts'
 import { useQueryClient } from '@tanstack/react-query'
 import { FinanceService } from '../services/financeService'
 import {

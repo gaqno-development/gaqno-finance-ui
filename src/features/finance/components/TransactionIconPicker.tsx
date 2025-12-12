@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
-import { cn } from '@gaqno-dev/core/lib/utils'
+import { cn } from '@gaqno-dev/frontcore/lib/utils'
 import { IFinanceCategory } from '../types/finance'
 import { getIconComponent } from '../utils/iconResolver'
 

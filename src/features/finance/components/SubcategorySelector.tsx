@@ -9,7 +9,7 @@ import {
   SheetDescription,
 } from '@gaqno-dev/ui/components/ui'
 import { Input } from '@gaqno-dev/ui/components/ui'
-import { cn } from '@gaqno-dev/core/lib/utils'
+import { cn } from '@gaqno-dev/frontcore/lib/utils'
 import { IFinanceSubcategory, IFinanceCategory } from '../types/finance'
 import { getTransactionIcon } from './TransactionIconPicker'
 import { Search, Check } from 'lucide-react'

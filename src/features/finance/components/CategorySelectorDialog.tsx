@@ -11,7 +11,7 @@ import {
 import { Button } from '@gaqno-dev/ui/components/ui'
 import { Input } from '@gaqno-dev/ui/components/ui'
 import { IFinanceCategory, TransactionType } from '../types/finance'
-import { cn } from '@gaqno-dev/core/lib/utils'
+import { cn } from '@gaqno-dev/frontcore/lib/utils'
 import { getDefaultColorForCategory } from '../utils/iconToCategory'
 import { getTransactionIcon } from './TransactionIconPicker'
 import { useCategories } from '../hooks/useCategories'

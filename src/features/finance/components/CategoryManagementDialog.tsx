@@ -25,10 +25,10 @@ import { Button } from '@gaqno-dev/ui/components/ui'
 import { IFinanceCategory, TransactionType, ICreateCategoryInput, IUpdateCategoryInput, ICreateSubcategoryInput, IUpdateSubcategoryInput } from '../types/finance'
 import { useCategories } from '../hooks/useCategories'
 import { useSubcategories } from '../hooks/useSubcategories'
-import { handleMutationError } from '@gaqno-dev/core/utils/error-handler'
+import { handleMutationError } from '@gaqno-dev/frontcore/utils/error-handler'
 import { Trash2, Plus, Edit2 } from 'lucide-react'
 import { getTransactionIcon } from './TransactionIconPicker'
-import { cn } from '@gaqno-dev/core/lib/utils'
+import { cn } from '@gaqno-dev/frontcore/lib/utils'
 import {
   AlertDialog,
   AlertDialogAction,

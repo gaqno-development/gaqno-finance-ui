@@ -12,7 +12,7 @@ import {
   DialogDescription,
 } from '@gaqno-dev/ui/components/ui'
 import { DialogFormFooter } from '@gaqno-dev/ui/components/ui'
-import { handleMutationError, handleFormError } from '@gaqno-dev/core/utils/error-handler'
+import { handleMutationError, handleFormError } from '@gaqno-dev/frontcore/utils/error-handler'
 import { Input } from '@gaqno-dev/ui/components/ui'
 import { Label } from '@gaqno-dev/ui/components/ui'
 import {

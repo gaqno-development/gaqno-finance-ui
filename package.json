@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@gaqno-dev/core": "^1.0.29",
+    "@gaqno-dev/frontcore": "^1.0.1",
     "@gaqno-dev/ui": "^1.0.18",
     "@hookform/resolvers": "^3.3.4",
     "@tanstack/react-query": "^5.90.12",
@@ -19,10 +19,10 @@
     "react-dom": "^18",
     "react-hook-form": "^7.68.0",
     "recharts": "^2.15.4",
+    "supports-color": "^10.2.2",
     "zod": "^4.1.13"
   },
   "devDependencies": {
-    "@gaqno-dev/config": "^1.0.8",
     "@types/node": "25.0.0",
     "@types/react": "^18.3.27",
     "@types/react-dom": "^18.3.7",
