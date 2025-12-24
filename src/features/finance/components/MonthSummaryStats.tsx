@@ -1,4 +1,4 @@
-'use client'
+
 
 import { TrendingUp, TrendingDown, Wallet } from 'lucide-react'
 import { formatCurrency } from '../utils/formatCurrency'

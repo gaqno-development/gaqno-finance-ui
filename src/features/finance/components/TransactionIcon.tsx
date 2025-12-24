@@ -1,4 +1,4 @@
-'use client'
+
 
 import { IFinanceTransaction } from '../types/finance'
 import { cn } from '@gaqno-dev/frontcore/lib/utils'

@@ -1,4 +1,4 @@
-'use client'
+
 
 import { RefreshCw } from 'lucide-react'
 import { IFinanceTransaction } from '../types/finance'

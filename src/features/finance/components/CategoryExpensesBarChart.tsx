@@ -1,4 +1,4 @@
-'use client'
+
 
 import * as React from 'react'
 import { Bar, BarChart, XAxis, YAxis } from 'recharts'
@@ -9,13 +9,13 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@gaqno-dev/ui/components/ui'
+} from '@gaqno-dev/frontcore/components/ui'
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from '@gaqno-dev/ui/components/ui'
+} from '@gaqno-dev/frontcore/components/ui'
 import { IFinanceTransaction } from '../types/finance'
 import { formatCurrency } from '../utils/formatCurrency'
 import { EmojiIcon } from './EmojiIcon'

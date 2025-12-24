@@ -1,4 +1,4 @@
-'use client'
+
 
 import { useEffect, useState, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
@@ -10,18 +10,18 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@gaqno-dev/ui/components/ui'
-import { DialogFormFooter } from '@gaqno-dev/ui/components/ui'
+} from '@gaqno-dev/frontcore/components/ui'
+import { DialogFormFooter } from '@gaqno-dev/frontcore/components/ui'
 import { handleMutationError, handleFormError } from '@gaqno-dev/frontcore/utils/error-handler'
-import { Input } from '@gaqno-dev/ui/components/ui'
-import { Label } from '@gaqno-dev/ui/components/ui'
+import { Input } from '@gaqno-dev/frontcore/components/ui'
+import { Label } from '@gaqno-dev/frontcore/components/ui'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@gaqno-dev/ui/components/ui'
+} from '@gaqno-dev/frontcore/components/ui'
 import { useTransactions } from '../hooks/useTransactions'
 import { useCreditCards } from '../hooks/useCreditCards'
 import { useCategories } from '../hooks/useCategories'
@@ -30,7 +30,7 @@ import { CategorySelectorDialog } from './CategorySelectorDialog'
 import { CategoryBadge } from './CategoryBadge'
 import { getTransactionIcon } from './TransactionIconPicker'
 import { IFinanceTransaction, TransactionType, TransactionStatus } from '../types/finance'
-import { Button } from '@gaqno-dev/ui/components/ui'
+import { Button } from '@gaqno-dev/frontcore/components/ui'
 import { X } from 'lucide-react'
 
 const transactionSchema = z.object({

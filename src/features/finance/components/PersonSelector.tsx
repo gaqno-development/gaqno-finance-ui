@@ -1,4 +1,4 @@
-'use client'
+
 
 import {
   Select,
@@ -6,10 +6,9 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@gaqno-dev/ui/components/ui'
-import { useAuth, useTenant } from '@gaqno-dev/frontcore/contexts'
-import { useSupabaseQuery } from '@gaqno-dev/frontcore/hooks/useSupabaseQuery'
-import { useSupabaseClient } from '@gaqno-dev/frontcore/hooks/useSupabaseClient'
+} from '@gaqno-dev/frontcore/components/ui'
+import { useQuery } from '@tanstack/react-query'
+import { useTenant } from '@gaqno-dev/frontcore/contexts'
 
 interface IPersonSelectorProps {
   value?: string | null
@@ -22,25 +21,15 @@ export function PersonSelector({
   onValueChange,
   placeholder = 'Selecione uma pessoa',
 }: IPersonSelectorProps) {
-  const supabase = useSupabaseClient()
   const { tenantId } = useTenant()
-  const { profile } = useAuth()
 
-  const { data: profiles } = useSupabaseQuery<any[]>(
-    ['tenant-profiles', tenantId ?? 'no-tenant'],
-    async () => {
-      if (!tenantId) return []
-
-      let query = supabase.from('profiles').select('id, name, avatar_url').eq('tenant_id', tenantId)
-
-      const { data, error } = await query
-      if (error) throw error
-      return data || []
+  const { data: profiles } = useQuery<any[]>({
+    queryKey: ['tenant-profiles', tenantId ?? 'no-tenant'],
+    queryFn: async () => {
+      return []
     },
-    {
-      enabled: !!tenantId,
-    }
-  )
+    enabled: !!tenantId,
+  })
 
   return (
     <Select value={value || 'none'} onValueChange={(val) => onValueChange(val === 'none' ? null : val)}>

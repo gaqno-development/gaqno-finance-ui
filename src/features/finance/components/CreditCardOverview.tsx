@@ -1,4 +1,4 @@
-'use client'
+
 
 import { useState } from 'react'
 import {
@@ -10,9 +10,9 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@gaqno-dev/ui/components/ui'
-import { Card, CardHeader, CardTitle, CardContent } from '@gaqno-dev/ui/components/ui'
-import { Button } from '@gaqno-dev/ui/components/ui'
+} from '@gaqno-dev/frontcore/components/ui'
+import { Card, CardHeader, CardTitle, CardContent } from '@gaqno-dev/frontcore/components/ui'
+import { Button } from '@gaqno-dev/frontcore/components/ui'
 import { Plus } from 'lucide-react'
 import { CreditCardDisplayCard } from './CreditCardDisplayCard'
 import { AddCreditCardDialog } from './AddCreditCardDialog'

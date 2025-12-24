@@ -1,8 +1,6 @@
-import { useSupabaseQuery, useSupabaseMutation } from '@gaqno-dev/frontcore/hooks/useSupabaseQuery'
-import { useSupabaseClient } from '@gaqno-dev/frontcore/hooks/useSupabaseClient'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTenant } from '@gaqno-dev/frontcore/contexts'
-import { useQueryClient } from '@tanstack/react-query'
-import { FinanceService } from '../services/financeService'
+import { api } from '@/lib/api-client'
 import {
   IFinanceCategory,
   ICreateCategoryInput,
@@ -11,53 +9,43 @@ import {
 } from '../types/finance'
 
 export const useCategories = (type?: TransactionType) => {
-  const supabase = useSupabaseClient()
   const { tenantId } = useTenant()
   const queryClient = useQueryClient()
 
-  const { data: categories, isLoading, refetch } = useSupabaseQuery<IFinanceCategory[]>(
-    ['finance-categories', tenantId ?? 'no-tenant', type ?? 'all'],
-    async () => {
-      const service = new FinanceService(supabase)
-      return service.getCategories(tenantId, type)
-    }
-  )
-
-  const createMutation = useSupabaseMutation<IFinanceCategory, ICreateCategoryInput>(
-    async (input) => {
-      const service = new FinanceService(supabase)
-      return service.createCategory(tenantId, input)
+  const { data: categories, isLoading, refetch } = useQuery<IFinanceCategory[]>({
+    queryKey: ['finance-categories', tenantId ?? 'no-tenant', type ?? 'all'],
+    queryFn: async () => {
+      return api.categories.getAll(type)
     },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['finance-categories', tenantId ?? 'no-tenant'] })
-      },
-    }
-  )
+  })
 
-  const updateMutation = useSupabaseMutation<IFinanceCategory, IUpdateCategoryInput>(
-    async (input) => {
-      const service = new FinanceService(supabase)
-      return service.updateCategory(tenantId, input)
+  const createMutation = useMutation<IFinanceCategory, Error, ICreateCategoryInput>({
+    mutationFn: async (input) => {
+      return api.categories.create(input)
     },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['finance-categories', tenantId ?? 'no-tenant'] })
-      },
-    }
-  )
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['finance-categories', tenantId ?? 'no-tenant'] })
+    },
+  })
 
-  const deleteMutation = useSupabaseMutation<void, string>(
-    async (categoryId) => {
-      const service = new FinanceService(supabase)
-      return service.deleteCategory(tenantId, categoryId)
+  const updateMutation = useMutation<IFinanceCategory, Error, IUpdateCategoryInput>({
+    mutationFn: async (input) => {
+      if (!input.id) throw new Error('Missing category ID')
+      return api.categories.update(input.id, input)
     },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['finance-categories', tenantId ?? 'no-tenant'] })
-      },
-    }
-  )
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['finance-categories', tenantId ?? 'no-tenant'] })
+    },
+  })
+
+  const deleteMutation = useMutation<void, Error, string>({
+    mutationFn: async (categoryId) => {
+      return api.categories.delete(categoryId)
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['finance-categories', tenantId ?? 'no-tenant'] })
+    },
+  })
 
   const createCategory = async (input: ICreateCategoryInput) => {
     try {

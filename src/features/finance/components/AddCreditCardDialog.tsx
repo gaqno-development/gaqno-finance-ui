@@ -1,4 +1,4 @@
-'use client'
+
 
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
@@ -10,18 +10,18 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@gaqno-dev/ui/components/ui'
-import { DialogFormFooter } from '@gaqno-dev/ui/components/ui'
+} from '@gaqno-dev/frontcore/components/ui'
+import { DialogFormFooter } from '@gaqno-dev/frontcore/components/ui'
 import { handleMutationError, handleFormError } from '@gaqno-dev/frontcore/utils/error-handler'
-import { Input } from '@gaqno-dev/ui/components/ui'
-import { Label } from '@gaqno-dev/ui/components/ui'
+import { Input } from '@gaqno-dev/frontcore/components/ui'
+import { Label } from '@gaqno-dev/frontcore/components/ui'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@gaqno-dev/ui/components/ui'
+} from '@gaqno-dev/frontcore/components/ui'
 import { useCreditCards } from '../hooks/useCreditCards'
 import { ICreditCard } from '../types/finance'
 

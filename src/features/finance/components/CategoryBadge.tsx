@@ -1,4 +1,4 @@
-'use client'
+
 
 import { IFinanceCategory, IFinanceSubcategory } from '../types/finance'
 import { getTransactionIcon } from './TransactionIconPicker'

@@ -4,31 +4,38 @@ RUN apk add --no-cache git libc6-compat
 FROM base AS builder
 WORKDIR /app
 
-WORKDIR /app/gaqno-finance
-COPY gaqno-finance/package.json ./
-# COPY gaqno-finance/package-lock.json ./
-RUN npm config set fetch-timeout 1200000 && \
+COPY package.json ./
+RUN --mount=type=cache,target=/root/.npm \
+    npm config set fetch-timeout 1200000 && \
     npm config set fetch-retries 10 && \
     npm install --legacy-peer-deps
 
-COPY gaqno-finance/ .
+COPY . .
 # PATCH: Fix unused @ts-expect-error in @gaqno-dev/frontcore
 RUN find node_modules -name useDialogForm.ts -exec sed -i '/@ts-expect-error/d' {} +
 RUN npm run build
 
-FROM base AS runner
+FROM nginx:alpine AS runner
 WORKDIR /app
-ENV NODE_ENV=production
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+# Copy built files
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/public /usr/share/nginx/html/public
 
-COPY --from=builder --chown=nextjs:nodejs /app/gaqno-finance/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/gaqno-finance/.next/static ./.next/static
-RUN mkdir -p ./public
+# Copy nginx config
+RUN echo 'server { \
+    listen 3005; \
+    server_name _; \
+    root /usr/share/nginx/html; \
+    index index.html; \
+    location / { \
+        try_files $uri $uri/ /index.html; \
+    } \
+    location /assets { \
+        expires 1y; \
+        add_header Cache-Control "public, immutable"; \
+    } \
+}' > /etc/nginx/conf.d/default.conf
 
-USER nextjs
-EXPOSE 3006
-ENV PORT=3006
-ENV HOSTNAME="0.0.0.0"
-CMD ["node", "server.js"]
+EXPOSE 3005
+CMD ["nginx", "-g", "daemon off;"]

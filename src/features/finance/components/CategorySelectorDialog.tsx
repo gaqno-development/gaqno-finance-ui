@@ -1,4 +1,4 @@
-'use client'
+
 
 import { useMemo, useState, useEffect } from 'react'
 import {
@@ -7,9 +7,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@gaqno-dev/ui/components/ui'
-import { Button } from '@gaqno-dev/ui/components/ui'
-import { Input } from '@gaqno-dev/ui/components/ui'
+} from '@gaqno-dev/frontcore/components/ui'
+import { Button } from '@gaqno-dev/frontcore/components/ui'
+import { Input } from '@gaqno-dev/frontcore/components/ui'
 import { IFinanceCategory, TransactionType } from '../types/finance'
 import { cn } from '@gaqno-dev/frontcore/lib/utils'
 import { getDefaultColorForCategory } from '../utils/iconToCategory'

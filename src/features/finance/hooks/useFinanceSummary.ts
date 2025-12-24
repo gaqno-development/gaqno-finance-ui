@@ -1,28 +1,22 @@
 import { useMemo } from 'react'
-import { useSupabaseQuery } from '@gaqno-dev/frontcore/hooks/useSupabaseQuery'
-import { useSupabaseClient } from '@gaqno-dev/frontcore/hooks/useSupabaseClient'
+import { useQuery } from '@tanstack/react-query'
 import { useTenant, useAuth } from '@gaqno-dev/frontcore/contexts'
-import { FinanceService } from '../services/financeService'
+import { api } from '@/lib/api-client'
 import { calculateBalance } from '../utils/calcBalance'
 import { IFinanceTransaction, IFinanceSummary } from '../types/finance'
 
 export const useFinanceSummary = (startDate?: string, endDate?: string) => {
-  const supabase = useSupabaseClient()
   const { tenantId } = useTenant()
   const { user } = useAuth()
 
-  const { data: transactions, isLoading } = useSupabaseQuery<IFinanceTransaction[]>(
-    ['finance-summary', tenantId ?? 'no-tenant', user?.id ?? 'no-user', startDate ?? '', endDate ?? ''],
-    async () => {
+  const { data: transactions, isLoading } = useQuery<IFinanceTransaction[]>({
+    queryKey: ['finance-summary', tenantId ?? 'no-tenant', user?.id ?? 'no-user', startDate ?? '', endDate ?? ''],
+    queryFn: async () => {
       if (!user) throw new Error('User not authenticated')
-
-      const service = new FinanceService(supabase)
-      return service.getTransactions(tenantId, user.id, startDate, endDate)
+      return api.transactions.getAll(startDate, endDate)
     },
-    {
-      enabled: !!user,
-    }
-  )
+    enabled: !!user,
+  })
 
   const summary = useMemo<IFinanceSummary>(() => {
     if (!transactions) {

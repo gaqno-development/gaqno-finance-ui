@@ -1,4 +1,4 @@
-'use client'
+
 
 import { useState, useMemo } from 'react'
 import {
@@ -7,8 +7,8 @@ import {
   SheetHeader,
   SheetTitle,
   SheetDescription,
-} from '@gaqno-dev/ui/components/ui'
-import { Input } from '@gaqno-dev/ui/components/ui'
+} from '@gaqno-dev/frontcore/components/ui'
+import { Input } from '@gaqno-dev/frontcore/components/ui'
 import { cn } from '@gaqno-dev/frontcore/lib/utils'
 import { IFinanceSubcategory, IFinanceCategory } from '../types/finance'
 import { getTransactionIcon } from './TransactionIconPicker'

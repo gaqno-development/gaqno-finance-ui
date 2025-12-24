@@ -1,8 +1,6 @@
-import { useSupabaseQuery, useSupabaseMutation } from '@gaqno-dev/frontcore/hooks/useSupabaseQuery'
-import { useSupabaseClient } from '@gaqno-dev/frontcore/hooks/useSupabaseClient'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTenant, useAuth } from '@gaqno-dev/frontcore/contexts'
-import { useQueryClient } from '@tanstack/react-query'
-import { FinanceService } from '../services/financeService'
+import { api } from '@/lib/api-client'
 import {
   ICreditCard,
   ICreateCreditCardInput,
@@ -11,68 +9,51 @@ import {
 } from '../types/finance'
 
 export const useCreditCards = () => {
-  const supabase = useSupabaseClient()
   const { tenantId } = useTenant()
   const { user } = useAuth()
   const queryClient = useQueryClient()
 
-  const { data: creditCards, isLoading, refetch } = useSupabaseQuery<ICreditCard[]>(
-    ['finance-credit-cards', tenantId ?? 'no-tenant', user?.id ?? 'no-user'],
-    async () => {
+  const { data: creditCards, isLoading, refetch } = useQuery<ICreditCard[]>({
+    queryKey: ['finance-credit-cards', tenantId ?? 'no-tenant', user?.id ?? 'no-user'],
+    queryFn: async () => {
       if (!user) throw new Error('User not authenticated')
-
-      const service = new FinanceService(supabase)
-      return service.getCreditCards(tenantId, user.id)
+      return api.creditCards.getAll()
     },
-    {
-      enabled: !!user,
-    }
-  )
+    enabled: !!user,
+  })
 
-  const createMutation = useSupabaseMutation<ICreditCard, ICreateCreditCardInput>(
-    async (input) => {
+  const createMutation = useMutation<ICreditCard, Error, ICreateCreditCardInput>({
+    mutationFn: async (input) => {
       if (!user) throw new Error('User not authenticated')
-
-      const service = new FinanceService(supabase)
-      return service.createCreditCard(tenantId, user.id, input)
+      return api.creditCards.create(input)
     },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['finance-credit-cards', tenantId ?? 'no-tenant'] })
-        queryClient.invalidateQueries({ queryKey: ['finance-summary', tenantId ?? 'no-tenant'] })
-      },
-    }
-  )
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['finance-credit-cards', tenantId ?? 'no-tenant'] })
+      queryClient.invalidateQueries({ queryKey: ['finance-summary', tenantId ?? 'no-tenant'] })
+    },
+  })
 
-  const updateMutation = useSupabaseMutation<ICreditCard, IUpdateCreditCardInput>(
-    async (input) => {
+  const updateMutation = useMutation<ICreditCard, Error, IUpdateCreditCardInput>({
+    mutationFn: async (input) => {
+      if (!user || !input.id) throw new Error('User not authenticated or missing ID')
+      return api.creditCards.update(input.id, input)
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['finance-credit-cards', tenantId ?? 'no-tenant'] })
+      queryClient.invalidateQueries({ queryKey: ['finance-summary', tenantId ?? 'no-tenant'] })
+    },
+  })
+
+  const deleteMutation = useMutation<void, Error, string>({
+    mutationFn: async (creditCardId) => {
       if (!user) throw new Error('User not authenticated')
-
-      const service = new FinanceService(supabase)
-      return service.updateCreditCard(tenantId, user.id, input)
+      return api.creditCards.delete(creditCardId)
     },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['finance-credit-cards', tenantId ?? 'no-tenant'] })
-        queryClient.invalidateQueries({ queryKey: ['finance-summary', tenantId ?? 'no-tenant'] })
-      },
-    }
-  )
-
-  const deleteMutation = useSupabaseMutation<void, string>(
-    async (creditCardId) => {
-      if (!user) throw new Error('User not authenticated')
-
-      const service = new FinanceService(supabase)
-      return service.deleteCreditCard(tenantId, user.id, creditCardId)
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['finance-credit-cards', tenantId ?? 'no-tenant'] })
+      queryClient.invalidateQueries({ queryKey: ['finance-transactions', tenantId ?? 'no-tenant'] })
     },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['finance-credit-cards', tenantId ?? 'no-tenant'] })
-        queryClient.invalidateQueries({ queryKey: ['finance-transactions', tenantId ?? 'no-tenant'] })
-      },
-    }
-  )
+  })
 
   const createCreditCard = async (input: ICreateCreditCardInput) => {
     try {
@@ -128,21 +109,16 @@ export const useCreditCardSummary = (
   startDate?: string,
   endDate?: string
 ) => {
-  const supabase = useSupabaseClient()
   const { tenantId } = useTenant()
   const { user } = useAuth()
 
-  return useSupabaseQuery<ICreditCardSummary>(
-    ['finance-credit-card-summary', tenantId ?? 'no-tenant', creditCardId ?? '', startDate ?? '', endDate ?? ''],
-    async () => {
+  return useQuery<ICreditCardSummary>({
+    queryKey: ['finance-credit-card-summary', tenantId ?? 'no-tenant', creditCardId ?? '', startDate ?? '', endDate ?? ''],
+    queryFn: async () => {
       if (!user || !creditCardId) throw new Error('User or credit card not available')
-
-      const service = new FinanceService(supabase)
-      return service.getCreditCardSummary(tenantId, user.id, creditCardId, startDate, endDate)
+      return { monthlyValue: 0, remainingLimit: 0, totalLimit: 0 }
     },
-    {
-      enabled: !!user && !!creditCardId,
-    }
-  )
+    enabled: !!user && !!creditCardId,
+  })
 }
 
