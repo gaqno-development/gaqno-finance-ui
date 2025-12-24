@@ -5,7 +5,7 @@
   "tsx": true,
   "tailwind": {
     "config": "",
-    "css": "../../@gaqno-frontcore/src/styles/globals.css",
+    "css": "@gaqno-dev/frontcore/styles/globals.css",
     "baseColor": "neutral",
     "cssVariables": true
   },
