@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import federation from '@originjs/vite-plugin-federation'
+import path from 'path'
 
 export default defineConfig(async () => {
 	const tailwindcss = (await import('@tailwindcss/vite')).default
@@ -12,6 +13,11 @@ export default defineConfig(async () => {
 		origin: 'http://localhost:3005',
 		fs: {
 			allow: ['.', '../shared'],
+		},
+	},
+	resolve: {
+		alias: {
+			'@': path.resolve(__dirname, './src'),
 		},
 	},
 	plugins: [

@@ -13,7 +13,7 @@ import {
   ICreateCreditCardInput,
   IUpdateCreditCardInput,
   TransactionType
-} from '../features/finance/types/finance';
+} from '../finance/types/finance';
 
 const getViteEnv = (key: string, defaultValue: string): string => {
   if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env[key]) {
@@ -23,7 +23,7 @@ const getViteEnv = (key: string, defaultValue: string): string => {
 };
 
 const financeClient = axios.create({
-  baseURL: getViteEnv('VITE_FINANCE_SERVICE_URL', 'http://localhost:3005'),
+  baseURL: `${getViteEnv('VITE_FINANCE_SERVICE_URL', 'http://localhost:4005')}/v1/finance`,
   withCredentials: true
 })
 
