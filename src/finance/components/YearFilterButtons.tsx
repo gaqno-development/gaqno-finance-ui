@@ -1,6 +1,6 @@
 
 
-import { Button } from '@gaqno-dev/frontcore/components/ui'
+import { Button } from '@gaqno-development/frontcore/components/ui'
 
 interface IYearFilterButtonsProps {
   availableYears: number[]

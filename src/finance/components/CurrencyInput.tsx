@@ -1,6 +1,6 @@
 import { forwardRef, useState, useEffect } from 'react'
-import { Input } from '@gaqno-dev/frontcore/components/ui'
-import { InputProps } from '@gaqno-dev/frontcore/components/ui'
+import { Input } from '@gaqno-development/frontcore/components/ui'
+import { InputProps } from '@gaqno-development/frontcore/components/ui'
 
 interface ICurrencyInputProps extends Omit<InputProps, 'onChange' | 'value'> {
   value?: number | string

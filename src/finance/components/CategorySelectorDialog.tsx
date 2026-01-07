@@ -7,11 +7,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@gaqno-dev/frontcore/components/ui'
-import { Button } from '@gaqno-dev/frontcore/components/ui'
-import { Input } from '@gaqno-dev/frontcore/components/ui'
+} from '@gaqno-development/frontcore/components/ui'
+import { Button } from '@gaqno-development/frontcore/components/ui'
+import { Input } from '@gaqno-development/frontcore/components/ui'
 import { IFinanceCategory, TransactionType } from '../types/finance'
-import { cn } from '@gaqno-dev/frontcore/lib/utils'
+import { cn } from '@gaqno-development/frontcore/lib/utils'
 import { getDefaultColorForCategory } from '../utils/iconToCategory'
 import { getTransactionIcon } from './TransactionIconPicker'
 import { useCategories } from '../hooks/useCategories'

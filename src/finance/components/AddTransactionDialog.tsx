@@ -10,11 +10,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@gaqno-dev/frontcore/components/ui'
-import { DialogFormFooter } from '@gaqno-dev/frontcore/components/ui'
-import { handleMutationError, handleFormError } from '@gaqno-dev/frontcore/utils/error-handler'
-import { Input } from '@gaqno-dev/frontcore/components/ui'
-import { Label } from '@gaqno-dev/frontcore/components/ui'
+} from '@gaqno-development/frontcore/components/ui'
+import { DialogFormFooter } from '@gaqno-development/frontcore/components/ui'
+import { handleMutationError, handleFormError } from '@gaqno-development/frontcore/utils/error-handler'
+import { Input } from '@gaqno-development/frontcore/components/ui'
+import { Label } from '@gaqno-development/frontcore/components/ui'
 import {
   Select,
   SelectContent,
@@ -22,7 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
   Switch,
-} from '@gaqno-dev/frontcore/components/ui'
+} from '@gaqno-development/frontcore/components/ui'
 import { useTransactions } from '../hooks/useTransactions'
 import { useCreditCards } from '../hooks/useCreditCards'
 import { useCategories } from '../hooks/useCategories'
@@ -31,10 +31,10 @@ import { CategorySelectorDialog } from './CategorySelectorDialog'
 import { CategoryBadge } from './CategoryBadge'
 import { getTransactionIcon } from './TransactionIconPicker'
 import { IFinanceTransaction, TransactionType, TransactionStatus } from '../types/finance'
-import { Button } from '@gaqno-dev/frontcore/components/ui'
+import { Button } from '@gaqno-development/frontcore/components/ui'
 import { X } from 'lucide-react'
 import { CurrencyInput } from './CurrencyInput'
-import { cn } from '@gaqno-dev/frontcore/lib/utils'
+import { cn } from '@gaqno-development/frontcore/lib/utils'
 
 const transactionSchema = z.object({
   description: z.string().min(1, 'Descrição é obrigatória'),

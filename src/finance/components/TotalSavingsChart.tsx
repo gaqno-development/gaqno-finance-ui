@@ -1,8 +1,8 @@
 
 
 import { useMemo, useState } from 'react'
-import { Card, CardHeader, CardContent } from '@gaqno-dev/frontcore/components/ui'
-import { Button } from '@gaqno-dev/frontcore/components/ui'
+import { Card, CardHeader, CardContent } from '@gaqno-development/frontcore/components/ui'
+import { Button } from '@gaqno-development/frontcore/components/ui'
 import { TrendingUp } from 'lucide-react'
 import { IFinanceTransaction } from '../types/finance'
 import { formatCurrency } from '../utils/formatCurrency'

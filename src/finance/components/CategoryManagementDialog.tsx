@@ -10,25 +10,25 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@gaqno-dev/frontcore/components/ui'
-import { DialogFormFooter } from '@gaqno-dev/frontcore/components/ui'
-import { Input } from '@gaqno-dev/frontcore/components/ui'
-import { Label } from '@gaqno-dev/frontcore/components/ui'
+} from '@gaqno-development/frontcore/components/ui'
+import { DialogFormFooter } from '@gaqno-development/frontcore/components/ui'
+import { Input } from '@gaqno-development/frontcore/components/ui'
+import { Label } from '@gaqno-development/frontcore/components/ui'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@gaqno-dev/frontcore/components/ui'
-import { Button } from '@gaqno-dev/frontcore/components/ui'
+} from '@gaqno-development/frontcore/components/ui'
+import { Button } from '@gaqno-development/frontcore/components/ui'
 import { IFinanceCategory, TransactionType, ICreateCategoryInput, IUpdateCategoryInput, ICreateSubcategoryInput, IUpdateSubcategoryInput } from '../types/finance'
 import { useCategories } from '../hooks/useCategories'
 import { useSubcategories } from '../hooks/useSubcategories'
-import { handleMutationError } from '@gaqno-dev/frontcore/utils/error-handler'
+import { handleMutationError } from '@gaqno-development/frontcore/utils/error-handler'
 import { Trash2, Plus, Edit2 } from 'lucide-react'
 import { getTransactionIcon } from './TransactionIconPicker'
-import { cn } from '@gaqno-dev/frontcore/lib/utils'
+import { cn } from '@gaqno-development/frontcore/lib/utils'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -38,7 +38,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@gaqno-dev/frontcore/components/ui'
+} from '@gaqno-development/frontcore/components/ui'
 
 const categorySchema = z.object({
   name: z.string().min(1, 'Nome é obrigatório'),

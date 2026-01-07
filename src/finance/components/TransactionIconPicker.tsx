@@ -1,7 +1,7 @@
 
 
 import { useMemo } from 'react'
-import { cn } from '@gaqno-dev/frontcore/lib/utils'
+import { cn } from '@gaqno-development/frontcore/lib/utils'
 import { IFinanceCategory } from '../types/finance'
 import { getIconComponent } from '../utils/iconResolver'
 

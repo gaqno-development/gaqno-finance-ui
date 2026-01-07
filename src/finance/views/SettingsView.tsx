@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardContent } from '@gaqno-dev/frontcore/components/ui'
+import { Card, CardHeader, CardTitle, CardContent } from '@gaqno-development/frontcore/components/ui'
 import { Settings } from 'lucide-react'
 
 export function SettingsView() {

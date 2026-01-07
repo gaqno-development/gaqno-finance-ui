@@ -4,7 +4,7 @@ import { IncomeCard } from '../components/IncomeCard'
 import { ExpenseCard } from '../components/ExpenseCard'
 import { IncomeExpenseView } from '../components/IncomeExpenseView'
 import { useTransactions } from '../hooks/useTransactions'
-import { LoadingSkeleton } from '@gaqno-dev/frontcore/components/ui'
+import { LoadingSkeleton } from '@gaqno-development/frontcore/components/ui'
 
 export function DashboardView() {
   const { summary, transactions, isLoading } = useFinanceSummary()

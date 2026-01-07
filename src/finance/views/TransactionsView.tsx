@@ -1,6 +1,6 @@
 import { useTransactions } from '../hooks/useTransactions'
 import { TransactionsTable } from '../components/TransactionsTable'
-import { LoadingSkeleton } from '@gaqno-dev/frontcore/components/ui'
+import { LoadingSkeleton } from '@gaqno-development/frontcore/components/ui'
 
 export function TransactionsView() {
   const { transactions, isLoading, deleteTransaction } = useTransactions()

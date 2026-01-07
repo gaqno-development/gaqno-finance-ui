@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { useTenant, useAuth } from '@gaqno-dev/frontcore/contexts'
+import { useTenant, useAuth } from '@gaqno-development/frontcore/contexts'
 import { api } from '@/lib/api-client'
 import { calculateBalance } from '../utils/calcBalance'
 import { IFinanceTransaction, IFinanceSummary } from '../types/finance'

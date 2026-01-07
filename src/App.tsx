@@ -1,7 +1,7 @@
 import React from 'react'
-import { AuthProvider, QueryProvider, TenantProvider } from "@gaqno-dev/frontcore"
-import { ModuleTabs, IModuleTabConfig } from "@gaqno-dev/frontcore/components/ui"
-import { useModuleView } from "@gaqno-dev/frontcore/hooks"
+import { AuthProvider, QueryProvider, TenantProvider } from "@gaqno-development/frontcore"
+import { ModuleTabs, IModuleTabConfig } from "@gaqno-development/frontcore/components/ui"
+import { useModuleView } from "@gaqno-development/frontcore/hooks"
 import { Home, ArrowLeftRight, Wallet, FileText, TrendingUp, Settings } from 'lucide-react'
 import { DashboardView } from './finance/views/DashboardView'
 import { TransactionsView } from './finance/views/TransactionsView'

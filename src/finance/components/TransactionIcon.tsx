@@ -1,7 +1,7 @@
 
 
 import { IFinanceTransaction } from '../types/finance'
-import { cn } from '@gaqno-dev/frontcore/lib/utils'
+import { cn } from '@gaqno-development/frontcore/lib/utils'
 import { getTransactionIcon } from './TransactionIconPicker'
 
 interface ITransactionIconProps {

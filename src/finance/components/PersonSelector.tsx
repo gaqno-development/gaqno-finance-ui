@@ -6,9 +6,9 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@gaqno-dev/frontcore/components/ui'
+} from '@gaqno-development/frontcore/components/ui'
 import { useQuery } from '@tanstack/react-query'
-import { useTenant } from '@gaqno-dev/frontcore/contexts'
+import { useTenant } from '@gaqno-development/frontcore/contexts'
 
 interface IPersonSelectorProps {
   value?: string | null

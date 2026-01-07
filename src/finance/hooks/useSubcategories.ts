@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { useTenant } from '@gaqno-dev/frontcore/contexts'
+import { useTenant } from '@gaqno-development/frontcore/contexts'
 import { api } from '@/lib/api-client'
 import {
   IFinanceSubcategory,
