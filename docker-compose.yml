@@ -6,10 +6,10 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3006:3006"
+      - "3005:3005"
     environment:
       - NODE_ENV=production
-      - PORT=3006
+      - PORT=3005
       - VITE_PUBLIC_SUPABASE_URL=${VITE_PUBLIC_SUPABASE_URL}
       - VITE_PUBLIC_SUPABASE_ANON_KEY=${VITE_PUBLIC_SUPABASE_ANON_KEY}
     env_file:
