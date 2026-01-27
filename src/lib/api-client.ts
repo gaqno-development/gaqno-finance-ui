@@ -13,7 +13,7 @@ import {
   ICreateCreditCardInput,
   IUpdateCreditCardInput,
   TransactionType
-} from '../finance/types/finance';
+} from '@/types/finance/finance';
 
 const getViteEnv = (key: string, defaultValue: string): string => {
   if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env[key]) {
