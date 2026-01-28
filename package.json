@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon --watch ./src --ext js,ts,jsx,tsx,json --exec \"vite build && vite preview --port 3005 --strictPort --host 0.0.0.0\"",
+    "dev": "nodemon",
     "build": "vite build",
+    "prebuild": "test -f ../package.json && npm run build:types --prefix .. || true",
     "preview": "vite preview --port 3005 --host 0.0.0.0",
     "start": "vite preview --port 3005 --host 0.0.0.0",
     "lint": "eslint . --ext .ts,.tsx"
@@ -25,13 +26,14 @@
   "devDependencies": {
     "@module-federation/vite": "^1.0.0",
     "@originjs/vite-plugin-federation": "^1.4.1",
-    "@types/node": "25.0.0",
     "@tailwindcss/vite": "^4.1.18",
+    "@types/node": "25.0.0",
     "@types/react": "^18.3.27",
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.57.0",
+    "nodemon": "^3.1.11",
     "postcss": "^8.4.32",
     "tailwind-scrollbar": "^3.0.5",
     "tailwindcss": "^4.1.18",
