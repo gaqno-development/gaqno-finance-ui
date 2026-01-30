@@ -14,7 +14,7 @@ export function TransactionsView() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-6">
       <TransactionsTable
         transactions={transactions}
         onDelete={handleDelete}

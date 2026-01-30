@@ -16,7 +16,7 @@ export function DashboardView() {
 
   if (isLoading) {
     return (
-      <div className="space-y-6">
+      <div className="space-y-6 p-6">
         <div className="grid gap-4 md:grid-cols-3">
           <LoadingSkeleton variant="card" count={3} />
         </div>
@@ -26,7 +26,7 @@ export function DashboardView() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-6">
       <div className="grid gap-4 md:grid-cols-3">
         <BalanceCard
           total={summary.totalBalance}

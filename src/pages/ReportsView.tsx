@@ -3,7 +3,7 @@ import { FileText } from 'lucide-react'
 
 export function ReportsView() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-6">
       <Card>
         <CardHeader>
           <div className="flex items-center gap-2">
