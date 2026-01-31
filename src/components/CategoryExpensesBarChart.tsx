@@ -1,5 +1,3 @@
-
-
 import * as React from 'react'
 import { Bar, BarChart, XAxis, YAxis } from 'recharts'
 import { TrendingDown } from 'lucide-react'
@@ -16,6 +14,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@gaqno-development/frontcore/components/ui'
+import { useIsMobile } from '@gaqno-development/frontcore/hooks'
 import { IFinanceTransaction } from '@/types/finance/finance'
 import { formatCurrency } from '@/utils/finance/formatCurrency'
 import { EmojiIcon } from './EmojiIcon'
@@ -27,16 +26,7 @@ interface ICategoryExpensesBarChartProps {
 export function CategoryExpensesBarChart({
   transactions,
 }: ICategoryExpensesBarChartProps) {
-  const [isMobile, setIsMobile] = React.useState(false)
-
-  React.useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+  const isMobile = useIsMobile()
 
   const expenseTransactions = transactions.filter((t) => t.type === 'expense')
 
