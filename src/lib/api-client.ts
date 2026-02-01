@@ -23,7 +23,7 @@ const getViteEnv = (key: string, defaultValue: string): string => {
 };
 
 const financeClient = axios.create({
-  baseURL: `${getViteEnv('VITE_FINANCE_SERVICE_URL', 'http://localhost:4005')}/v1/finance`,
+  baseURL: `${getViteEnv('VITE_SERVICE_FINANCE_URL', 'http://localhost:4005')}/v1/finance`,
   withCredentials: true
 })
 
