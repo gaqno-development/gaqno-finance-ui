@@ -11,7 +11,7 @@
     "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {
-    "@gaqno-development/frontcore": "^1.0.21",
+    "@gaqno-development/frontcore": "^1.0.22",
     "@hookform/resolvers": "^3.3.4",
     "@tanstack/react-query": "^5.90.12",
     "lucide-react": "^0.560.0",
@@ -43,6 +43,6 @@
     "vite-plugin-top-level-await": "^1.6.0"
   },
   "overrides": {
-    "@gaqno-development/core": "npm:@gaqno-development/frontcore@^1.0.21"
+    "@gaqno-development/core": "npm:@gaqno-development/frontcore@^1.0.22"
   }
 }
