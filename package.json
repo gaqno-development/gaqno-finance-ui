@@ -6,8 +6,8 @@
     "dev": "nodemon",
     "build": "vite build",
     "prebuild": "test -f ../package.json && npm run build:types --prefix .. || true",
-    "preview": "vite preview --port 3005 --host 0.0.0.0",
-    "start": "vite preview --port 3005 --host 0.0.0.0",
+    "preview": "vite preview --port 3006 --host 0.0.0.0",
+    "start": "vite preview --port 3006 --host 0.0.0.0",
     "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {
