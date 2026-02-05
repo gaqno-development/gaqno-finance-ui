@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTenant } from '@gaqno-development/frontcore/contexts'
-import { api } from '@/lib/api-client'
+import { financeApi } from '@/lib/finance-api'
 import {
   IFinanceCategory,
   ICreateCategoryInput,
@@ -15,13 +15,13 @@ export const useCategories = (type?: TransactionType) => {
   const { data: categories, isLoading, refetch } = useQuery<IFinanceCategory[]>({
     queryKey: ['finance-categories', tenantId ?? 'no-tenant', type ?? 'all'],
     queryFn: async () => {
-      return api.categories.getAll(type)
+      return financeApi.categories.getAll(type)
     },
   })
 
   const createMutation = useMutation<IFinanceCategory, Error, ICreateCategoryInput>({
     mutationFn: async (input) => {
-      return api.categories.create(input)
+      return financeApi.categories.create(input)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['finance-categories', tenantId ?? 'no-tenant'] })
@@ -31,7 +31,7 @@ export const useCategories = (type?: TransactionType) => {
   const updateMutation = useMutation<IFinanceCategory, Error, IUpdateCategoryInput>({
     mutationFn: async (input) => {
       if (!input.id) throw new Error('Missing category ID')
-      return api.categories.update(input.id, input)
+      return financeApi.categories.update(input.id, input)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['finance-categories', tenantId ?? 'no-tenant'] })
@@ -40,7 +40,7 @@ export const useCategories = (type?: TransactionType) => {
 
   const deleteMutation = useMutation<void, Error, string>({
     mutationFn: async (categoryId) => {
-      return api.categories.delete(categoryId)
+      return financeApi.categories.delete(categoryId)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['finance-categories', tenantId ?? 'no-tenant'] })

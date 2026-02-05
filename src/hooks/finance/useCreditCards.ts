@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTenant, useAuth } from '@gaqno-development/frontcore/contexts'
-import { api } from '@/lib/api-client'
+import { financeApi } from '@/lib/finance-api'
 import {
   ICreditCard,
   ICreateCreditCardInput,
@@ -17,7 +17,7 @@ export const useCreditCards = () => {
     queryKey: ['finance-credit-cards', tenantId ?? 'no-tenant', user?.id ?? 'no-user'],
     queryFn: async () => {
       if (!user) throw new Error('User not authenticated')
-      return api.creditCards.getAll()
+      return financeApi.creditCards.getAll()
     },
     enabled: !!user,
   })
@@ -25,7 +25,7 @@ export const useCreditCards = () => {
   const createMutation = useMutation<ICreditCard, Error, ICreateCreditCardInput>({
     mutationFn: async (input) => {
       if (!user) throw new Error('User not authenticated')
-      return api.creditCards.create(input)
+      return financeApi.creditCards.create(input)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['finance-credit-cards', tenantId ?? 'no-tenant'] })
@@ -36,7 +36,7 @@ export const useCreditCards = () => {
   const updateMutation = useMutation<ICreditCard, Error, IUpdateCreditCardInput>({
     mutationFn: async (input) => {
       if (!user || !input.id) throw new Error('User not authenticated or missing ID')
-      return api.creditCards.update(input.id, input)
+      return financeApi.creditCards.update(input.id, input)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['finance-credit-cards', tenantId ?? 'no-tenant'] })
@@ -47,7 +47,7 @@ export const useCreditCards = () => {
   const deleteMutation = useMutation<void, Error, string>({
     mutationFn: async (creditCardId) => {
       if (!user) throw new Error('User not authenticated')
-      return api.creditCards.delete(creditCardId)
+      return financeApi.creditCards.delete(creditCardId)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['finance-credit-cards', tenantId ?? 'no-tenant'] })
