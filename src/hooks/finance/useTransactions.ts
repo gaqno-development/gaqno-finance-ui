@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTenant, useAuth } from '@gaqno-development/frontcore/contexts'
-import { api } from '@/lib/api-client'
+import { financeApi } from '@/lib/finance-api'
 import {
   IFinanceTransaction,
   ICreateTransactionInput,
@@ -16,7 +16,7 @@ export const useTransactions = (startDate?: string, endDate?: string) => {
     queryKey: ['finance-transactions', tenantId ?? 'no-tenant', user?.id ?? 'no-user', startDate ?? '', endDate ?? ''],
     queryFn: async () => {
       if (!user) throw new Error('User not authenticated')
-      return api.transactions.getAll(startDate, endDate)
+      return financeApi.transactions.getAll(startDate, endDate)
     },
     enabled: !!user,
   })
@@ -24,7 +24,7 @@ export const useTransactions = (startDate?: string, endDate?: string) => {
   const createMutation = useMutation<IFinanceTransaction, Error, ICreateTransactionInput>({
     mutationFn: async (input) => {
       if (!user) throw new Error('User not authenticated')
-      return api.transactions.create(input)
+      return financeApi.transactions.create(input)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ 
@@ -41,7 +41,7 @@ export const useTransactions = (startDate?: string, endDate?: string) => {
   const updateMutation = useMutation<IFinanceTransaction, Error, IUpdateTransactionInput>({
     mutationFn: async (input) => {
       if (!user || !input.id) throw new Error('User not authenticated or missing ID')
-      return api.transactions.update(input.id, input)
+      return financeApi.transactions.update(input.id, input)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ 
@@ -58,7 +58,7 @@ export const useTransactions = (startDate?: string, endDate?: string) => {
   const deleteMutation = useMutation<void, Error, string>({
     mutationFn: async (transactionId) => {
       if (!user) throw new Error('User not authenticated')
-      return api.transactions.delete(transactionId)
+      return financeApi.transactions.delete(transactionId)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ 

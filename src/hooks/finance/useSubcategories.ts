@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTenant } from '@gaqno-development/frontcore/contexts'
-import { api } from '@/lib/api-client'
+import { financeApi } from '@/lib/finance-api'
 import {
   IFinanceSubcategory,
   ICreateSubcategoryInput,
@@ -15,14 +15,14 @@ export const useSubcategories = (parentCategoryId: string | null) => {
     queryKey: ['finance-subcategories', tenantId ?? 'no-tenant', parentCategoryId ?? 'no-parent'],
     queryFn: async () => {
       if (!parentCategoryId) return []
-      return api.subcategories.getAll(parentCategoryId)
+      return financeApi.subcategories.getAll(parentCategoryId)
     },
     enabled: !!parentCategoryId,
   })
 
   const createMutation = useMutation<IFinanceSubcategory, Error, ICreateSubcategoryInput>({
     mutationFn: async (input) => {
-      return api.subcategories.create(input)
+      return financeApi.subcategories.create(input)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['finance-subcategories', tenantId ?? 'no-tenant'] })
@@ -33,7 +33,7 @@ export const useSubcategories = (parentCategoryId: string | null) => {
   const updateMutation = useMutation<IFinanceSubcategory, Error, IUpdateSubcategoryInput>({
     mutationFn: async (input) => {
       if (!input.id) throw new Error('Missing subcategory ID')
-      return api.subcategories.update(input.id, input)
+      return financeApi.subcategories.update(input.id, input)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['finance-subcategories', tenantId ?? 'no-tenant'] })
@@ -42,7 +42,7 @@ export const useSubcategories = (parentCategoryId: string | null) => {
 
   const deleteMutation = useMutation<void, Error, string>({
     mutationFn: async (subcategoryId) => {
-      return api.subcategories.delete(subcategoryId)
+      return financeApi.subcategories.delete(subcategoryId)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['finance-subcategories', tenantId ?? 'no-tenant'] })

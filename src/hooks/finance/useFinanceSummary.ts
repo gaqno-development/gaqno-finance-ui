@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useTenant, useAuth } from '@gaqno-development/frontcore/contexts'
-import { api } from '@/lib/api-client'
+import { financeApi } from '@/lib/finance-api'
 import { calculateBalance } from '@/utils/finance/calcBalance'
 import { IFinanceTransaction, IFinanceSummary } from '@/types/finance/finance'
 
@@ -13,7 +13,7 @@ export const useFinanceSummary = (startDate?: string, endDate?: string) => {
     queryKey: ['finance-summary', tenantId ?? 'no-tenant', user?.id ?? 'no-user', startDate ?? '', endDate ?? ''],
     queryFn: async () => {
       if (!user) throw new Error('User not authenticated')
-      return api.transactions.getAll(startDate, endDate)
+      return financeApi.transactions.getAll(startDate, endDate)
     },
     enabled: !!user,
   })
