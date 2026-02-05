@@ -1,95 +1,124 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { useTenant, useAuth } from '@gaqno-development/frontcore/contexts'
-import { financeApi } from '@/lib/finance-api'
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTenant, useAuth } from "@gaqno-development/frontcore/contexts";
+import { financeApi } from "@/lib/finance-api";
 import {
   ICreditCard,
   ICreateCreditCardInput,
   IUpdateCreditCardInput,
   ICreditCardSummary,
-} from '@/types/finance/finance'
+} from "@/types/finance/finance";
 
 export const useCreditCards = () => {
-  const { tenantId } = useTenant()
-  const { user } = useAuth()
-  const queryClient = useQueryClient()
+  const { tenantId } = useTenant();
+  const { user } = useAuth();
+  const queryClient = useQueryClient();
 
-  const { data: creditCards, isLoading, refetch } = useQuery<ICreditCard[]>({
-    queryKey: ['finance-credit-cards', tenantId ?? 'no-tenant', user?.id ?? 'no-user'],
+  const {
+    data: creditCards,
+    isLoading,
+    refetch,
+  } = useQuery<ICreditCard[]>({
+    queryKey: [
+      "finance-credit-cards",
+      tenantId ?? "no-tenant",
+      user?.id ?? "no-user",
+    ],
     queryFn: async () => {
-      if (!user) throw new Error('User not authenticated')
-      return financeApi.creditCards.getAll()
+      if (!user) throw new Error("User not authenticated");
+      return financeApi.creditCards.getAll();
     },
     enabled: !!user,
-  })
+  });
 
-  const createMutation = useMutation<ICreditCard, Error, ICreateCreditCardInput>({
+  const createMutation = useMutation<
+    ICreditCard,
+    Error,
+    ICreateCreditCardInput
+  >({
     mutationFn: async (input) => {
-      if (!user) throw new Error('User not authenticated')
-      return financeApi.creditCards.create(input)
+      if (!user) throw new Error("User not authenticated");
+      return financeApi.creditCards.create(input);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['finance-credit-cards', tenantId ?? 'no-tenant'] })
-      queryClient.invalidateQueries({ queryKey: ['finance-summary', tenantId ?? 'no-tenant'] })
+      queryClient.invalidateQueries({
+        queryKey: ["finance-credit-cards", tenantId ?? "no-tenant"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["finance-summary", tenantId ?? "no-tenant"],
+      });
     },
-  })
+  });
 
-  const updateMutation = useMutation<ICreditCard, Error, IUpdateCreditCardInput>({
+  const updateMutation = useMutation<
+    ICreditCard,
+    Error,
+    IUpdateCreditCardInput
+  >({
     mutationFn: async (input) => {
-      if (!user || !input.id) throw new Error('User not authenticated or missing ID')
-      return financeApi.creditCards.update(input.id, input)
+      if (!user || !input.id)
+        throw new Error("User not authenticated or missing ID");
+      return financeApi.creditCards.update(input.id, input);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['finance-credit-cards', tenantId ?? 'no-tenant'] })
-      queryClient.invalidateQueries({ queryKey: ['finance-summary', tenantId ?? 'no-tenant'] })
+      queryClient.invalidateQueries({
+        queryKey: ["finance-credit-cards", tenantId ?? "no-tenant"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["finance-summary", tenantId ?? "no-tenant"],
+      });
     },
-  })
+  });
 
   const deleteMutation = useMutation<void, Error, string>({
     mutationFn: async (creditCardId) => {
-      if (!user) throw new Error('User not authenticated')
-      return financeApi.creditCards.delete(creditCardId)
+      if (!user) throw new Error("User not authenticated");
+      return financeApi.creditCards.delete(creditCardId);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['finance-credit-cards', tenantId ?? 'no-tenant'] })
-      queryClient.invalidateQueries({ queryKey: ['finance-transactions', tenantId ?? 'no-tenant'] })
+      queryClient.invalidateQueries({
+        queryKey: ["finance-credit-cards", tenantId ?? "no-tenant"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["finance-transactions", tenantId ?? "no-tenant"],
+      });
     },
-  })
+  });
 
   const createCreditCard = async (input: ICreateCreditCardInput) => {
     try {
-      await createMutation.mutateAsync(input)
-      return { success: true, error: null }
+      await createMutation.mutateAsync(input);
+      return { success: true, error: null };
     } catch (error) {
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error',
-      }
+        error: error instanceof Error ? error.message : "Unknown error",
+      };
     }
-  }
+  };
 
   const updateCreditCard = async (input: IUpdateCreditCardInput) => {
     try {
-      await updateMutation.mutateAsync(input)
-      return { success: true, error: null }
+      await updateMutation.mutateAsync(input);
+      return { success: true, error: null };
     } catch (error) {
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error',
-      }
+        error: error instanceof Error ? error.message : "Unknown error",
+      };
     }
-  }
+  };
 
   const deleteCreditCard = async (creditCardId: string) => {
     try {
-      await deleteMutation.mutateAsync(creditCardId)
-      return { success: true, error: null }
+      await deleteMutation.mutateAsync(creditCardId);
+      return { success: true, error: null };
     } catch (error) {
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error',
-      }
+        error: error instanceof Error ? error.message : "Unknown error",
+      };
     }
-  }
+  };
 
   return {
     creditCards: creditCards || [],
@@ -101,24 +130,30 @@ export const useCreditCards = () => {
     isCreating: createMutation.isPending,
     isUpdating: updateMutation.isPending,
     isDeleting: deleteMutation.isPending,
-  }
-}
+  };
+};
 
 export const useCreditCardSummary = (
   creditCardId: string | null,
   startDate?: string,
   endDate?: string
 ) => {
-  const { tenantId } = useTenant()
-  const { user } = useAuth()
+  const { tenantId } = useTenant();
+  const { user } = useAuth();
 
   return useQuery<ICreditCardSummary>({
-    queryKey: ['finance-credit-card-summary', tenantId ?? 'no-tenant', creditCardId ?? '', startDate ?? '', endDate ?? ''],
+    queryKey: [
+      "finance-credit-card-summary",
+      tenantId ?? "no-tenant",
+      creditCardId ?? "",
+      startDate ?? "",
+      endDate ?? "",
+    ],
     queryFn: async () => {
-      if (!user || !creditCardId) throw new Error('User or credit card not available')
-      return { monthlyValue: 0, remainingLimit: 0, totalLimit: 0 }
+      if (!user || !creditCardId)
+        throw new Error("User or credit card not available");
+      return { monthlyValue: 0, remainingLimit: 0, totalLimit: 0 };
     },
     enabled: !!user && !!creditCardId,
-  })
-}
-
+  });
+};
