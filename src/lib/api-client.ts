@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { financeClient } from "@gaqno-development/frontcore/utils/api";
 import {
   IFinanceTransaction,
   IFinanceCategory,
@@ -12,43 +12,50 @@ import {
   IUpdateSubcategoryInput,
   ICreateCreditCardInput,
   IUpdateCreditCardInput,
-  TransactionType
-} from '@/types/finance/finance';
-
-const getViteEnv = (key: string, defaultValue: string): string => {
-  if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env[key]) {
-    return import.meta.env[key] as string;
-  }
-  return defaultValue;
-};
-
-const financeClient = axios.create({
-  baseURL: `${getViteEnv('VITE_SERVICE_FINANCE_URL', 'http://localhost:4005')}/v1/finance`,
-  withCredentials: true
-})
+  TransactionType,
+} from "@/types/finance/finance";
 
 export const api = {
   transactions: {
-    getAll: async (startDate?: string, endDate?: string): Promise<IFinanceTransaction[]> => {
+    getAll: async (
+      startDate?: string,
+      endDate?: string
+    ): Promise<IFinanceTransaction[]> => {
       const params: Record<string, string> = {};
       if (startDate) params.startDate = startDate;
       if (endDate) params.endDate = endDate;
-      const response = await financeClient.get('/transactions', { params });
+      const response = await financeClient.get<IFinanceTransaction[]>(
+        "/transactions",
+        { params }
+      );
       return response.data;
     },
 
     getById: async (id: string): Promise<IFinanceTransaction> => {
-      const response = await financeClient.get(`/transactions/${id}`);
+      const response = await financeClient.get<IFinanceTransaction>(
+        `/transactions/${id}`
+      );
       return response.data;
     },
 
-    create: async (data: ICreateTransactionInput): Promise<IFinanceTransaction> => {
-      const response = await financeClient.post('/transactions', data);
+    create: async (
+      data: ICreateTransactionInput
+    ): Promise<IFinanceTransaction> => {
+      const response = await financeClient.post<IFinanceTransaction>(
+        "/transactions",
+        data
+      );
       return response.data;
     },
 
-    update: async (id: string, data: IUpdateTransactionInput): Promise<IFinanceTransaction> => {
-      const response = await financeClient.patch(`/transactions/${id}`, data);
+    update: async (
+      id: string,
+      data: IUpdateTransactionInput
+    ): Promise<IFinanceTransaction> => {
+      const response = await financeClient.patch<IFinanceTransaction>(
+        `/transactions/${id}`,
+        data
+      );
       return response.data;
     },
 
@@ -60,22 +67,36 @@ export const api = {
   categories: {
     getAll: async (type?: TransactionType): Promise<IFinanceCategory[]> => {
       const params = type ? { type } : {};
-      const response = await financeClient.get('/categories', { params });
+      const response = await financeClient.get<IFinanceCategory[]>(
+        "/categories",
+        { params }
+      );
       return response.data;
     },
 
     getById: async (id: string): Promise<IFinanceCategory> => {
-      const response = await financeClient.get(`/categories/${id}`);
+      const response = await financeClient.get<IFinanceCategory>(
+        `/categories/${id}`
+      );
       return response.data;
     },
 
     create: async (data: ICreateCategoryInput): Promise<IFinanceCategory> => {
-      const response = await financeClient.post('/categories', data);
+      const response = await financeClient.post<IFinanceCategory>(
+        "/categories",
+        data
+      );
       return response.data;
     },
 
-    update: async (id: string, data: IUpdateCategoryInput): Promise<IFinanceCategory> => {
-      const response = await financeClient.patch(`/categories/${id}`, data);
+    update: async (
+      id: string,
+      data: IUpdateCategoryInput
+    ): Promise<IFinanceCategory> => {
+      const response = await financeClient.patch<IFinanceCategory>(
+        `/categories/${id}`,
+        data
+      );
       return response.data;
     },
 
@@ -85,25 +106,43 @@ export const api = {
   },
 
   subcategories: {
-    getAll: async (parentCategoryId: string): Promise<IFinanceSubcategory[]> => {
-      const response = await financeClient.get('/subcategories', {
-        params: { parentCategoryId }
-      });
+    getAll: async (
+      parentCategoryId: string
+    ): Promise<IFinanceSubcategory[]> => {
+      const response = await financeClient.get<IFinanceSubcategory[]>(
+        "/subcategories",
+        {
+          params: { parentCategoryId },
+        }
+      );
       return response.data;
     },
 
     getById: async (id: string): Promise<IFinanceSubcategory> => {
-      const response = await financeClient.get(`/subcategories/${id}`);
+      const response = await financeClient.get<IFinanceSubcategory>(
+        `/subcategories/${id}`
+      );
       return response.data;
     },
 
-    create: async (data: ICreateSubcategoryInput): Promise<IFinanceSubcategory> => {
-      const response = await financeClient.post('/subcategories', data);
+    create: async (
+      data: ICreateSubcategoryInput
+    ): Promise<IFinanceSubcategory> => {
+      const response = await financeClient.post<IFinanceSubcategory>(
+        "/subcategories",
+        data
+      );
       return response.data;
     },
 
-    update: async (id: string, data: IUpdateSubcategoryInput): Promise<IFinanceSubcategory> => {
-      const response = await financeClient.patch(`/subcategories/${id}`, data);
+    update: async (
+      id: string,
+      data: IUpdateSubcategoryInput
+    ): Promise<IFinanceSubcategory> => {
+      const response = await financeClient.patch<IFinanceSubcategory>(
+        `/subcategories/${id}`,
+        data
+      );
       return response.data;
     },
 
@@ -114,22 +153,33 @@ export const api = {
 
   creditCards: {
     getAll: async (): Promise<ICreditCard[]> => {
-      const response = await financeClient.get('/credit-cards');
+      const response = await financeClient.get<ICreditCard[]>("/credit-cards");
       return response.data;
     },
 
     getById: async (id: string): Promise<ICreditCard> => {
-      const response = await financeClient.get(`/credit-cards/${id}`);
+      const response = await financeClient.get<ICreditCard>(
+        `/credit-cards/${id}`
+      );
       return response.data;
     },
 
     create: async (data: ICreateCreditCardInput): Promise<ICreditCard> => {
-      const response = await financeClient.post('/credit-cards', data);
+      const response = await financeClient.post<ICreditCard>(
+        "/credit-cards",
+        data
+      );
       return response.data;
     },
 
-    update: async (id: string, data: IUpdateCreditCardInput): Promise<ICreditCard> => {
-      const response = await financeClient.patch(`/credit-cards/${id}`, data);
+    update: async (
+      id: string,
+      data: IUpdateCreditCardInput
+    ): Promise<ICreditCard> => {
+      const response = await financeClient.patch<ICreditCard>(
+        `/credit-cards/${id}`,
+        data
+      );
       return response.data;
     },
 
@@ -138,4 +188,3 @@ export const api = {
     },
   },
 };
-
