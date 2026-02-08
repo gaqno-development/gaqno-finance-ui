@@ -1,5 +1,5 @@
 import { financeClient } from "@gaqno-development/frontcore/utils/api";
-import {
+import type {
   IFinanceTransaction,
   IFinanceCategory,
   IFinanceSubcategory,
@@ -15,7 +15,7 @@ import {
   TransactionType,
 } from "@/types/finance/finance";
 
-export const api = {
+export const financeApi = {
   transactions: {
     getAll: async (
       startDate?: string,
@@ -24,165 +24,148 @@ export const api = {
       const params: Record<string, string> = {};
       if (startDate) params.startDate = startDate;
       if (endDate) params.endDate = endDate;
-      const response = await financeClient.get<IFinanceTransaction[]>(
+      const { data } = await financeClient.get<IFinanceTransaction[]>(
         "/transactions",
         { params }
       );
-      return response.data;
+      return data;
     },
-
     getById: async (id: string): Promise<IFinanceTransaction> => {
-      const response = await financeClient.get<IFinanceTransaction>(
+      const { data } = await financeClient.get<IFinanceTransaction>(
         `/transactions/${id}`
       );
-      return response.data;
+      return data;
     },
-
     create: async (
-      data: ICreateTransactionInput
+      payload: ICreateTransactionInput
     ): Promise<IFinanceTransaction> => {
-      const response = await financeClient.post<IFinanceTransaction>(
+      const { data } = await financeClient.post<IFinanceTransaction>(
         "/transactions",
-        data
+        payload
       );
-      return response.data;
+      return data;
     },
-
     update: async (
       id: string,
-      data: IUpdateTransactionInput
+      payload: IUpdateTransactionInput
     ): Promise<IFinanceTransaction> => {
-      const response = await financeClient.patch<IFinanceTransaction>(
+      const { data } = await financeClient.patch<IFinanceTransaction>(
         `/transactions/${id}`,
-        data
+        payload
       );
-      return response.data;
+      return data;
     },
-
     delete: async (id: string): Promise<void> => {
       await financeClient.delete(`/transactions/${id}`);
     },
   },
-
   categories: {
     getAll: async (type?: TransactionType): Promise<IFinanceCategory[]> => {
       const params = type ? { type } : {};
-      const response = await financeClient.get<IFinanceCategory[]>(
+      const { data } = await financeClient.get<IFinanceCategory[]>(
         "/categories",
         { params }
       );
-      return response.data;
+      return data;
     },
-
     getById: async (id: string): Promise<IFinanceCategory> => {
-      const response = await financeClient.get<IFinanceCategory>(
+      const { data } = await financeClient.get<IFinanceCategory>(
         `/categories/${id}`
       );
-      return response.data;
+      return data;
     },
-
-    create: async (data: ICreateCategoryInput): Promise<IFinanceCategory> => {
-      const response = await financeClient.post<IFinanceCategory>(
+    create: async (
+      payload: ICreateCategoryInput
+    ): Promise<IFinanceCategory> => {
+      const { data } = await financeClient.post<IFinanceCategory>(
         "/categories",
-        data
+        payload
       );
-      return response.data;
+      return data;
     },
-
     update: async (
       id: string,
-      data: IUpdateCategoryInput
+      payload: IUpdateCategoryInput
     ): Promise<IFinanceCategory> => {
-      const response = await financeClient.patch<IFinanceCategory>(
+      const { data } = await financeClient.patch<IFinanceCategory>(
         `/categories/${id}`,
-        data
+        payload
       );
-      return response.data;
+      return data;
     },
-
     delete: async (id: string): Promise<void> => {
       await financeClient.delete(`/categories/${id}`);
     },
   },
-
   subcategories: {
     getAll: async (
       parentCategoryId: string
     ): Promise<IFinanceSubcategory[]> => {
-      const response = await financeClient.get<IFinanceSubcategory[]>(
+      const { data } = await financeClient.get<IFinanceSubcategory[]>(
         "/subcategories",
         {
           params: { parentCategoryId },
         }
       );
-      return response.data;
+      return data;
     },
-
     getById: async (id: string): Promise<IFinanceSubcategory> => {
-      const response = await financeClient.get<IFinanceSubcategory>(
+      const { data } = await financeClient.get<IFinanceSubcategory>(
         `/subcategories/${id}`
       );
-      return response.data;
+      return data;
     },
-
     create: async (
-      data: ICreateSubcategoryInput
+      payload: ICreateSubcategoryInput
     ): Promise<IFinanceSubcategory> => {
-      const response = await financeClient.post<IFinanceSubcategory>(
+      const { data } = await financeClient.post<IFinanceSubcategory>(
         "/subcategories",
-        data
+        payload
       );
-      return response.data;
+      return data;
     },
-
     update: async (
       id: string,
-      data: IUpdateSubcategoryInput
+      payload: IUpdateSubcategoryInput
     ): Promise<IFinanceSubcategory> => {
-      const response = await financeClient.patch<IFinanceSubcategory>(
+      const { data } = await financeClient.patch<IFinanceSubcategory>(
         `/subcategories/${id}`,
-        data
+        payload
       );
-      return response.data;
+      return data;
     },
-
     delete: async (id: string): Promise<void> => {
       await financeClient.delete(`/subcategories/${id}`);
     },
   },
-
   creditCards: {
     getAll: async (): Promise<ICreditCard[]> => {
-      const response = await financeClient.get<ICreditCard[]>("/credit-cards");
-      return response.data;
+      const { data } = await financeClient.get<ICreditCard[]>("/credit-cards");
+      return data;
     },
-
     getById: async (id: string): Promise<ICreditCard> => {
-      const response = await financeClient.get<ICreditCard>(
+      const { data } = await financeClient.get<ICreditCard>(
         `/credit-cards/${id}`
       );
-      return response.data;
+      return data;
     },
-
-    create: async (data: ICreateCreditCardInput): Promise<ICreditCard> => {
-      const response = await financeClient.post<ICreditCard>(
+    create: async (payload: ICreateCreditCardInput): Promise<ICreditCard> => {
+      const { data } = await financeClient.post<ICreditCard>(
         "/credit-cards",
-        data
+        payload
       );
-      return response.data;
+      return data;
     },
-
     update: async (
       id: string,
-      data: IUpdateCreditCardInput
+      payload: IUpdateCreditCardInput
     ): Promise<ICreditCard> => {
-      const response = await financeClient.patch<ICreditCard>(
+      const { data } = await financeClient.patch<ICreditCard>(
         `/credit-cards/${id}`,
-        data
+        payload
       );
-      return response.data;
+      return data;
     },
-
     delete: async (id: string): Promise<void> => {
       await financeClient.delete(`/credit-cards/${id}`);
     },
