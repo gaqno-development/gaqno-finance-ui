@@ -1,6 +1,4 @@
-
-
-import { useState } from 'react'
+import { useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,56 +8,61 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@gaqno-development/frontcore/components/ui'
-import { Card, CardHeader, CardTitle, CardContent } from '@gaqno-development/frontcore/components/ui'
-import { Button } from '@gaqno-development/frontcore/components/ui'
-import { Plus } from 'lucide-react'
-import { CreditCardDisplayCard } from './CreditCardDisplayCard'
-import { AddCreditCardDialog } from './AddCreditCardDialog'
-import { useCreditCards } from '@/hooks/finance/useCreditCards'
-import { ICreditCard } from '@/types/finance/finance'
+} from "@gaqno-development/frontcore/components/ui";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@gaqno-development/frontcore/components/ui";
+import { Button } from "@gaqno-development/frontcore/components/ui";
+import { Plus } from "lucide-react";
+import { CreditCardDisplayCard } from "./CreditCardDisplayCard";
+import { AddCreditCardDialog } from "./AddCreditCardDialog";
+import { useCreditCards } from "@/hooks/finance";
+import { ICreditCard } from "@/types/finance/finance";
 
 interface ICreditCardOverviewProps {
-  onCardSelect?: (cardId: string) => void
-  selectedCardId?: string | null
+  onCardSelect?: (cardId: string) => void;
+  selectedCardId?: string | null;
 }
 
 export function CreditCardOverview({
   onCardSelect,
   selectedCardId,
 }: ICreditCardOverviewProps) {
-  const { creditCards, isLoading, deleteCreditCard } = useCreditCards()
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [editingCard, setEditingCard] = useState<ICreditCard | null>(null)
-  const [deleteCardId, setDeleteCardId] = useState<string | null>(null)
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
+  const { creditCards, isLoading, deleteCreditCard } = useCreditCards();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [editingCard, setEditingCard] = useState<ICreditCard | null>(null);
+  const [deleteCardId, setDeleteCardId] = useState<string | null>(null);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   const handleDelete = async (cardId: string) => {
-    setDeleteCardId(cardId)
-    setIsDeleteDialogOpen(true)
-  }
+    setDeleteCardId(cardId);
+    setIsDeleteDialogOpen(true);
+  };
 
   const confirmDelete = async () => {
-    if (!deleteCardId) return
+    if (!deleteCardId) return;
 
-    const result = await deleteCreditCard(deleteCardId)
-    setIsDeleteDialogOpen(false)
-    setDeleteCardId(null)
+    const result = await deleteCreditCard(deleteCardId);
+    setIsDeleteDialogOpen(false);
+    setDeleteCardId(null);
 
     if (!result.success) {
-      alert(`Erro ao deletar: ${result.error}`)
+      alert(`Erro ao deletar: ${result.error}`);
     }
-  }
+  };
 
   const handleEdit = (card: ICreditCard) => {
-    setEditingCard(card)
-    setIsDialogOpen(true)
-  }
+    setEditingCard(card);
+    setIsDialogOpen(true);
+  };
 
   const handleClose = () => {
-    setIsDialogOpen(false)
-    setEditingCard(null)
-  }
+    setIsDialogOpen(false);
+    setEditingCard(null);
+  };
 
   if (isLoading) {
     return (
@@ -68,7 +71,7 @@ export function CreditCardOverview({
           <p className="text-muted-foreground">Carregando cartões...</p>
         </CardContent>
       </Card>
-    )
+    );
   }
 
   return (
@@ -98,7 +101,7 @@ export function CreditCardOverview({
                   onEdit={handleEdit}
                   onClick={(cardId) => {
                     if (onCardSelect) {
-                      onCardSelect(cardId)
+                      onCardSelect(cardId);
                     }
                   }}
                 />
@@ -115,23 +118,29 @@ export function CreditCardOverview({
         onClose={handleClose}
       />
 
-      <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+      <AlertDialog
+        open={isDeleteDialogOpen}
+        onOpenChange={setIsDeleteDialogOpen}
+      >
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Excluir Cartão</AlertDialogTitle>
             <AlertDialogDescription>
-              Tem certeza que deseja excluir este cartão? Esta ação não pode ser desfeita.
+              Tem certeza que deseja excluir este cartão? Esta ação não pode ser
+              desfeita.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <AlertDialogAction onClick={confirmDelete} className="bg-red-600 hover:bg-red-700">
+            <AlertDialogAction
+              onClick={confirmDelete}
+              className="bg-red-600 hover:bg-red-700"
+            >
               Excluir
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
     </>
-  )
+  );
 }
-

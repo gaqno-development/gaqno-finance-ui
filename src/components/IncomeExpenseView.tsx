@@ -1,284 +1,334 @@
-
-
-import { useState, useMemo, useEffect } from 'react'
-import { Card, CardHeader, CardContent } from '@gaqno-development/frontcore/components/ui'
-import { Button } from '@gaqno-development/frontcore/components/ui'
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@gaqno-development/frontcore/components/ui'
+import { useState, useMemo, useEffect } from "react";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+} from "@gaqno-development/frontcore/components/ui";
+import { Button } from "@gaqno-development/frontcore/components/ui";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@gaqno-development/frontcore/components/ui";
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuTrigger,
   ContextMenuSeparator,
-} from '@gaqno-development/frontcore/components/ui'
+} from "@gaqno-development/frontcore/components/ui";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@gaqno-development/frontcore/components/ui'
-import { TrendingUp, TrendingDown, ChevronDown, ChevronRight, Plus, Filter, Maximize2, Eye, Edit, Trash2 } from 'lucide-react'
-import { IFinanceTransaction } from '@/types/finance/finance'
-import { formatCurrency } from '@/utils/finance/formatCurrency'
-import { AddTransactionDialog } from './AddTransactionDialog'
-import { TransactionIcon } from './TransactionIcon'
-import { generateRecurringTransactions } from '@/utils/finance/generateRecurringTransactions'
-import { useTransactions } from '@/hooks/finance/useTransactions'
-import { TransactionStatus } from '@/types/finance/finance'
-import { useCategories } from '@/hooks/finance/useCategories'
-import { RecurringBadge } from './RecurringBadge'
-import { TransactionStatusBadge } from './TransactionStatusBadge'
-import { MonthSummaryStats } from './MonthSummaryStats'
-import { CategoryBadge } from './CategoryBadge'
-import { QuarterFilterButtons } from './QuarterFilterButtons'
-import { YearFilterButtons } from './YearFilterButtons'
+} from "@gaqno-development/frontcore/components/ui";
+import {
+  TrendingUp,
+  TrendingDown,
+  ChevronDown,
+  ChevronRight,
+  Plus,
+  Filter,
+  Maximize2,
+  Eye,
+  Edit,
+  Trash2,
+} from "lucide-react";
+import { IFinanceTransaction } from "@/types/finance/finance";
+import { formatCurrency } from "@/utils/finance/formatCurrency";
+import { AddTransactionDialog } from "./AddTransactionDialog";
+import { TransactionIcon } from "./TransactionIcon";
+import { generateRecurringTransactions } from "@/utils/finance/generateRecurringTransactions";
+import { useTransactions, useCategories } from "@/hooks/finance";
+import { TransactionStatus } from "@/types/finance/finance";
+import { RecurringBadge } from "./RecurringBadge";
+import { TransactionStatusBadge } from "./TransactionStatusBadge";
+import { MonthSummaryStats } from "./MonthSummaryStats";
+import { CategoryBadge } from "./CategoryBadge";
+import { QuarterFilterButtons } from "./QuarterFilterButtons";
+import { YearFilterButtons } from "./YearFilterButtons";
 
 interface IIncomeExpenseViewProps {
-  transactions: IFinanceTransaction[]
-  onDelete: (transactionId: string) => void
+  transactions: IFinanceTransaction[];
+  onDelete: (transactionId: string) => void;
 }
 
 interface IMonthlyGroup {
-  month: string
-  year: number
-  monthIndex: number
-  yearMonth: string
-  transactions: IFinanceTransaction[]
+  month: string;
+  year: number;
+  monthIndex: number;
+  yearMonth: string;
+  transactions: IFinanceTransaction[];
 }
 
 const MONTHS = [
-  'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-  'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-]
+  "Janeiro",
+  "Fevereiro",
+  "Março",
+  "Abril",
+  "Maio",
+  "Junho",
+  "Julho",
+  "Agosto",
+  "Setembro",
+  "Outubro",
+  "Novembro",
+  "Dezembro",
+];
 
 const getCurrentQuarter = () => {
-  const month = new Date().getMonth()
-  if (month >= 0 && month <= 2) return 'q1'
-  if (month >= 3 && month <= 5) return 'q2'
-  if (month >= 6 && month <= 8) return 'q3'
-  return 'q4'
-}
+  const month = new Date().getMonth();
+  if (month >= 0 && month <= 2) return "q1";
+  if (month >= 3 && month <= 5) return "q2";
+  if (month >= 6 && month <= 8) return "q3";
+  return "q4";
+};
 
-export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseViewProps) {
-  const currentYear = new Date().getFullYear()
-  const [selectedYear, setSelectedYear] = useState<number>(currentYear)
-  const [selectedQuarter, setSelectedQuarter] = useState<string>(getCurrentQuarter())
-  const [selectedType, setSelectedType] = useState<'all' | 'income' | 'expense'>('all')
-  const [isNewDialogOpen, setIsNewDialogOpen] = useState(false)
-  const [openMonths, setOpenMonths] = useState<Record<string, boolean>>({})
-  const [editingTransaction, setEditingTransaction] = useState<IFinanceTransaction | null>(null)
-  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
-  const [detailsTransaction, setDetailsTransaction] = useState<IFinanceTransaction | null>(null)
-  const [isDetailsDialogOpen, setIsDetailsDialogOpen] = useState(false)
+export function IncomeExpenseView({
+  transactions,
+  onDelete,
+}: IIncomeExpenseViewProps) {
+  const currentYear = new Date().getFullYear();
+  const [selectedYear, setSelectedYear] = useState<number>(currentYear);
+  const [selectedQuarter, setSelectedQuarter] =
+    useState<string>(getCurrentQuarter());
+  const [selectedType, setSelectedType] = useState<
+    "all" | "income" | "expense"
+  >("all");
+  const [isNewDialogOpen, setIsNewDialogOpen] = useState(false);
+  const [openMonths, setOpenMonths] = useState<Record<string, boolean>>({});
+  const [editingTransaction, setEditingTransaction] =
+    useState<IFinanceTransaction | null>(null);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [detailsTransaction, setDetailsTransaction] =
+    useState<IFinanceTransaction | null>(null);
+  const [isDetailsDialogOpen, setIsDetailsDialogOpen] = useState(false);
 
-  const { updateTransaction } = useTransactions()
-  const { categories } = useCategories()
+  const { updateTransaction } = useTransactions();
+  const { categories } = useCategories();
 
   const handleViewDetails = (transaction: IFinanceTransaction) => {
-    setDetailsTransaction(transaction)
-    setIsDetailsDialogOpen(true)
-  }
+    setDetailsTransaction(transaction);
+    setIsDetailsDialogOpen(true);
+  };
 
   const handleEdit = (transaction: IFinanceTransaction) => {
-    if (transaction.id.includes('-generated-')) {
-      alert('Esta é uma transação futura gerada automaticamente. Para editá-la, edite a transação recorrente original.')
-      return
+    if (transaction.id.includes("-generated-")) {
+      alert(
+        "Esta é uma transação futura gerada automaticamente. Para editá-la, edite a transação recorrente original."
+      );
+      return;
     }
-    setEditingTransaction(transaction)
-    setIsEditDialogOpen(true)
-  }
+    setEditingTransaction(transaction);
+    setIsEditDialogOpen(true);
+  };
 
   const handleDelete = async (transaction: IFinanceTransaction) => {
-    if (transaction.id.includes('-generated-')) {
-      alert('Esta é uma transação futura gerada automaticamente. Para removê-la, desative a recorrência na transação original.')
-      return
+    if (transaction.id.includes("-generated-")) {
+      alert(
+        "Esta é uma transação futura gerada automaticamente. Para removê-la, desative a recorrência na transação original."
+      );
+      return;
     }
-    if (confirm(`Tem certeza que deseja excluir "${transaction.description}"?`)) {
-      await onDelete(transaction.id)
+    if (
+      confirm(`Tem certeza que deseja excluir "${transaction.description}"?`)
+    ) {
+      await onDelete(transaction.id);
     }
-  }
+  };
 
-  const getTransactionStatus = (transaction: IFinanceTransaction): TransactionStatus => {
+  const getTransactionStatus = (
+    transaction: IFinanceTransaction
+  ): TransactionStatus => {
     if (transaction.status === TransactionStatus.PAGO) {
-      return TransactionStatus.PAGO
+      return TransactionStatus.PAGO;
     }
 
-    if (transaction.due_date && transaction.type === 'expense') {
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
-      const dueDate = new Date(transaction.due_date)
-      dueDate.setHours(0, 0, 0, 0)
+    if (transaction.due_date && transaction.type === "expense") {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const dueDate = new Date(transaction.due_date);
+      dueDate.setHours(0, 0, 0, 0);
 
       if (dueDate < today) {
-        return TransactionStatus.EM_ATRASO
+        return TransactionStatus.EM_ATRASO;
       }
     }
 
-    return transaction.status || TransactionStatus.A_PAGAR
-  }
+    return transaction.status || TransactionStatus.A_PAGAR;
+  };
 
   const handleToggleStatus = async (transaction: IFinanceTransaction) => {
-    if (transaction.id.includes('-generated-')) {
-      alert('Esta é uma transação futura gerada automaticamente. Para alterar o status, edite a transação recorrente original.')
-      return
+    if (transaction.id.includes("-generated-")) {
+      alert(
+        "Esta é uma transação futura gerada automaticamente. Para alterar o status, edite a transação recorrente original."
+      );
+      return;
     }
 
-    const currentStatus = getTransactionStatus(transaction)
-    let newStatus: TransactionStatus
+    const currentStatus = getTransactionStatus(transaction);
+    let newStatus: TransactionStatus;
 
-    if (currentStatus === TransactionStatus.A_PAGAR || currentStatus === TransactionStatus.EM_ATRASO) {
-      newStatus = TransactionStatus.PAGO
+    if (
+      currentStatus === TransactionStatus.A_PAGAR ||
+      currentStatus === TransactionStatus.EM_ATRASO
+    ) {
+      newStatus = TransactionStatus.PAGO;
     } else {
-      newStatus = TransactionStatus.A_PAGAR
+      newStatus = TransactionStatus.A_PAGAR;
     }
 
     const result = await updateTransaction({
       id: transaction.id,
       status: newStatus,
-    })
+    });
 
     if (!result.success) {
-      alert('Erro ao atualizar status: ' + result.error)
+      alert("Erro ao atualizar status: " + result.error);
     }
-  }
+  };
 
   const allTransactions = useMemo(
     () => generateRecurringTransactions(transactions, 12),
     [transactions]
-  )
+  );
 
   useEffect(() => {
     const updateOverdueTransactions = async () => {
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
 
       const overdueTransactions = transactions.filter((transaction) => {
-        if (transaction.id.includes('-generated-')) return false
-        if (transaction.status === TransactionStatus.PAGO) return false
-        if (transaction.type !== 'expense') return false
-        if (!transaction.due_date) return false
+        if (transaction.id.includes("-generated-")) return false;
+        if (transaction.status === TransactionStatus.PAGO) return false;
+        if (transaction.type !== "expense") return false;
+        if (!transaction.due_date) return false;
 
-        const dueDate = new Date(transaction.due_date)
-        dueDate.setHours(0, 0, 0, 0)
+        const dueDate = new Date(transaction.due_date);
+        dueDate.setHours(0, 0, 0, 0);
 
-        return dueDate < today && transaction.status !== TransactionStatus.EM_ATRASO
-      })
+        return (
+          dueDate < today && transaction.status !== TransactionStatus.EM_ATRASO
+        );
+      });
 
       if (overdueTransactions.length > 0) {
         for (const transaction of overdueTransactions) {
           await updateTransaction({
             id: transaction.id,
             status: TransactionStatus.EM_ATRASO,
-          })
+          });
         }
       }
-    }
+    };
 
-    updateOverdueTransactions()
-  }, [transactions, updateTransaction])
+    updateOverdueTransactions();
+  }, [transactions, updateTransaction]);
 
   const availableYears = useMemo(() => {
-    const years = new Set<number>()
+    const years = new Set<number>();
     allTransactions.forEach((t) => {
-      years.add(new Date(t.transaction_date).getFullYear())
-    })
-    return Array.from(years).sort((a, b) => b - a)
-  }, [allTransactions])
+      years.add(new Date(t.transaction_date).getFullYear());
+    });
+    return Array.from(years).sort((a, b) => b - a);
+  }, [allTransactions]);
 
   const filterByQuarter = (transactions: IFinanceTransaction[]) => {
-    if (selectedQuarter === 'all') return transactions
+    if (selectedQuarter === "all") return transactions;
 
     const quarterMonths: Record<string, number[]> = {
       q1: [0, 1, 2], // Jan, Feb, Mar
       q2: [3, 4, 5], // Apr, May, Jun
       q3: [6, 7, 8], // Jul, Aug, Sep
       q4: [9, 10, 11], // Oct, Nov, Dec
-    }
+    };
 
-    const months = quarterMonths[selectedQuarter]
-    if (!months) return transactions
+    const months = quarterMonths[selectedQuarter];
+    if (!months) return transactions;
 
     return transactions.filter((t) => {
-      const date = new Date(t.transaction_date)
-      return months.includes(date.getMonth())
-    })
-  }
+      const date = new Date(t.transaction_date);
+      return months.includes(date.getMonth());
+    });
+  };
 
   const filteredTransactions = useMemo(() => {
-    let filtered = allTransactions
+    let filtered = allTransactions;
 
     filtered = filtered.filter((t) => {
-      const date = new Date(t.transaction_date)
-      return date.getFullYear() === selectedYear
-    })
+      const date = new Date(t.transaction_date);
+      return date.getFullYear() === selectedYear;
+    });
 
-    if (selectedType !== 'all') {
-      filtered = filtered.filter((t) => t.type === selectedType)
+    if (selectedType !== "all") {
+      filtered = filtered.filter((t) => t.type === selectedType);
     }
-    return filterByQuarter(filtered)
-  }, [allTransactions, selectedType, selectedQuarter, selectedYear])
+    return filterByQuarter(filtered);
+  }, [allTransactions, selectedType, selectedQuarter, selectedYear]);
 
-  const groupByMonth = (transactions: IFinanceTransaction[]): IMonthlyGroup[] => {
-    const groups: Record<string, IFinanceTransaction[]> = {}
+  const groupByMonth = (
+    transactions: IFinanceTransaction[]
+  ): IMonthlyGroup[] => {
+    const groups: Record<string, IFinanceTransaction[]> = {};
 
     transactions.forEach((transaction) => {
-      const date = new Date(transaction.transaction_date)
-      const year = date.getFullYear()
-      const monthIndex = date.getMonth()
-      const yearMonth = `${year}-${monthIndex}`
+      const date = new Date(transaction.transaction_date);
+      const year = date.getFullYear();
+      const monthIndex = date.getMonth();
+      const yearMonth = `${year}-${monthIndex}`;
 
       if (!groups[yearMonth]) {
-        groups[yearMonth] = []
+        groups[yearMonth] = [];
       }
-      groups[yearMonth].push(transaction)
-    })
+      groups[yearMonth].push(transaction);
+    });
 
     return Object.entries(groups)
       .map(([yearMonth, transactions]) => {
-        const [year, monthIndex] = yearMonth.split('-').map(Number)
+        const [year, monthIndex] = yearMonth.split("-").map(Number);
         return {
           month: MONTHS[monthIndex],
           year,
           monthIndex,
           yearMonth,
-          transactions: transactions.sort((a, b) =>
-            new Date(b.transaction_date).getTime() - new Date(a.transaction_date).getTime()
+          transactions: transactions.sort(
+            (a, b) =>
+              new Date(b.transaction_date).getTime() -
+              new Date(a.transaction_date).getTime()
           ),
-        }
+        };
       })
       .sort((a, b) => {
-        if (a.year !== b.year) return b.year - a.year
-        return b.monthIndex - a.monthIndex
-      })
-  }
+        if (a.year !== b.year) return b.year - a.year;
+        return b.monthIndex - a.monthIndex;
+      });
+  };
 
-  const transactionGroups = useMemo(() => groupByMonth(filteredTransactions), [filteredTransactions])
+  const transactionGroups = useMemo(
+    () => groupByMonth(filteredTransactions),
+    [filteredTransactions]
+  );
 
   const toggleMonth = (yearMonth: string) => {
     setOpenMonths((prev) => ({
       ...prev,
       [yearMonth]: !prev[yearMonth],
-    }))
-  }
+    }));
+  };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-    })
-  }
-
+    return new Date(dateString).toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    });
+  };
 
   const renderCategoryIcon = (transaction: IFinanceTransaction) => {
-    return (
-      <TransactionIcon
-        transaction={transaction}
-        size="sm"
-      />
-    )
-  }
+    return <TransactionIcon transaction={transaction} size="sm" />;
+  };
 
   const renderTransactionTable = (groups: IMonthlyGroup[]) => {
     if (groups.length === 0) {
@@ -286,23 +336,23 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
         <div className="text-center py-12 text-muted-foreground">
           Nenhuma transação registrada
         </div>
-      )
+      );
     }
 
     return (
       <div className="space-y-4 md:space-y-3">
         {groups.map((group) => {
-          const isOpen = openMonths[group.yearMonth] !== false
+          const isOpen = openMonths[group.yearMonth] !== false;
 
           const monthIncome = group.transactions
-            .filter((t) => t.type === 'income')
-            .reduce((sum, t) => sum + Number(t.amount), 0)
+            .filter((t) => t.type === "income")
+            .reduce((sum, t) => sum + Number(t.amount), 0);
 
           const monthExpenses = group.transactions
-            .filter((t) => t.type === 'expense')
-            .reduce((sum, t) => sum + Number(t.amount), 0)
+            .filter((t) => t.type === "expense")
+            .reduce((sum, t) => sum + Number(t.amount), 0);
 
-          const monthBalance = monthIncome - monthExpenses
+          const monthBalance = monthIncome - monthExpenses;
 
           return (
             <Collapsible
@@ -314,10 +364,14 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
               <CollapsibleTrigger className="w-full">
                 <div className="px-4 py-3 md:py-2 hover:bg-muted/50 transition-colors">
                   <div className="flex items-center gap-2">
-                    <div className={`transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`}>
+                    <div
+                      className={`transition-transform duration-200 ${isOpen ? "rotate-90" : ""}`}
+                    >
                       <ChevronRight className="h-4 w-4 text-muted-foreground" />
                     </div>
-                    <span className="font-semibold text-base md:text-sm">{group.month} {group.year}</span>
+                    <span className="font-semibold text-base md:text-sm">
+                      {group.month} {group.year}
+                    </span>
                     <MonthSummaryStats
                       monthIncome={monthIncome}
                       monthExpenses={monthExpenses}
@@ -358,27 +412,33 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
                       <div className="md:hidden px-4 py-3 hover:bg-muted/50 transition-colors border-b last:border-0">
                         <div className="flex items-start justify-between gap-2 mb-2">
                           <div className="flex items-center gap-2 min-w-0 flex-1">
-                            <div className={`w-2 h-2 rounded-full flex-shrink-0 ${transaction.type === 'income' ? 'bg-green-500' : 'bg-red-500'}`} />
+                            <div
+                              className={`w-2 h-2 rounded-full flex-shrink-0 ${transaction.type === "income" ? "bg-green-500" : "bg-red-500"}`}
+                            />
                             {renderCategoryIcon(transaction)}
-                            <span className="font-medium text-sm">{transaction.description}</span>
+                            <span className="font-medium text-sm">
+                              {transaction.description}
+                            </span>
                           </div>
-                          <div className={`font-semibold text-sm ${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'}`}>
+                          <div
+                            className={`font-semibold text-sm ${transaction.type === "income" ? "text-green-600" : "text-red-600"}`}
+                          >
                             {formatCurrency(transaction.amount)}
                           </div>
                         </div>
                         <div className="flex flex-wrap gap-2 items-center text-xs">
                           {transaction.category && (
-                            <CategoryBadge 
-                              category={transaction.category} 
+                            <CategoryBadge
+                              category={transaction.category}
                               subcategory={transaction.subcategory}
                             />
                           )}
-                          {transaction.type === 'expense' && (
+                          {transaction.type === "expense" && (
                             <TransactionStatusBadge
                               status={getTransactionStatus(transaction)}
                               onClick={(e) => {
-                                e?.stopPropagation()
-                                handleToggleStatus(transaction)
+                                e?.stopPropagation();
+                                handleToggleStatus(transaction);
                               }}
                             />
                           )}
@@ -418,33 +478,40 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
 
                       <ContextMenu>
                         <ContextMenuTrigger asChild>
-                          <div
-                            className="hidden md:grid grid-cols-[2fr,150px,120px,160px] gap-4 px-4 py-3 hover:bg-muted/50 transition-colors text-sm border-b last:border-0 cursor-context-menu"
-                          >
+                          <div className="hidden md:grid grid-cols-[2fr,150px,120px,160px] gap-4 px-4 py-3 hover:bg-muted/50 transition-colors text-sm border-b last:border-0 cursor-context-menu">
                             <div className="flex items-center gap-2 min-w-0">
-                              <div className={`w-2 h-2 rounded-full flex-shrink-0 ${transaction.type === 'income' ? 'bg-green-500' : 'bg-red-500'}`} />
+                              <div
+                                className={`w-2 h-2 rounded-full flex-shrink-0 ${transaction.type === "income" ? "bg-green-500" : "bg-red-500"}`}
+                              />
                               {renderCategoryIcon(transaction)}
-                              <span className="font-medium truncate">{transaction.description}</span>
-                              {transaction.type === 'expense' && (
+                              <span className="font-medium truncate">
+                                {transaction.description}
+                              </span>
+                              {transaction.type === "expense" && (
                                 <TransactionStatusBadge
                                   status={getTransactionStatus(transaction)}
                                   onClick={(e) => {
-                                    e?.stopPropagation()
-                                    handleToggleStatus(transaction)
+                                    e?.stopPropagation();
+                                    handleToggleStatus(transaction);
                                   }}
                                 />
                               )}
-                              <RecurringBadge transaction={transaction} className="text-xs flex-shrink-0" />
+                              <RecurringBadge
+                                transaction={transaction}
+                                className="text-xs flex-shrink-0"
+                              />
                             </div>
-                            <div className={`font-semibold text-right ${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'}`}>
+                            <div
+                              className={`font-semibold text-right ${transaction.type === "income" ? "text-green-600" : "text-red-600"}`}
+                            >
                               {formatCurrency(transaction.amount)}
                             </div>
                             <div className="flex gap-1 flex-wrap items-center">
                               {transaction.category && (
-                                <CategoryBadge 
-                                  category={transaction.category} 
+                                <CategoryBadge
+                                  category={transaction.category}
                                   subcategory={transaction.subcategory}
-                                  size="sm" 
+                                  size="sm"
                                 />
                               )}
                             </div>
@@ -454,11 +521,15 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
                           </div>
                         </ContextMenuTrigger>
                         <ContextMenuContent>
-                          <ContextMenuItem onClick={() => handleViewDetails(transaction)}>
+                          <ContextMenuItem
+                            onClick={() => handleViewDetails(transaction)}
+                          >
                             <Eye className="mr-2 h-4 w-4" />
                             Ver Detalhes
                           </ContextMenuItem>
-                          <ContextMenuItem onClick={() => handleEdit(transaction)}>
+                          <ContextMenuItem
+                            onClick={() => handleEdit(transaction)}
+                          >
                             <Edit className="mr-2 h-4 w-4" />
                             Editar
                           </ContextMenuItem>
@@ -477,18 +548,17 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
                 </div>
               </CollapsibleContent>
             </Collapsible>
-          )
-        })
-        }
-      </div >
-    )
-  }
+          );
+        })}
+      </div>
+    );
+  };
 
-  const getDefaultTypeForNew = (): 'income' | 'expense' => {
-    if (selectedType === 'income') return 'income'
-    if (selectedType === 'expense') return 'expense'
-    return 'expense'
-  }
+  const getDefaultTypeForNew = (): "income" | "expense" => {
+    if (selectedType === "income") return "income";
+    if (selectedType === "expense") return "expense";
+    return "expense";
+  };
 
   return (
     <>
@@ -498,26 +568,26 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
             <div className="flex items-center gap-2 flex-wrap">
               <div className="flex gap-1">
                 <Button
-                  variant={selectedType === 'all' ? 'default' : 'ghost'}
+                  variant={selectedType === "all" ? "default" : "ghost"}
                   size="sm"
-                  onClick={() => setSelectedType('all')}
+                  onClick={() => setSelectedType("all")}
                 >
                   All
                 </Button>
                 <Button
-                  variant={selectedType === 'income' ? 'default' : 'ghost'}
+                  variant={selectedType === "income" ? "default" : "ghost"}
                   size="sm"
                   className="gap-2"
-                  onClick={() => setSelectedType('income')}
+                  onClick={() => setSelectedType("income")}
                 >
                   <TrendingUp className="h-4 w-4 text-green-600" />
                   Income
                 </Button>
                 <Button
-                  variant={selectedType === 'expense' ? 'default' : 'ghost'}
+                  variant={selectedType === "expense" ? "default" : "ghost"}
                   size="sm"
                   className="gap-2"
-                  onClick={() => setSelectedType('expense')}
+                  onClick={() => setSelectedType("expense")}
                 >
                   <TrendingDown className="h-4 w-4 text-red-600" />
                   Expenses
@@ -567,9 +637,7 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
             </div>
           </div>
         </CardHeader>
-        <CardContent>
-          {renderTransactionTable(transactionGroups)}
-        </CardContent>
+        <CardContent>{renderTransactionTable(transactionGroups)}</CardContent>
       </Card>
 
       <AddTransactionDialog
@@ -584,11 +652,10 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
         onOpenChange={setIsEditDialogOpen}
         transaction={editingTransaction}
         onClose={() => {
-          setIsEditDialogOpen(false)
-          setEditingTransaction(null)
+          setIsEditDialogOpen(false);
+          setEditingTransaction(null);
         }}
       />
-
 
       <Dialog open={isDetailsDialogOpen} onOpenChange={setIsDetailsDialogOpen}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
@@ -602,76 +669,122 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Descrição</p>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Descrição
+                  </p>
                   <p className="text-base">{detailsTransaction.description}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Tipo</p>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Tipo
+                  </p>
                   <p className="text-base">
-                    {detailsTransaction.type === 'income' ? 'Receita' : 'Despesa'}
+                    {detailsTransaction.type === "income"
+                      ? "Receita"
+                      : "Despesa"}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Valor</p>
-                  <p className={`text-base font-semibold ${detailsTransaction.type === 'income' ? 'text-green-600' : 'text-red-600'
-                    }`}>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Valor
+                  </p>
+                  <p
+                    className={`text-base font-semibold ${
+                      detailsTransaction.type === "income"
+                        ? "text-green-600"
+                        : "text-red-600"
+                    }`}
+                  >
                     {formatCurrency(detailsTransaction.amount)}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Data</p>
-                  <p className="text-base">{formatDate(detailsTransaction.transaction_date)}</p>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Data
+                  </p>
+                  <p className="text-base">
+                    {formatDate(detailsTransaction.transaction_date)}
+                  </p>
                 </div>
                 {detailsTransaction.due_date && (
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground">Data de Vencimento</p>
-                    <p className="text-base">{formatDate(detailsTransaction.due_date)}</p>
+                    <p className="text-sm font-medium text-muted-foreground">
+                      Data de Vencimento
+                    </p>
+                    <p className="text-base">
+                      {formatDate(detailsTransaction.due_date)}
+                    </p>
                   </div>
                 )}
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Status</p>
-                  <p className="text-base capitalize">{detailsTransaction.status.replace('_', ' ')}</p>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Status
+                  </p>
+                  <p className="text-base capitalize">
+                    {detailsTransaction.status.replace("_", " ")}
+                  </p>
                 </div>
                 {detailsTransaction.category && (
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground">Categoria</p>
-                    <p className="text-base">{detailsTransaction.category.name}</p>
+                    <p className="text-sm font-medium text-muted-foreground">
+                      Categoria
+                    </p>
+                    <p className="text-base">
+                      {detailsTransaction.category.name}
+                    </p>
                   </div>
                 )}
                 {detailsTransaction.creditCard && (
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground">Cartão de Crédito</p>
+                    <p className="text-sm font-medium text-muted-foreground">
+                      Cartão de Crédito
+                    </p>
                     <p className="text-base">
-                      {detailsTransaction.creditCard.name} - Final {detailsTransaction.creditCard.last_four_digits}
+                      {detailsTransaction.creditCard.name} - Final{" "}
+                      {detailsTransaction.creditCard.last_four_digits}
                     </p>
                   </div>
                 )}
                 {detailsTransaction.is_recurring && (
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground">Recorrência</p>
+                    <p className="text-sm font-medium text-muted-foreground">
+                      Recorrência
+                    </p>
                     <p className="text-base">
-                      <RecurringBadge transaction={detailsTransaction} variant="text" />
+                      <RecurringBadge
+                        transaction={detailsTransaction}
+                        variant="text"
+                      />
                     </p>
                   </div>
                 )}
                 {detailsTransaction.installment_count > 1 && (
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground">Parcelas</p>
+                    <p className="text-sm font-medium text-muted-foreground">
+                      Parcelas
+                    </p>
                     <p className="text-base">
-                      {detailsTransaction.installment_current} de {detailsTransaction.installment_count}
+                      {detailsTransaction.installment_current} de{" "}
+                      {detailsTransaction.installment_count}
                     </p>
                   </div>
                 )}
                 {detailsTransaction.assigned_to && (
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground">Corresponde a</p>
-                    <p className="text-base">{detailsTransaction.assigned_to}</p>
+                    <p className="text-sm font-medium text-muted-foreground">
+                      Corresponde a
+                    </p>
+                    <p className="text-base">
+                      {detailsTransaction.assigned_to}
+                    </p>
                   </div>
                 )}
               </div>
               {detailsTransaction.notes && (
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Anotações</p>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    Anotações
+                  </p>
                   <p className="text-base">{detailsTransaction.notes}</p>
                 </div>
               )}
@@ -680,6 +793,5 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
         </DialogContent>
       </Dialog>
     </>
-  )
+  );
 }
-

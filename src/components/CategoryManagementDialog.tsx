@@ -1,34 +1,38 @@
-
-
-import { useState, useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
+import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@gaqno-development/frontcore/components/ui'
-import { DialogFormFooter } from '@gaqno-development/frontcore/components/ui'
-import { Input } from '@gaqno-development/frontcore/components/ui'
-import { Label } from '@gaqno-development/frontcore/components/ui'
+} from "@gaqno-development/frontcore/components/ui";
+import { DialogFormFooter } from "@gaqno-development/frontcore/components/ui";
+import { Input } from "@gaqno-development/frontcore/components/ui";
+import { Label } from "@gaqno-development/frontcore/components/ui";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@gaqno-development/frontcore/components/ui'
-import { Button } from '@gaqno-development/frontcore/components/ui'
-import { IFinanceCategory, TransactionType, ICreateCategoryInput, IUpdateCategoryInput, ICreateSubcategoryInput, IUpdateSubcategoryInput } from '@/types/finance/finance'
-import { useCategories } from '@/hooks/finance/useCategories'
-import { useSubcategories } from '@/hooks/finance/useSubcategories'
-import { handleMutationError } from '@gaqno-development/frontcore/utils/error-handler'
-import { Trash2, Plus, Edit2 } from 'lucide-react'
-import { getTransactionIcon } from './TransactionIconPicker'
-import { cn } from '@gaqno-development/frontcore/lib/utils'
+} from "@gaqno-development/frontcore/components/ui";
+import { Button } from "@gaqno-development/frontcore/components/ui";
+import {
+  IFinanceCategory,
+  TransactionType,
+  ICreateCategoryInput,
+  IUpdateCategoryInput,
+  ICreateSubcategoryInput,
+  IUpdateSubcategoryInput,
+} from "@/types/finance/finance";
+import { useCategories, useSubcategories } from "@/hooks/finance";
+import { handleMutationError } from "@gaqno-development/frontcore/utils/error-handler";
+import { Trash2, Plus, Edit2 } from "lucide-react";
+import { getTransactionIcon } from "./TransactionIconPicker";
+import { cn } from "@gaqno-development/frontcore/lib/utils";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -38,20 +42,20 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@gaqno-development/frontcore/components/ui'
+} from "@gaqno-development/frontcore/components/ui";
 
 const categorySchema = z.object({
-  name: z.string().min(1, 'Nome é obrigatório'),
-  type: z.enum(['income', 'expense']),
-  color: z.string().min(1, 'Cor é obrigatória'),
-})
+  name: z.string().min(1, "Nome é obrigatório"),
+  type: z.enum(["income", "expense"]),
+  color: z.string().min(1, "Cor é obrigatória"),
+});
 
-type CategoryFormValues = z.infer<typeof categorySchema>
+type CategoryFormValues = z.infer<typeof categorySchema>;
 
 interface ICategoryManagementDialogProps {
-  open: boolean
-  onOpenChange: (open: boolean) => void
-  category?: IFinanceCategory | null
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  category?: IFinanceCategory | null;
 }
 
 export function CategoryManagementDialog({
@@ -59,12 +63,30 @@ export function CategoryManagementDialog({
   onOpenChange,
   category,
 }: ICategoryManagementDialogProps) {
-  const isEditing = !!category
-  const { createCategory, updateCategory, deleteCategory, isCreating, isUpdating, isDeleting } = useCategories()
-  const { subcategories, createSubcategory, updateSubcategory, deleteSubcategory, isCreating: isCreatingSub, isUpdating: isUpdatingSub, isDeleting: isDeletingSub, refetch: refetchSubcategories } = useSubcategories(category?.id || null)
-  const [showDeleteDialog, setShowDeleteDialog] = useState(false)
-  const [editingSubcategoryId, setEditingSubcategoryId] = useState<string | null>(null)
-  const [newSubcategoryName, setNewSubcategoryName] = useState('')
+  const isEditing = !!category;
+  const {
+    createCategory,
+    updateCategory,
+    deleteCategory,
+    isCreating,
+    isUpdating,
+    isDeleting,
+  } = useCategories();
+  const {
+    subcategories,
+    createSubcategory,
+    updateSubcategory,
+    deleteSubcategory,
+    isCreating: isCreatingSub,
+    isUpdating: isUpdatingSub,
+    isDeleting: isDeletingSub,
+    refetch: refetchSubcategories,
+  } = useSubcategories(category?.id || null);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [editingSubcategoryId, setEditingSubcategoryId] = useState<
+    string | null
+  >(null);
+  const [newSubcategoryName, setNewSubcategoryName] = useState("");
 
   const {
     register,
@@ -76,11 +98,11 @@ export function CategoryManagementDialog({
   } = useForm<CategoryFormValues>({
     resolver: zodResolver(categorySchema),
     defaultValues: {
-      name: '',
-      type: 'expense',
-      color: '#3B82F6',
+      name: "",
+      type: "expense",
+      color: "#3B82F6",
     },
-  })
+  });
 
   useEffect(() => {
     if (category) {
@@ -88,15 +110,15 @@ export function CategoryManagementDialog({
         name: category.name,
         type: category.type,
         color: category.color,
-      })
+      });
     } else {
       reset({
-        name: '',
-        type: 'expense',
-        color: '#3B82F6',
-      })
+        name: "",
+        type: "expense",
+        color: "#3B82F6",
+      });
     }
-  }, [category, reset])
+  }, [category, reset]);
 
   const onSubmit = async (data: CategoryFormValues) => {
     try {
@@ -106,112 +128,135 @@ export function CategoryManagementDialog({
           name: data.name,
           type: data.type,
           color: data.color,
-        }
-        const result = await updateCategory(updateData)
+        };
+        const result = await updateCategory(updateData);
         if (result.success) {
-          onOpenChange(false)
-          reset()
+          onOpenChange(false);
+          reset();
         } else {
-          handleMutationError(result.error || 'Erro ao atualizar categoria', 'categoria')
+          handleMutationError(
+            result.error || "Erro ao atualizar categoria",
+            "categoria"
+          );
         }
       } else {
         const createData: ICreateCategoryInput = {
           name: data.name,
           type: data.type,
           color: data.color,
-        }
-        const result = await createCategory(createData)
+        };
+        const result = await createCategory(createData);
         if (result.success) {
-          onOpenChange(false)
-          reset()
+          onOpenChange(false);
+          reset();
         } else {
-          handleMutationError(result.error || 'Erro ao criar categoria', 'categoria')
+          handleMutationError(
+            result.error || "Erro ao criar categoria",
+            "categoria"
+          );
         }
       }
     } catch (error) {
-      handleMutationError(error, 'categoria')
+      handleMutationError(error, "categoria");
     }
-  }
+  };
 
   const handleDelete = async () => {
-    if (!category) return
+    if (!category) return;
 
     try {
-      const result = await deleteCategory(category.id)
+      const result = await deleteCategory(category.id);
       if (result.success) {
-        setShowDeleteDialog(false)
-        onOpenChange(false)
-        reset()
+        setShowDeleteDialog(false);
+        onOpenChange(false);
+        reset();
       } else {
-        handleMutationError(result.error || 'Erro ao deletar categoria', 'categoria')
+        handleMutationError(
+          result.error || "Erro ao deletar categoria",
+          "categoria"
+        );
       }
     } catch (error) {
-      handleMutationError(error, 'categoria')
+      handleMutationError(error, "categoria");
     }
-  }
+  };
 
   const handleCreateSubcategory = async () => {
-    if (!category || !newSubcategoryName.trim()) return
+    if (!category || !newSubcategoryName.trim()) return;
 
     try {
       const result = await createSubcategory({
         parent_category_id: category.id,
         name: newSubcategoryName.trim(),
-      })
+      });
       if (result.success) {
-        setNewSubcategoryName('')
-        setEditingSubcategoryId(null)
-        await refetchSubcategories()
+        setNewSubcategoryName("");
+        setEditingSubcategoryId(null);
+        await refetchSubcategories();
       } else {
-        handleMutationError(result.error || 'Erro ao criar subcategoria', 'subcategoria')
+        handleMutationError(
+          result.error || "Erro ao criar subcategoria",
+          "subcategoria"
+        );
       }
     } catch (error) {
-      handleMutationError(error, 'subcategoria')
+      handleMutationError(error, "subcategoria");
     }
-  }
+  };
 
-  const handleUpdateSubcategory = async (subcategoryId: string, newName: string) => {
-    if (!newName.trim()) return
+  const handleUpdateSubcategory = async (
+    subcategoryId: string,
+    newName: string
+  ) => {
+    if (!newName.trim()) return;
 
     try {
       const result = await updateSubcategory({
         id: subcategoryId,
         name: newName.trim(),
-      })
+      });
       if (result.success) {
-        setEditingSubcategoryId(null)
-        await refetchSubcategories()
+        setEditingSubcategoryId(null);
+        await refetchSubcategories();
       } else {
-        handleMutationError(result.error || 'Erro ao atualizar subcategoria', 'subcategoria')
+        handleMutationError(
+          result.error || "Erro ao atualizar subcategoria",
+          "subcategoria"
+        );
       }
     } catch (error) {
-      handleMutationError(error, 'subcategoria')
+      handleMutationError(error, "subcategoria");
     }
-  }
+  };
 
   const handleDeleteSubcategory = async (subcategoryId: string) => {
     try {
-      const result = await deleteSubcategory(subcategoryId)
+      const result = await deleteSubcategory(subcategoryId);
       if (result.success) {
-        await refetchSubcategories()
+        await refetchSubcategories();
       } else {
-        handleMutationError(result.error || 'Erro ao deletar subcategoria', 'subcategoria')
+        handleMutationError(
+          result.error || "Erro ao deletar subcategoria",
+          "subcategoria"
+        );
       }
     } catch (error) {
-      handleMutationError(error, 'subcategoria')
+      handleMutationError(error, "subcategoria");
     }
-  }
+  };
 
   return (
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>{isEditing ? 'Editar Categoria' : 'Nova Categoria'}</DialogTitle>
+            <DialogTitle>
+              {isEditing ? "Editar Categoria" : "Nova Categoria"}
+            </DialogTitle>
             <DialogDescription>
               {isEditing
-                ? 'Atualize as informações da categoria'
-                : 'Crie uma nova categoria para organizar suas transações'}
+                ? "Atualize as informações da categoria"
+                : "Crie uma nova categoria para organizar suas transações"}
             </DialogDescription>
           </DialogHeader>
 
@@ -220,20 +265,24 @@ export function CategoryManagementDialog({
               <Label htmlFor="name">Nome</Label>
               <Input
                 id="name"
-                {...register('name')}
+                {...register("name")}
                 placeholder="Ex: Alimentação"
                 disabled={isSubmitting}
               />
               {errors.name && (
-                <p className="text-sm text-destructive">{errors.name.message}</p>
+                <p className="text-sm text-destructive">
+                  {errors.name.message}
+                </p>
               )}
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="type">Tipo</Label>
               <Select
-                value={watch('type')}
-                onValueChange={(value: TransactionType) => setValue('type', value)}
+                value={watch("type")}
+                onValueChange={(value: TransactionType) =>
+                  setValue("type", value)
+                }
                 disabled={isSubmitting}
               >
                 <SelectTrigger id="type">
@@ -245,7 +294,9 @@ export function CategoryManagementDialog({
                 </SelectContent>
               </Select>
               {errors.type && (
-                <p className="text-sm text-destructive">{errors.type.message}</p>
+                <p className="text-sm text-destructive">
+                  {errors.type.message}
+                </p>
               )}
             </div>
 
@@ -255,20 +306,22 @@ export function CategoryManagementDialog({
                 <Input
                   id="color"
                   type="color"
-                  {...register('color')}
+                  {...register("color")}
                   className="w-20 h-10 cursor-pointer"
                   disabled={isSubmitting}
                 />
                 <Input
                   type="text"
-                  {...register('color')}
+                  {...register("color")}
                   placeholder="#3B82F6"
                   disabled={isSubmitting}
                   className="flex-1"
                 />
               </div>
               {errors.color && (
-                <p className="text-sm text-destructive">{errors.color.message}</p>
+                <p className="text-sm text-destructive">
+                  {errors.color.message}
+                </p>
               )}
             </div>
 
@@ -281,7 +334,7 @@ export function CategoryManagementDialog({
                       type="button"
                       variant="outline"
                       size="sm"
-                      onClick={() => setEditingSubcategoryId('new')}
+                      onClick={() => setEditingSubcategoryId("new")}
                       disabled={isCreatingSub}
                     >
                       <Plus className="w-4 h-4 mr-2" />
@@ -290,18 +343,18 @@ export function CategoryManagementDialog({
                   )}
                 </div>
 
-                {editingSubcategoryId === 'new' && (
+                {editingSubcategoryId === "new" && (
                   <div className="flex gap-2">
                     <Input
                       placeholder="Nome da subcategoria"
                       value={newSubcategoryName}
                       onChange={(e) => setNewSubcategoryName(e.target.value)}
                       onKeyDown={(e) => {
-                        if (e.key === 'Enter' && newSubcategoryName.trim()) {
-                          handleCreateSubcategory()
-                        } else if (e.key === 'Escape') {
-                          setEditingSubcategoryId(null)
-                          setNewSubcategoryName('')
+                        if (e.key === "Enter" && newSubcategoryName.trim()) {
+                          handleCreateSubcategory();
+                        } else if (e.key === "Escape") {
+                          setEditingSubcategoryId(null);
+                          setNewSubcategoryName("");
                         }
                       }}
                     />
@@ -318,8 +371,8 @@ export function CategoryManagementDialog({
                       size="sm"
                       variant="ghost"
                       onClick={() => {
-                        setEditingSubcategoryId(null)
-                        setNewSubcategoryName('')
+                        setEditingSubcategoryId(null);
+                        setNewSubcategoryName("");
                       }}
                     >
                       Cancelar
@@ -328,21 +381,24 @@ export function CategoryManagementDialog({
                 )}
 
                 <div className="space-y-2 max-h-60 overflow-y-auto">
-                  {subcategories.length === 0 && editingSubcategoryId !== 'new' && (
-                    <p className="text-sm text-muted-foreground text-center py-4">
-                      Nenhuma subcategoria cadastrada
-                    </p>
-                  )}
+                  {subcategories.length === 0 &&
+                    editingSubcategoryId !== "new" && (
+                      <p className="text-sm text-muted-foreground text-center py-4">
+                        Nenhuma subcategoria cadastrada
+                      </p>
+                    )}
                   {subcategories.map((subcat) => {
-                    const isEditing = editingSubcategoryId === subcat.id
-                    const IconComponent = getTransactionIcon(subcat.icon || category.icon)
+                    const isEditing = editingSubcategoryId === subcat.id;
+                    const IconComponent = getTransactionIcon(
+                      subcat.icon || category.icon
+                    );
 
                     return (
                       <div
                         key={subcat.id}
                         className={cn(
-                          'flex items-center gap-3 p-3 rounded-lg border',
-                          isEditing && 'border-primary bg-primary/5'
+                          "flex items-center gap-3 p-3 rounded-lg border",
+                          isEditing && "border-primary bg-primary/5"
                         )}
                       >
                         {isEditing ? (
@@ -360,11 +416,14 @@ export function CategoryManagementDialog({
                             <Input
                               defaultValue={subcat.name}
                               onKeyDown={(e) => {
-                                if (e.key === 'Enter') {
-                                  const input = e.target as HTMLInputElement
-                                  handleUpdateSubcategory(subcat.id, input.value)
-                                } else if (e.key === 'Escape') {
-                                  setEditingSubcategoryId(null)
+                                if (e.key === "Enter") {
+                                  const input = e.target as HTMLInputElement;
+                                  handleUpdateSubcategory(
+                                    subcat.id,
+                                    input.value
+                                  );
+                                } else if (e.key === "Escape") {
+                                  setEditingSubcategoryId(null);
                                 }
                               }}
                               className="flex-1"
@@ -390,7 +449,9 @@ export function CategoryManagementDialog({
                                 <span>📁</span>
                               )}
                             </div>
-                            <span className="flex-1 font-medium">{subcat.name}</span>
+                            <span className="flex-1 font-medium">
+                              {subcat.name}
+                            </span>
                             <Button
                               type="button"
                               size="sm"
@@ -412,7 +473,7 @@ export function CategoryManagementDialog({
                           </>
                         )}
                       </div>
-                    )
+                    );
                   })}
                 </div>
               </div>
@@ -432,11 +493,11 @@ export function CategoryManagementDialog({
               )}
               <DialogFormFooter
                 onCancel={() => {
-                  onOpenChange(false)
-                  reset()
+                  onOpenChange(false);
+                  reset();
                 }}
                 isSubmitting={isSubmitting || isCreating || isUpdating}
-                submitLabel={isEditing ? 'Salvar' : 'Criar'}
+                submitLabel={isEditing ? "Salvar" : "Criar"}
                 isEdit={isEditing}
               />
             </div>
@@ -449,7 +510,8 @@ export function CategoryManagementDialog({
           <AlertDialogHeader>
             <AlertDialogTitle>Confirmar exclusão</AlertDialogTitle>
             <AlertDialogDescription>
-              Tem certeza que deseja deletar a categoria "{category?.name}"? Esta ação não pode ser desfeita.
+              Tem certeza que deseja deletar a categoria "{category?.name}"?
+              Esta ação não pode ser desfeita.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -459,11 +521,11 @@ export function CategoryManagementDialog({
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
               disabled={isDeleting}
             >
-              {isDeleting ? 'Deletando...' : 'Deletar'}
+              {isDeleting ? "Deletando..." : "Deletar"}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
     </>
-  )
+  );
 }

@@ -1,18 +1,17 @@
-import { useFinanceSummary } from '@/hooks/finance/useFinanceSummary'
-import { BalanceCard } from '@/components/BalanceCard'
-import { IncomeCard } from '@/components/IncomeCard'
-import { ExpenseCard } from '@/components/ExpenseCard'
-import { IncomeExpenseView } from '@/components/IncomeExpenseView'
-import { useTransactions } from '@/hooks/finance/useTransactions'
-import { LoadingSkeleton } from '@gaqno-development/frontcore/components/ui'
+import { useFinanceSummary, useTransactions } from "@/hooks/finance";
+import { BalanceCard } from "@/components/BalanceCard";
+import { IncomeCard } from "@/components/IncomeCard";
+import { ExpenseCard } from "@/components/ExpenseCard";
+import { IncomeExpenseView } from "@/components/IncomeExpenseView";
+import { LoadingSkeleton } from "@gaqno-development/frontcore/components/ui";
 
 export function DashboardView() {
-  const { summary, transactions, isLoading } = useFinanceSummary()
-  const { deleteTransaction } = useTransactions()
+  const { summary, transactions, isLoading } = useFinanceSummary();
+  const { deleteTransaction } = useTransactions();
 
   const handleDelete = async (transactionId: string) => {
-    await deleteTransaction(transactionId)
-  }
+    await deleteTransaction(transactionId);
+  };
 
   if (isLoading) {
     return (
@@ -22,7 +21,7 @@ export function DashboardView() {
         </div>
         <LoadingSkeleton variant="card" count={1} />
       </div>
-    )
+    );
   }
 
   return (
@@ -42,6 +41,5 @@ export function DashboardView() {
         onDelete={handleDelete}
       />
     </div>
-  )
+  );
 }
-
