@@ -23,10 +23,12 @@ import {
   SelectValue,
   Switch,
 } from '@gaqno-development/frontcore/components/ui'
-import { useTransactions } from '@/hooks/finance/useTransactions'
-import { useCreditCards } from '@/hooks/finance/useCreditCards'
-import { useCategories } from '@/hooks/finance/useCategories'
-import { useSubcategories } from '@/hooks/finance/useSubcategories'
+import {
+  useTransactions,
+  useCreditCards,
+  useCategories,
+  useSubcategories,
+} from '@/hooks/finance'
 import { CategorySelectorDialog } from './CategorySelectorDialog'
 import { CategoryBadge } from './CategoryBadge'
 import { getTransactionIcon } from './TransactionIconPicker'

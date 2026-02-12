@@ -22,7 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@gaqno-development/frontcore/components/ui'
-import { useCreditCards } from '@/hooks/finance/useCreditCards'
+import { useCreditCards } from '@/hooks/finance'
 import { ICreditCard } from '@/types/finance/finance'
 
 const creditCardSchema = z.object({
