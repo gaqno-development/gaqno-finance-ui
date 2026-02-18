@@ -16,7 +16,7 @@ import { Button } from '@gaqno-development/frontcore/components/ui'
 import { Plus } from 'lucide-react'
 import { CreditCardDisplayCard } from './CreditCardDisplayCard'
 import { AddCreditCardDialog } from './AddCreditCardDialog'
-import { useCreditCards } from '@/hooks/finance/useCreditCards'
+import { useCreditCards } from '@/hooks/finance'
 import { ICreditCard } from '@/types/finance/finance'
 
 interface ICreditCardOverviewProps {

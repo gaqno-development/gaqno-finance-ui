@@ -1,4 +1,4 @@
-import { useTransactions } from '@/hooks/finance/useTransactions'
+import { useTransactions } from '@/hooks/finance'
 import { TransactionsTable } from '@/components/TransactionsTable'
 import { LoadingSkeleton } from '@gaqno-development/frontcore/components/ui'
 

@@ -1,9 +1,8 @@
-import { useFinanceSummary } from '@/hooks/finance/useFinanceSummary'
+import { useFinanceSummary, useTransactions } from '@/hooks/finance'
 import { BalanceCard } from '@/components/BalanceCard'
 import { IncomeCard } from '@/components/IncomeCard'
 import { ExpenseCard } from '@/components/ExpenseCard'
 import { IncomeExpenseView } from '@/components/IncomeExpenseView'
-import { useTransactions } from '@/hooks/finance/useTransactions'
 import { LoadingSkeleton } from '@gaqno-development/frontcore/components/ui'
 
 export function DashboardView() {
