@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import '@gaqno-development/frontcore/styles/globals.css'
+import "./styles/index.css";
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
