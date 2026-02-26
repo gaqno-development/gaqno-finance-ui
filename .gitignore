@@ -46,3 +46,27 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Coverage reports (comprehensive)
+*.lcov
+lcov.info
+junit.xml
+clover.xml
+coverage-summary.json
+coverage-final.json
+coverage-*.xml
+coverage-*.json
+coverage-report/
+test-results/
+
+# Coverage reports (comprehensive)
+*.lcov
+lcov.info
+junit.xml
+clover.xml
+coverage-summary.json
+coverage-final.json
+coverage-*.xml
+coverage-*.json
+coverage-report/
+test-results/
