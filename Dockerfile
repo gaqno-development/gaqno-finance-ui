@@ -29,6 +29,8 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY --from=builder /app/public /usr/share/nginx/html/public
 
 RUN echo 'server { listen 3005; server_name _; root /usr/share/nginx/html; index index.html; absolute_redirect off; \
+    location = /finance/assets/remoteEntry.js { alias /usr/share/nginx/html/assets/remoteEntry.js; add_header Content-Type "application/javascript"; add_header Cache-Control "no-cache"; add_header Access-Control-Allow-Origin "*"; } \
+    location = /assets/remoteEntry.js { alias /usr/share/nginx/html/assets/remoteEntry.js; add_header Content-Type "application/javascript"; add_header Cache-Control "no-cache"; add_header Access-Control-Allow-Origin "*"; } \
     location /finance/assets/ { alias /usr/share/nginx/html/assets/; add_header Cache-Control "public, immutable"; add_header Access-Control-Allow-Origin "*"; } \
     location /assets/ { alias /usr/share/nginx/html/assets/; add_header Cache-Control "public, immutable"; add_header Access-Control-Allow-Origin "*"; } \
     location / { return 302 /; } }' > /etc/nginx/conf.d/default.conf
