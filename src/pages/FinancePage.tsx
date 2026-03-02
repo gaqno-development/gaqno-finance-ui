@@ -1,5 +1,6 @@
 import React from 'react'
-import { ModuleTabs, IModuleTabConfig } from '@gaqno-development/frontcore/components/ui'
+import { PageLayout } from '@gaqno-development/frontcore/components/layout'
+import { useTranslation } from '@gaqno-development/frontcore/i18n'
 import { useModuleView } from '@gaqno-development/frontcore/hooks'
 import { Home, ArrowLeftRight, Wallet, FileText, TrendingUp, Settings } from 'lucide-react'
 import { DashboardView } from './DashboardView'
@@ -9,46 +10,48 @@ import { ReportsView } from './ReportsView'
 import { InvestmentsView } from './InvestmentsView'
 import { SettingsView } from './SettingsView'
 
-const FINANCE_TABS: IModuleTabConfig[] = [
-  { id: 'dashboard', label: 'Dashboard', icon: Home },
-  { id: 'transactions', label: 'Transactions', icon: ArrowLeftRight },
-  { id: 'accounts', label: 'Accounts', icon: Wallet },
-  { id: 'reports', label: 'Reports', icon: FileText },
-  { id: 'investments', label: 'Investments', icon: TrendingUp },
-  { id: 'settings', label: 'Settings', icon: Settings },
-]
+const TAB_KEYS = [
+  { id: 'dashboard', icon: <Home className="h-4 w-4" />, tKey: 'finance.dashboard' },
+  { id: 'transactions', icon: <ArrowLeftRight className="h-4 w-4" />, tKey: 'finance.transactions' },
+  { id: 'accounts', icon: <Wallet className="h-4 w-4" />, tKey: 'finance.accounts' },
+  { id: 'reports', icon: <FileText className="h-4 w-4" />, tKey: 'finance.reports' },
+  { id: 'investments', icon: <TrendingUp className="h-4 w-4" />, tKey: 'finance.investments' },
+  { id: 'settings', icon: <Settings className="h-4 w-4" />, tKey: 'finance.settings' },
+] as const
+
+const VIEW_MAP: Record<string, React.ComponentType> = {
+  dashboard: DashboardView,
+  transactions: TransactionsView,
+  accounts: AccountsView,
+  reports: ReportsView,
+  investments: InvestmentsView,
+  settings: SettingsView,
+}
 
 export function FinancePage() {
-  const { currentView } = useModuleView({
+  const { t } = useTranslation('navigation')
+  const { currentView, setView } = useModuleView({
     defaultView: 'dashboard',
-    allowedViews: FINANCE_TABS.map((tab) => tab.id),
+    allowedViews: TAB_KEYS.map((tab) => tab.id),
   })
 
-  const renderView = () => {
-    const viewMap: Record<string, React.ComponentType> = {
-      dashboard: DashboardView,
-      transactions: TransactionsView,
-      accounts: AccountsView,
-      reports: ReportsView,
-      investments: InvestmentsView,
-      settings: SettingsView,
-    }
+  const tabs = TAB_KEYS.map((tab) => ({
+    id: tab.id,
+    label: t(tab.tKey),
+    icon: tab.icon,
+  }))
 
-    const ViewComponent = viewMap[currentView] || DashboardView
-    return <ViewComponent />
-  }
+  const ViewComponent = VIEW_MAP[currentView] || DashboardView
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="border-b bg-background sticky top-0 z-10">
-        <div className="px-6 py-4">
-          <h1 className="text-2xl font-bold mb-4">Finance</h1>
-          <ModuleTabs tabs={FINANCE_TABS} defaultView="dashboard" />
-        </div>
-      </div>
-      <div className="flex-1 overflow-auto p-6">
-        {renderView()}
-      </div>
-    </div>
+    <PageLayout
+      title={t('finance.title')}
+      tabs={tabs}
+      activeTab={currentView}
+      onTabChange={setView}
+      layoutId="financeActiveTab"
+    >
+      <ViewComponent />
+    </PageLayout>
   )
 }
