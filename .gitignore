@@ -1,72 +1,55 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
+# Dependencies
+node_modules/
+**/node_modules/
+.pnp
 .pnp.js
 
-# testing
-/coverage
-/test-results
-/playwright-report
-/playwright/.cache
-
+# Build
 dist/
 .turbo/
-# next.js
-/.next/
-/out/
+.next/
+out/
+build/
 
-# production
-/build
+# Environment
+.env
+.env*.local
+!.env.example
+!.env.template
 
-# misc
+# Logs
+*.log
+logs/
+
+# OS
 .DS_Store
 *.pem
 
-# debug
-npm-debug.log*
-logs/
-yarn-debug.log*
-yarn-error.log*
-
-# local env files
-.env*.local
-.env
-
-# shadcn may write here when ui alias points to frontcore; ignore, use @gaqno-frontcore
-/@gaqno-development/
-
-# NPM Configuration (may contain secrets)
+# NPM (secrets)
 .npmrc
 
-# vercel
+# Testing
+coverage/
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Vercel
 .vercel
 
-# typescript
+# TypeScript
 *.tsbuildinfo
 next-env.d.ts
 
-# Coverage reports (comprehensive)
-*.lcov
-lcov.info
-junit.xml
-clover.xml
-coverage-summary.json
-coverage-final.json
-coverage-*.xml
-coverage-*.json
-coverage-report/
-test-results/
+# Project-specific
+/@gaqno-development/
 
-# Coverage reports (comprehensive)
+# Coverage
 *.lcov
 lcov.info
 junit.xml
 clover.xml
 coverage-summary.json
 coverage-final.json
-coverage-*.xml
-coverage-*.json
 coverage-report/
-test-results/
+.nyc_output/
