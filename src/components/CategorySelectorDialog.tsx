@@ -10,7 +10,7 @@ import {
 } from '@gaqno-development/frontcore/components/ui'
 import { Button } from '@gaqno-development/frontcore/components/ui'
 import { Input } from '@gaqno-development/frontcore/components/ui'
-import { IFinanceCategory, TransactionType } from '@/types/finance/finance'
+import { TransactionType, type IFinanceCategory } from '@gaqno-development/types/finance'
 import { cn } from '@gaqno-development/frontcore/lib/utils'
 import { getDefaultColorForCategory } from '@/utils/finance/iconToCategory'
 import { getTransactionIcon } from './TransactionIconPicker'

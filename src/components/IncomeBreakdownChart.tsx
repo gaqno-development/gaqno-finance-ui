@@ -16,7 +16,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@gaqno-development/frontcore/components/ui'
-import { IFinanceTransaction } from '@/types/finance/finance'
+import type { IFinanceTransaction } from '@gaqno-development/types/finance'
 import { formatCurrency } from '@/utils/finance/formatCurrency'
 import { EmojiIcon } from './EmojiIcon'
 

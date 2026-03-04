@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react'
 import { Card, CardHeader, CardContent } from '@gaqno-development/frontcore/components/ui'
 import { Button } from '@gaqno-development/frontcore/components/ui'
 import { TrendingUp } from 'lucide-react'
-import { IFinanceTransaction } from '@/types/finance/finance'
+import type { IFinanceTransaction } from '@gaqno-development/types/finance'
 import { formatCurrency } from '@/utils/finance/formatCurrency'
 import { generateRecurringTransactions } from '@/utils/finance/generateRecurringTransactions'
 import { QuarterFilterButtons } from './QuarterFilterButtons'
@@ -36,19 +36,19 @@ const MONTHS = [
   'Dezembro',
 ]
 
-const MONTH_COLORS: Record<string, string> = {
-  Janeiro: 'bg-blue-500',
-  Fevereiro: 'bg-blue-500',
-  Março: 'bg-blue-500',
-  Abril: 'bg-green-500',
-  Maio: 'bg-green-500',
-  Junho: 'bg-green-500',
-  Julho: 'bg-yellow-500',
-  Agosto: 'bg-yellow-500',
-  Setembro: 'bg-yellow-500',
-  Outubro: 'bg-gray-500',
-  Novembro: 'bg-red-500',
-  Dezembro: 'bg-red-500',
+const MONTH_COLORS: Record<string, { bg: string; hex: string }> = {
+  Janeiro: { bg: 'bg-blue-500', hex: '#3B82F6' },
+  Fevereiro: { bg: 'bg-blue-500', hex: '#3B82F6' },
+  Março: { bg: 'bg-blue-500', hex: '#3B82F6' },
+  Abril: { bg: 'bg-green-500', hex: '#22C55E' },
+  Maio: { bg: 'bg-green-500', hex: '#22C55E' },
+  Junho: { bg: 'bg-green-500', hex: '#22C55E' },
+  Julho: { bg: 'bg-yellow-500', hex: '#EAB308' },
+  Agosto: { bg: 'bg-yellow-500', hex: '#EAB308' },
+  Setembro: { bg: 'bg-yellow-500', hex: '#EAB308' },
+  Outubro: { bg: 'bg-gray-500', hex: '#6B7280' },
+  Novembro: { bg: 'bg-red-500', hex: '#EF4444' },
+  Dezembro: { bg: 'bg-red-500', hex: '#EF4444' },
 }
 
 export function TotalSavingsChart({ transactions }: ITotalSavingsChartProps) {
@@ -81,7 +81,7 @@ export function TotalSavingsChart({ transactions }: ITotalSavingsChartProps) {
         income,
         expenses,
         net: income - expenses,
-        color: MONTH_COLORS[month],
+        color: MONTH_COLORS[month]?.bg || 'bg-gray-500',
       })
     })
 
@@ -109,7 +109,7 @@ export function TotalSavingsChart({ transactions }: ITotalSavingsChartProps) {
             <Card
               key={data.month}
               className="p-4 border-l-4 hover:shadow-md transition-shadow"
-              style={{ borderLeftColor: MONTH_COLORS[data.month].replace('bg-', '#') }}
+              style={{ borderLeftColor: MONTH_COLORS[data.month]?.hex || '#6B7280' }}
             >
               <div className="flex items-center gap-2 mb-2">
                 <div className={`w-3 h-3 rounded-full ${data.color}`} />

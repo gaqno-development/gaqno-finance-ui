@@ -1,8 +1,7 @@
-import { TransactionStatus as TransactionStatusType } from '@/types/finance/finance'
-import { TransactionStatus } from '@/types/finance/finance'
+import { TransactionStatus } from '@gaqno-development/types/finance'
 
 interface ITransactionStatusBadgeProps {
-  status: TransactionStatusType
+  status: TransactionStatus
   onClick?: (e?: React.MouseEvent) => void
 }
 

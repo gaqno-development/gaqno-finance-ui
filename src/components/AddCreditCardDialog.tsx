@@ -23,7 +23,7 @@ import {
   SelectValue,
 } from '@gaqno-development/frontcore/components/ui'
 import { useCreditCards } from '@/hooks/finance'
-import { ICreditCard } from '@/types/finance/finance'
+import type { ICreditCard } from '@gaqno-development/types/finance'
 
 const creditCardSchema = z.object({
   name: z.string().min(1, 'Nome é obrigatório'),
@@ -91,12 +91,12 @@ export function AddCreditCardDialog({
     if (card) {
       reset({
         name: card.name,
-        last_four_digits: card.last_four_digits,
-        card_type: card.card_type,
-        bank_name: card.bank_name || '',
-        credit_limit: card.credit_limit,
-        closing_day: card.closing_day,
-        due_day: card.due_day,
+        last_four_digits: card.lastFourDigits,
+        card_type: card.cardType,
+        bank_name: card.bankName || '',
+        credit_limit: card.creditLimit,
+        closing_day: card.closingDay,
+        due_day: card.dueDay,
         color: card.color,
         icon: card.icon || '',
       })

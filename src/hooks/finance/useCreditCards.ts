@@ -1,12 +1,12 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTenant, useAuth } from "@gaqno-development/frontcore/contexts";
 import { financeApi } from "@/lib/finance-api";
-import {
+import type {
   ICreditCard,
   ICreateCreditCardInput,
   IUpdateCreditCardInput,
   ICreditCardSummary,
-} from "@/types/finance/finance";
+} from "@gaqno-development/types/finance";
 
 export const useCreditCards = () => {
   const { tenantId } = useTenant();
@@ -133,26 +133,53 @@ export const useCreditCards = () => {
   };
 };
 
-export const useCreditCardSummary = (
-  creditCardId: string | null,
-  startDate?: string,
-  endDate?: string
-) => {
+export const useCreditCardSummary = (creditCardId: string | null) => {
   const { tenantId } = useTenant();
   const { user } = useAuth();
+
+  const now = new Date();
+  const startDate = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
+  const endDate = new Date(
+    now.getFullYear(),
+    now.getMonth() + 1,
+    0
+  ).toISOString();
 
   return useQuery<ICreditCardSummary>({
     queryKey: [
       "finance-credit-card-summary",
       tenantId ?? "no-tenant",
       creditCardId ?? "",
-      startDate ?? "",
-      endDate ?? "",
+      startDate,
+      endDate,
     ],
     queryFn: async () => {
       if (!user || !creditCardId)
         throw new Error("User or credit card not available");
-      return { monthlyValue: 0, remainingLimit: 0, totalLimit: 0 };
+
+      const transactions = await financeApi.transactions.getAll(
+        startDate,
+        endDate
+      );
+
+      const cardTransactions = transactions.filter(
+        (t) => t.creditCardId === creditCardId && t.type === "expense"
+      );
+
+      const monthlyValue = cardTransactions.reduce(
+        (sum, t) => sum + Number(t.amount),
+        0
+      );
+
+      const allCards = await financeApi.creditCards.getAll();
+      const card = allCards.find((c) => c.id === creditCardId);
+      const totalLimit = card ? Number(card.creditLimit) : 0;
+
+      return {
+        monthlyValue,
+        remainingLimit: totalLimit - monthlyValue,
+        totalLimit,
+      };
     },
     enabled: !!user && !!creditCardId,
   });

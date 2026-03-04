@@ -1,11 +1,11 @@
-import { IFinanceTransaction, IFinanceSummary } from '@/types/finance/finance'
+import type { IFinanceTransaction, IFinanceSummary } from '@gaqno-development/types/finance'
 
 export function calculateBalance(transactions: IFinanceTransaction[]): IFinanceSummary {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
 
   const currentTransactions = transactions.filter((t) => {
-    const transactionDate = new Date(t.transaction_date)
+    const transactionDate = new Date(t.transactionDate)
     transactionDate.setHours(0, 0, 0, 0)
     return transactionDate <= today
   })

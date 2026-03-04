@@ -22,7 +22,7 @@ import {
   SelectValue,
 } from '@gaqno-development/frontcore/components/ui'
 import { Button } from '@gaqno-development/frontcore/components/ui'
-import { IFinanceCategory, TransactionType, ICreateCategoryInput, IUpdateCategoryInput, ICreateSubcategoryInput, IUpdateSubcategoryInput } from '@/types/finance/finance'
+import { TransactionType, type IFinanceCategory, type ICreateCategoryInput, type IUpdateCategoryInput, type ICreateSubcategoryInput, type IUpdateSubcategoryInput } from '@gaqno-development/types/finance'
 import { useCategories, useSubcategories } from '@/hooks/finance'
 import { handleMutationError } from '@gaqno-development/frontcore/utils/error-handler'
 import { Trash2, Plus, Edit2 } from 'lucide-react'

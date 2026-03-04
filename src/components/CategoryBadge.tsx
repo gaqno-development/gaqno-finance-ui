@@ -1,6 +1,6 @@
 
 
-import { IFinanceCategory, IFinanceSubcategory } from '@/types/finance/finance'
+import type { IFinanceCategory, IFinanceSubcategory } from '@gaqno-development/types/finance'
 import { getTransactionIcon } from './TransactionIconPicker'
 
 interface ICategoryBadgeProps {

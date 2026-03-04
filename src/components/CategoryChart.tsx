@@ -17,7 +17,7 @@ import {
   ChartTooltipContent,
 } from '@gaqno-development/frontcore/components/ui'
 import { formatCurrency } from '@/utils/finance/formatCurrency'
-import { ICategoryExpense } from '@/types/finance/finance'
+import type { ICategoryExpense } from '@gaqno-development/types/finance'
 
 interface ICategoryChartProps {
   data: ICategoryExpense[]

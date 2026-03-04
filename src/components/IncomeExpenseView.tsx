@@ -19,13 +19,12 @@ import {
   DialogDescription,
 } from '@gaqno-development/frontcore/components/ui'
 import { TrendingUp, TrendingDown, ChevronDown, ChevronRight, Plus, Filter, Maximize2, Eye, Edit, Trash2 } from 'lucide-react'
-import { IFinanceTransaction } from '@/types/finance/finance'
+import { TransactionStatus, type IFinanceTransaction } from '@gaqno-development/types/finance'
 import { formatCurrency } from '@/utils/finance/formatCurrency'
 import { AddTransactionDialog } from './AddTransactionDialog'
 import { TransactionIcon } from './TransactionIcon'
 import { generateRecurringTransactions } from '@/utils/finance/generateRecurringTransactions'
 import { useTransactions } from '@/hooks/finance'
-import { TransactionStatus } from '@/types/finance/finance'
 import { useCategories } from '@/hooks/finance'
 import { RecurringBadge } from './RecurringBadge'
 import { TransactionStatusBadge } from './TransactionStatusBadge'
@@ -104,10 +103,10 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
       return TransactionStatus.PAGO
     }
 
-    if (transaction.due_date && transaction.type === 'expense') {
+    if (transaction.dueDate && transaction.type === 'expense') {
       const today = new Date()
       today.setHours(0, 0, 0, 0)
-      const dueDate = new Date(transaction.due_date)
+      const dueDate = new Date(transaction.dueDate)
       dueDate.setHours(0, 0, 0, 0)
 
       if (dueDate < today) {
@@ -157,9 +156,9 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
         if (transaction.id.includes('-generated-')) return false
         if (transaction.status === TransactionStatus.PAGO) return false
         if (transaction.type !== 'expense') return false
-        if (!transaction.due_date) return false
+        if (!transaction.dueDate) return false
 
-        const dueDate = new Date(transaction.due_date)
+        const dueDate = new Date(transaction.dueDate)
         dueDate.setHours(0, 0, 0, 0)
 
         return dueDate < today && transaction.status !== TransactionStatus.EM_ATRASO
@@ -181,7 +180,7 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
   const availableYears = useMemo(() => {
     const years = new Set<number>()
     allTransactions.forEach((t) => {
-      years.add(new Date(t.transaction_date).getFullYear())
+      years.add(new Date(t.transactionDate).getFullYear())
     })
     return Array.from(years).sort((a, b) => b - a)
   }, [allTransactions])
@@ -200,7 +199,7 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
     if (!months) return transactions
 
     return transactions.filter((t) => {
-      const date = new Date(t.transaction_date)
+      const date = new Date(t.transactionDate)
       return months.includes(date.getMonth())
     })
   }
@@ -209,7 +208,7 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
     let filtered = allTransactions
 
     filtered = filtered.filter((t) => {
-      const date = new Date(t.transaction_date)
+      const date = new Date(t.transactionDate)
       return date.getFullYear() === selectedYear
     })
 
@@ -223,7 +222,7 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
     const groups: Record<string, IFinanceTransaction[]> = {}
 
     transactions.forEach((transaction) => {
-      const date = new Date(transaction.transaction_date)
+      const date = new Date(transaction.transactionDate)
       const year = date.getFullYear()
       const monthIndex = date.getMonth()
       const yearMonth = `${year}-${monthIndex}`
@@ -243,7 +242,7 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
           monthIndex,
           yearMonth,
           transactions: transactions.sort((a, b) =>
-            new Date(b.transaction_date).getTime() - new Date(a.transaction_date).getTime()
+            new Date(b.transactionDate).getTime() - new Date(a.transactionDate).getTime()
           ),
         }
       })
@@ -384,7 +383,7 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
                           )}
                           <RecurringBadge transaction={transaction} />
                           <span className="text-muted-foreground ml-auto">
-                            {formatDate(transaction.transaction_date)}
+                            {formatDate(transaction.transactionDate)}
                           </span>
                         </div>
                         <div className="flex gap-2 mt-3">
@@ -449,7 +448,7 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
                               )}
                             </div>
                             <div className="text-muted-foreground text-xs">
-                              {formatDate(transaction.transaction_date)}
+                              {formatDate(transaction.transactionDate)}
                             </div>
                           </div>
                         </ContextMenuTrigger>
@@ -620,12 +619,12 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
                 </div>
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">Data</p>
-                  <p className="text-base">{formatDate(detailsTransaction.transaction_date)}</p>
+                  <p className="text-base">{formatDate(detailsTransaction.transactionDate)}</p>
                 </div>
-                {detailsTransaction.due_date && (
+                {detailsTransaction.dueDate && (
                   <div>
                     <p className="text-sm font-medium text-muted-foreground">Data de Vencimento</p>
-                    <p className="text-base">{formatDate(detailsTransaction.due_date)}</p>
+                    <p className="text-base">{formatDate(detailsTransaction.dueDate)}</p>
                   </div>
                 )}
                 <div>
@@ -642,11 +641,11 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
                   <div>
                     <p className="text-sm font-medium text-muted-foreground">Cartão de Crédito</p>
                     <p className="text-base">
-                      {detailsTransaction.creditCard.name} - Final {detailsTransaction.creditCard.last_four_digits}
+                      {detailsTransaction.creditCard.name} - Final {detailsTransaction.creditCard.lastFourDigits}
                     </p>
                   </div>
                 )}
-                {detailsTransaction.is_recurring && (
+                {detailsTransaction.isRecurring && (
                   <div>
                     <p className="text-sm font-medium text-muted-foreground">Recorrência</p>
                     <p className="text-base">
@@ -654,18 +653,18 @@ export function IncomeExpenseView({ transactions, onDelete }: IIncomeExpenseView
                     </p>
                   </div>
                 )}
-                {detailsTransaction.installment_count > 1 && (
+                {detailsTransaction.installmentCount > 1 && (
                   <div>
                     <p className="text-sm font-medium text-muted-foreground">Parcelas</p>
                     <p className="text-base">
-                      {detailsTransaction.installment_current} de {detailsTransaction.installment_count}
+                      {detailsTransaction.installmentCurrent} de {detailsTransaction.installmentCount}
                     </p>
                   </div>
                 )}
-                {detailsTransaction.assigned_to && (
+                {detailsTransaction.assignedTo && (
                   <div>
                     <p className="text-sm font-medium text-muted-foreground">Corresponde a</p>
-                    <p className="text-base">{detailsTransaction.assigned_to}</p>
+                    <p className="text-base">{detailsTransaction.assignedTo}</p>
                   </div>
                 )}
               </div>

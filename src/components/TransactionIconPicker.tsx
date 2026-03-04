@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react'
 import { cn } from '@gaqno-development/frontcore/lib/utils'
-import { IFinanceCategory } from '@/types/finance/finance'
+import type { IFinanceCategory } from '@gaqno-development/types/finance'
 import { getIconComponent } from '@/utils/finance/iconResolver'
 
 interface ITransactionIconPickerProps {

@@ -2,7 +2,7 @@ import { Card, CardContent } from '@gaqno-development/frontcore/components/ui'
 import { Button } from '@gaqno-development/frontcore/components/ui'
 import { Trash2, Edit } from 'lucide-react'
 import { formatCurrency } from '@/utils/finance/formatCurrency'
-import { ICreditCard } from '@/types/finance/finance'
+import type { ICreditCard } from '@gaqno-development/types/finance'
 
 interface ICreditCardDisplayCardProps {
   card: ICreditCard
@@ -36,10 +36,10 @@ export function CreditCardDisplayCard({
             )}
             <h3 className="text-xl font-bold">{card.name}</h3>
             <p className="text-sm opacity-90">
-              Final {card.last_four_digits} - {card.card_type}
+              Final {card.lastFourDigits} - {card.cardType}
             </p>
-            {card.bank_name && (
-              <p className="text-xs opacity-75 mt-1">{card.bank_name}</p>
+            {card.bankName && (
+              <p className="text-xs opacity-75 mt-1">{card.bankName}</p>
             )}
           </div>
           <div className="flex gap-1">
@@ -74,15 +74,15 @@ export function CreditCardDisplayCard({
         <div className="space-y-2 text-sm">
           <div className="flex justify-between">
             <span className="opacity-90">Limite:</span>
-            <span className="font-semibold">{formatCurrency(card.credit_limit)}</span>
+            <span className="font-semibold">{formatCurrency(card.creditLimit)}</span>
           </div>
           <div className="flex justify-between">
             <span className="opacity-90">Fechamento:</span>
-            <span className="font-semibold">Dia {card.closing_day}</span>
+            <span className="font-semibold">Dia {card.closingDay}</span>
           </div>
           <div className="flex justify-between">
             <span className="opacity-90">Vencimento:</span>
-            <span className="font-semibold">Dia {card.due_day}</span>
+            <span className="font-semibold">Dia {card.dueDay}</span>
           </div>
         </div>
       </CardContent>

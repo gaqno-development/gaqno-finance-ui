@@ -1,5 +1,4 @@
-import { IFinanceTransaction } from '@/types/finance/finance'
-import { TransactionStatus } from '@/types/finance/finance'
+import { TransactionStatus, type IFinanceTransaction } from '@gaqno-development/types/finance'
 
 export function generateRecurringTransactions(
   transactions: IFinanceTransaction[],
@@ -12,14 +11,14 @@ export function generateRecurringTransactions(
   maxDate.setMonth(maxDate.getMonth() + monthsAhead)
   maxDate.setHours(23, 59, 59, 999)
 
-  const recurringTransactions = transactions.filter((t) => t.is_recurring)
+  const recurringTransactions = transactions.filter((t) => t.isRecurring)
 
   recurringTransactions.forEach((transaction) => {
-    const baseDate = new Date(transaction.transaction_date)
+    const baseDate = new Date(transaction.transactionDate)
     baseDate.setHours(0, 0, 0, 0)
 
-    const maxMonths = transaction.recurring_months 
-      ? Math.min(transaction.recurring_months, monthsAhead)
+    const maxMonths = transaction.recurringMonths 
+      ? Math.min(transaction.recurringMonths, monthsAhead)
       : monthsAhead
 
     let monthOffset = 1
@@ -28,8 +27,8 @@ export function generateRecurringTransactions(
       const generatedDate = getRecurringDate(
         baseDate,
         monthOffset,
-        transaction.recurring_type || undefined,
-        transaction.recurring_day || undefined
+        transaction.recurringType || undefined,
+        transaction.recurringDay || undefined
       )
       generatedDate.setHours(0, 0, 0, 0)
 
@@ -51,7 +50,7 @@ export function generateRecurringTransactions(
       const alreadyExists = generated.some(
         (t) =>
           t.description === transaction.description &&
-          t.transaction_date === generatedDateString &&
+          t.transactionDate === generatedDateString &&
           t.type === transaction.type &&
           t.amount === transaction.amount
       )
@@ -60,10 +59,10 @@ export function generateRecurringTransactions(
         const generatedTransaction: IFinanceTransaction = {
           ...transaction,
           id: `${transaction.id}-generated-${generatedDate.getFullYear()}-${String(generatedDate.getMonth()).padStart(2, '0')}-${String(generatedDate.getDate()).padStart(2, '0')}`,
-          transaction_date: generatedDateString,
+          transactionDate: generatedDateString,
           status: TransactionStatus.A_PAGAR,
-          created_at: transaction.created_at,
-          updated_at: transaction.updated_at,
+          createdAt: transaction.createdAt,
+          updatedAt: transaction.updatedAt,
         }
         generated.push(generatedTransaction)
       }
@@ -73,8 +72,8 @@ export function generateRecurringTransactions(
   })
 
   return generated.sort((a, b) => {
-    const dateA = new Date(a.transaction_date)
-    const dateB = new Date(b.transaction_date)
+    const dateA = new Date(a.transactionDate)
+    const dateB = new Date(b.transactionDate)
     return dateB.getTime() - dateA.getTime()
   })
 }

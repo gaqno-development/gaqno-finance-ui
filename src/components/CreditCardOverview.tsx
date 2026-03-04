@@ -17,7 +17,7 @@ import { Plus } from 'lucide-react'
 import { CreditCardDisplayCard } from './CreditCardDisplayCard'
 import { AddCreditCardDialog } from './AddCreditCardDialog'
 import { useCreditCards } from '@/hooks/finance'
-import { ICreditCard } from '@/types/finance/finance'
+import type { ICreditCard } from '@gaqno-development/types/finance'
 
 interface ICreditCardOverviewProps {
   onCardSelect?: (cardId: string) => void

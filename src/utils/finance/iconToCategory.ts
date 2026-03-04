@@ -1,4 +1,4 @@
-import { IFinanceCategory } from '@/types/finance/finance'
+import type { IFinanceCategory } from '@gaqno-development/types/finance'
 
 const FALLBACK_COLOR = '#3B82F6'
 

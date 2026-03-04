@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useTenant, useAuth } from "@gaqno-development/frontcore/contexts";
 import { financeApi } from "@/lib/finance-api";
 import { calculateBalance } from "@/utils/finance/calcBalance";
-import { IFinanceTransaction, IFinanceSummary } from "@/types/finance/finance";
+import type { IFinanceTransaction, IFinanceSummary } from "@gaqno-development/types/finance";
 
 export const useFinanceSummary = (startDate?: string, endDate?: string) => {
   const { tenantId } = useTenant();

@@ -25,7 +25,7 @@ import {
   SelectValue,
 } from '@gaqno-development/frontcore/components/ui'
 import { TrendingUp, TrendingDown } from 'lucide-react'
-import { IFinanceTransaction } from '@/types/finance/finance'
+import type { IFinanceTransaction } from '@gaqno-development/types/finance'
 import { formatCurrency } from '@/utils/finance/formatCurrency'
 import { generateRecurringTransactions } from '@/utils/finance/generateRecurringTransactions'
 
@@ -60,7 +60,7 @@ export function MonthlySummaryBarChart({
     const dataMap = new Map<string, { date: string; income: number; expense: number }>()
 
     allTransactions.forEach((transaction) => {
-      const date = new Date(transaction.transaction_date)
+      const date = new Date(transaction.transactionDate)
       const dateKey = date.toISOString().split('T')[0]
 
       if (!dataMap.has(dateKey)) {

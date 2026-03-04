@@ -41,6 +41,7 @@ export default defineConfig(async () => {
 		commonjsOptions: {
 			transformMixedEsModules: true,
 			requireReturnsDefault: 'preferred',
+			include: [/node_modules/, /\/@gaqno-types\//],
 		},
 		rollupOptions: { output: { format: 'es' } },
 	},

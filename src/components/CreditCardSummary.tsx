@@ -1,6 +1,6 @@
 import { Card, CardHeader, CardTitle, CardContent } from '@gaqno-development/frontcore/components/ui'
 import { formatCurrency } from '@/utils/finance/formatCurrency'
-import { ICreditCardSummary } from '@/types/finance/finance'
+import type { ICreditCardSummary } from '@gaqno-development/types/finance'
 
 interface ICreditCardSummaryProps {
   summary: ICreditCardSummary

@@ -32,7 +32,7 @@ import {
 import { CategorySelectorDialog } from './CategorySelectorDialog'
 import { CategoryBadge } from './CategoryBadge'
 import { getTransactionIcon } from './TransactionIconPicker'
-import { IFinanceTransaction, TransactionType, TransactionStatus } from '@/types/finance/finance'
+import { TransactionType, TransactionStatus, type IFinanceTransaction } from '@gaqno-development/types/finance'
 import { Button } from '@gaqno-development/frontcore/components/ui'
 import { X } from 'lucide-react'
 import { CurrencyInput } from './CurrencyInput'
@@ -149,19 +149,19 @@ export function AddTransactionDialog({
         description: transaction.description,
         amount: transaction.amount,
         type: transaction.type,
-        transaction_date: transaction.transaction_date,
-        due_date: transaction.due_date || null,
-        credit_card_id: transaction.credit_card_id || null,
+        transaction_date: transaction.transactionDate,
+        due_date: transaction.dueDate || null,
+        credit_card_id: transaction.creditCardId || null,
         status: transaction.status || TransactionStatus.A_PAGAR,
         notes: transaction.notes || null,
-        installment_count: transaction.installment_count || 1,
-        installment_current: transaction.installment_current || 1,
-        is_recurring: transaction.is_recurring || false,
-        recurring_type: transaction.recurring_type || null,
-        recurring_day: transaction.recurring_day || null,
-        recurring_months: transaction.recurring_months || null,
-        category_id: transaction.category_id || null,
-        subcategory_id: transaction.subcategory_id || null,
+        installment_count: transaction.installmentCount || 1,
+        installment_current: transaction.installmentCurrent || 1,
+        is_recurring: transaction.isRecurring || false,
+        recurring_type: transaction.recurringType || null,
+        recurring_day: transaction.recurringDay || null,
+        recurring_months: transaction.recurringMonths || null,
+        category_id: transaction.categoryId || null,
+        subcategory_id: transaction.subcategoryId || null,
       })
     } else {
       reset({
@@ -404,7 +404,7 @@ export function AddTransactionDialog({
                       <SelectItem value="none">Sem cartão</SelectItem>
                       {creditCards.map((card) => (
                         <SelectItem key={card.id} value={card.id}>
-                          {card.name} - Final {card.last_four_digits}
+                          {card.name} - Final {card.lastFourDigits}
                         </SelectItem>
                       ))}
                     </SelectContent>

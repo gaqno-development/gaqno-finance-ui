@@ -10,7 +10,7 @@ import {
 } from '@gaqno-development/frontcore/components/ui'
 import { Input } from '@gaqno-development/frontcore/components/ui'
 import { cn } from '@gaqno-development/frontcore/lib/utils'
-import { IFinanceSubcategory, IFinanceCategory } from '@/types/finance/finance'
+import type { IFinanceSubcategory, IFinanceCategory } from '@gaqno-development/types/finance'
 import { getTransactionIcon } from './TransactionIconPicker'
 import { Search, Check } from 'lucide-react'
 

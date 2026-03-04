@@ -8,14 +8,24 @@ import {
   CardHeader,
   CardTitle,
   CardContent,
+  Badge,
 } from '@gaqno-development/frontcore/components/ui'
 import { Edit, Trash2 } from 'lucide-react'
 import { formatCurrency } from '@/utils/finance/formatCurrency'
 import { TransactionStatusBadge } from './TransactionStatusBadge'
 import { TransactionIcon } from './TransactionIcon'
-import { IFinanceTransaction } from '@/types/finance/finance'
+import type { IFinanceTransaction } from '@gaqno-development/types/finance'
 import { AddTransactionDialog } from './AddTransactionDialog'
 import { RecurringBadge } from './RecurringBadge'
+
+function isCrmOriginTransaction(transaction: IFinanceTransaction): boolean {
+  const notes = transaction.notes ?? ''
+  const description = transaction.description ?? ''
+  return (
+    notes.startsWith('Origem: CRM') ||
+    description.startsWith('Receita - Oportunidade')
+  )
+}
 
 interface ITransactionsTableProps {
   transactions: IFinanceTransaction[]
@@ -46,23 +56,32 @@ export function TransactionsTable({
   const transactionColumns = useMemo<ColumnDef<IFinanceTransaction>[]>(
     () => [
       {
-        id: 'transaction_date',
+        id: 'transactionDate',
         header: ({ column }) => (
           <DataTableColumnHeader column={column} title="Data" />
         ),
-        cell: ({ row }) => formatDate(row.original.transaction_date),
+        cell: ({ row }) => formatDate(row.original.transactionDate),
       },
       {
         accessorKey: 'description',
         header: ({ column }) => (
           <DataTableColumnHeader column={column} title="Descrição" />
         ),
-        cell: ({ row }) => (
-          <div className="flex items-center gap-2 font-medium">
-            <TransactionIcon transaction={row.original} size="sm" />
-            <span>{row.original.description}</span>
-          </div>
-        ),
+        cell: ({ row }) => {
+          const t = row.original
+          const fromCrm = isCrmOriginTransaction(t)
+          return (
+            <div className="flex items-center gap-2 font-medium">
+              <TransactionIcon transaction={t} size="sm" />
+              <span>{t.description}</span>
+              {fromCrm && (
+                <Badge variant="outline" className="text-[10px] shrink-0">
+                  CRM
+                </Badge>
+              )}
+            </div>
+          )
+        },
       },
       {
         id: 'category',

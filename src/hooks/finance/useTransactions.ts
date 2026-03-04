@@ -1,11 +1,11 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTenant, useAuth } from "@gaqno-development/frontcore/contexts";
 import { financeApi } from "@/lib/finance-api";
-import {
+import type {
   IFinanceTransaction,
   ICreateTransactionInput,
   IUpdateTransactionInput,
-} from "@/types/finance/finance";
+} from "@gaqno-development/types/finance";
 
 export const useTransactions = (startDate?: string, endDate?: string) => {
   const { tenantId } = useTenant();
@@ -29,6 +29,7 @@ export const useTransactions = (startDate?: string, endDate?: string) => {
       return financeApi.transactions.getAll(startDate, endDate);
     },
     enabled: !!user,
+    refetchInterval: 30_000,
   });
 
   const createMutation = useMutation<

@@ -1,7 +1,7 @@
 
 
 import { RefreshCw } from 'lucide-react'
-import { IFinanceTransaction } from '@/types/finance/finance'
+import type { IFinanceTransaction } from '@gaqno-development/types/finance'
 
 interface IRecurringBadgeProps {
   transaction: IFinanceTransaction
@@ -10,28 +10,28 @@ interface IRecurringBadgeProps {
 }
 
 const getRecurringTypeLabel = (transaction: IFinanceTransaction): string => {
-  if (transaction.recurring_type === 'fifth_business_day') return '(5º dia útil)'
-  if (transaction.recurring_type === 'day_15') return '(dia 15)'
-  if (transaction.recurring_type === 'last_day') return '(fim do mês)'
-  if (transaction.recurring_day) return `(dia ${transaction.recurring_day})`
+  if (transaction.recurringType === 'fifth_business_day') return '(5º dia útil)'
+  if (transaction.recurringType === 'day_15') return '(dia 15)'
+  if (transaction.recurringType === 'last_day') return '(fim do mês)'
+  if (transaction.recurringDay) return `(dia ${transaction.recurringDay})`
   return ''
 }
 
 const getRecurringTypeText = (transaction: IFinanceTransaction): string => {
-  if (transaction.recurring_type === 'fifth_business_day') return 'Quinto dia útil do mês'
-  if (transaction.recurring_type === 'day_15') return 'Todo dia 15'
-  if (transaction.recurring_type === 'last_day') return 'Final do mês'
-  if (transaction.recurring_type === 'custom' && transaction.recurring_day) {
-    return `Todo dia ${transaction.recurring_day} do mês`
+  if (transaction.recurringType === 'fifth_business_day') return 'Quinto dia útil do mês'
+  if (transaction.recurringType === 'day_15') return 'Todo dia 15'
+  if (transaction.recurringType === 'last_day') return 'Final do mês'
+  if (transaction.recurringType === 'custom' && transaction.recurringDay) {
+    return `Todo dia ${transaction.recurringDay} do mês`
   }
-  if (transaction.recurring_day) {
-    return `Todo dia ${transaction.recurring_day} do mês`
+  if (transaction.recurringDay) {
+    return `Todo dia ${transaction.recurringDay} do mês`
   }
   return ''
 }
 
 export function RecurringBadge({ transaction, variant = 'badge', className = '' }: IRecurringBadgeProps) {
-  if (!transaction.is_recurring) return null
+  if (!transaction.isRecurring) return null
 
   if (variant === 'text') {
     const text = getRecurringTypeText(transaction)

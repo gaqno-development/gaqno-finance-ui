@@ -1,11 +1,11 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTenant } from "@gaqno-development/frontcore/contexts";
 import { financeApi } from "@/lib/finance-api";
-import {
+import type {
   IFinanceSubcategory,
   ICreateSubcategoryInput,
   IUpdateSubcategoryInput,
-} from "@/types/finance/finance";
+} from "@gaqno-development/types/finance";
 
 export const useSubcategories = (parentCategoryId: string | null) => {
   const { tenantId } = useTenant();

@@ -1,19 +1,20 @@
 import { financeClient } from "@gaqno-development/frontcore/utils/api";
-import type {
-  IFinanceTransaction,
-  IFinanceCategory,
-  IFinanceSubcategory,
-  ICreditCard,
-  ICreateTransactionInput,
-  IUpdateTransactionInput,
-  ICreateCategoryInput,
-  IUpdateCategoryInput,
-  ICreateSubcategoryInput,
-  IUpdateSubcategoryInput,
-  ICreateCreditCardInput,
-  IUpdateCreditCardInput,
+import {
   TransactionType,
-} from "@/types/finance/finance";
+  type IDashboardMetrics,
+  type IFinanceTransaction,
+  type IFinanceCategory,
+  type IFinanceSubcategory,
+  type ICreditCard,
+  type ICreateTransactionInput,
+  type IUpdateTransactionInput,
+  type ICreateCategoryInput,
+  type IUpdateCategoryInput,
+  type ICreateSubcategoryInput,
+  type IUpdateSubcategoryInput,
+  type ICreateCreditCardInput,
+  type IUpdateCreditCardInput,
+} from "@gaqno-development/types/finance";
 
 export const financeApi = {
   transactions: {
@@ -136,6 +137,14 @@ export const financeApi = {
     },
     delete: async (id: string): Promise<void> => {
       await financeClient.delete(`/subcategories/${id}`);
+    },
+  },
+  dashboard: {
+    getMetrics: async (): Promise<IDashboardMetrics> => {
+      const { data } = await financeClient.get<IDashboardMetrics>(
+        "/dashboard/metrics"
+      );
+      return data;
     },
   },
   creditCards: {
